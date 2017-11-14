@@ -1,0 +1,511 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">1-1</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">출결현황
+        <span class="pull-right" style="margin-top:-6px;">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <select class="form-control">
+                    <option>일간</option>
+                    <option>주간</option>
+                    <option>월간</option>
+                    <option>년간</option>
+                  </select>
+                </td>
+                <td>&nbsp;&nbsp;</td>
+                <td>
+                  <select class="form-control">
+                    <option>전체</option>
+                    <option>등교</option>
+                    <option>결석</option>
+                    <option>조퇴</option>
+                    <option>기타</option>
+                    <option>밴드착용</option>
+                    <option>밴드미착용</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </span>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <!-- Nav tabs -->
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="home">
+            <div class="flot-chart">
+              <div class="flot-chart-content" id="flot-bar-chart"></div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile">
+            <div class="flot-chart">
+              <div class="flot-chart-content" id="flot-bar-chart"></div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="messages">
+            <div class="flot-chart">
+              <div class="flot-chart-content" id="flot-bar-chart"></div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="settings">
+            <div class="flot-chart">
+              <div class="flot-chart-content" id="flot-bar-chart"></div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="settings">
+            <div class="flot-chart">
+              <div class="flot-chart-content" id="flot-bar-chart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">출석부</div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>생년월일</th>
+                <th>연락처</th>
+                <th>이메일</th>
+                <th>상태</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김채동</a>
+                </td>
+                <td>000000</td>
+                <td>000-0000-0000</td>
+                <td>abcdef@hanmail.net</td>
+                <td class="info">등교</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김채동</a>
+                </td>
+                <td>000000</td>
+                <td>000-0000-0000</td>
+                <td>abcdef@hanmail.net</td>
+                <td class="danger">결석</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김채동</a>
+                </td>
+                <td>000000</td>
+                <td>000-0000-0000</td>
+                <td>abcdef@hanmail.net</td>
+                <td class="warning">조퇴</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김채동</a>
+                </td>
+                <td>000000</td>
+                <td>000-0000-0000</td>
+                <td>abcdef@hanmail.net</td>
+                <td class="success">기타</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+</div>
+<!-- /.row -->
+<!-- /.row -->
+<!-- Modal -->
+<div class="fade modal text-center" id="myModal_student_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">학생정보</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--일정 입력창 시작-->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td>이름</td>
+                <td>김재동</td>
+              </tr>
+              <tr>
+                <td>생년월일</td>
+                <td>20130901</td>
+              </tr>
+              <tr>
+                <td>담임</td>
+                <td>박재룡 선생님</td>
+              </tr>
+              <tr>
+                <td>반</td>
+                <td>1-3</td>
+              </tr>
+              <tr>
+                <td>스마트 밴드</td>
+                <td>TS0101010101</td>
+              </tr>
+              <tr>
+                <td>연락처</td>
+                <td>010-0000-0000</td>
+              </tr>
+              <tr>
+                <td>이메일</td>
+                <td>abcdef@hanmail.net</td>
+              </tr>
+              <tr>
+                <td>주소</td>
+                <td>00000 서울특별시 구로구 디지털로 00길 00 SBA 2014</td>
+              </tr>
+              <tr>
+                <td>학부모</td>
+                <td>김아빠</td>
+              </tr>
+              <tr>
+                <td>학부모연락처</td>
+                <td>010-0000-0000</td>
+              </tr>
+              <tr>
+                <td>상태</td>
+                <td>재학중</td>
+              </tr>
+              <tr>
+                <td>기타</td>
+                <td>부모님이 맞벌이</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <td>등교</td>
+                <td>결석</td>
+                <td>조퇴</td>
+                <td>기타</td>
+                <td>밴드착용</td>
+                <td>밴드미착용</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>000</td>
+                <td class="danger">000</td>
+                <td class="warning">000</td>
+                <td class="success">000</td>
+                <td>000</td>
+                <td>000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--일정 입력창 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-target="#myModal_student_info_edit" data-toggle="modal">정보수정</button>
+        <button type="button" class="btn btn-default" data-target="#myModal_student_info_del" data-toggle="modal">삭제</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="fade modal text-center" id="myModal_student_info_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">학생정보수정</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--일정 입력창 시작-->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td>이름</td>
+                <td>
+                  <input class="form-control" placeholder="" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td>생년월일</td>
+                <td>
+                  <input class="form-control" placeholder="6자리 입력 예:20130901" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td>담임</td>
+                <td>
+                  <select class="form-control">
+                    <option>선생님이름1</option>
+                    <option>선생님이름2</option>
+                    <option>선생님이름3</option>
+                    <option>선생님이름4</option>
+                    <option>선생님이름5</option>
+                    <option>선생님이름6</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>반</td>
+                <td>
+                  <div class="">
+                    <table class="">
+                      <!--thead>
+                        <tr>
+                          <th>#</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Username</th>
+                        </tr>
+                      </thead-->
+                      <tbody>
+                        <tr>
+                          <td>
+                            <select class="form-control">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
+                            </select>
+                          </td>
+                          <td>학년</td>
+                          <td>
+                            <select class="form-control">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
+                              <option>7</option>
+                              <option>8</option>
+                              <option>9</option>
+                              <option>10</option>
+                              <option>11</option>
+                              <option>12</option>
+                              <option>13</option>
+                              <option>14</option>
+                              <option>15</option>
+                              <option>16</option>
+                              <option>17</option>
+                              <option>18</option>
+                              <option>19</option>
+                              <option>20</option>
+                              <option>21</option>
+                              <option>22</option>
+                              <option>23</option>
+                              <option>24</option>
+                              <option>25</option>
+                              <option>26</option>
+                              <option>27</option>
+                              <option>28</option>
+                              <option>29</option>
+                              <option>30</option>
+                            </select>
+                          </td>
+                          <td>반</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>스마트 밴드</td>
+                <td>
+                  <input class="form-control" placeholder="입력 예:TS0101010101" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td>연락처</td>
+                <td>
+                  <div class="">
+                    <table class="">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <input class="form-control" placeholder="" type="text" size="4" maxlength="3">
+                          </td>
+                          <td>-</td>
+                          <td>
+                            <input class="form-control" placeholder="" type="text" size="4" maxlength="4">
+                          </td>
+                          <td>-</td>
+                          <td>
+                            <input class="form-control" placeholder="" type="text" maxlength="4" size="4">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>이메일</td>
+                <td>
+                  <div class="">
+                    <table class="">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <input class="form-control" placeholder="" type="text" size="10">
+                          </td>
+                          <td>@</td>
+                          <td>
+                            <input class="form-control" placeholder="" type="text" size="15">
+                          </td>
+                          <td>&nbsp;&nbsp;</td>
+                          <td>
+                            <select class="form-control">
+                              <option>직접입력</option>
+                              <option>@naver.com</option>
+                              <option>@hanmail.net</option>
+                              <option>@gmail.com</option>
+                              <option>5</option>
+                              <option>6</option>
+                            </select>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>주소</td>
+                <td>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <input class="form-control" placeholder="" type="text" maxlength="5" size="8">
+                        </td>
+                        <td>&nbsp;&nbsp;
+                          <button type="button" class="btn btn-primary btn-sm">우편번호 검색</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <input class="form-control" placeholder="우편번호 검색을 통해 입력해 주십시오" type="text">
+                  <input class="form-control" placeholder="나머지 주소입력" type="text">
+                </td>
+              </tr>
+              
+              <tr>
+                <td>학부모</td>
+                <td>
+                  <input class="form-control" placeholder="" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td>학부모연락처</td>
+                <td>
+                  <table class="">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <input class="form-control" placeholder="" type="text" size="4" maxlength="3">
+                        </td>
+                        <td>-</td>
+                        <td>
+                          <input class="form-control" placeholder="" type="text" size="4" maxlength="4">
+                        </td>
+                        <td>-</td>
+                        <td>
+                          <input class="form-control" placeholder="" type="text" maxlength="4" size="4">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>상태</td>
+                <td>
+                  <select class="form-control">
+                    <option>선택</option>
+                    <option>재학중</option>
+                    <option>휴학</option>
+                    <option>퇴학</option>
+                    <option>기타</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>기타</td>
+                <td>
+                  <textarea class="form-control" rows="3"></textarea>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--일정 입력창 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">정보수정</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="fade modal text-center" id="myModal_student_info_del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">학생정보를 삭제하시겠습니까.</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <p class="text-muted">해당학생의 정보만 삭제될뿐 스마트밴드의 정보는 삭제되지 않습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

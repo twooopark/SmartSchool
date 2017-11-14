@@ -1,0 +1,62 @@
+#total-projects {
+  background: #33CC99;
+  width: 200px;
+  position:relative;
+  height:80px;
+  font-size: 29px;
+  color: white;
+  vertical-align: middle;
+  text-align: center;
+  padding-bottom: 0px;
+}
+.chart-wrapper {
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.chart-title {
+  border-bottom: 1px solid #d7d7d7;
+  color: #666;
+  font-size: 14px;
+  font-weight: 200;
+  padding: 7px 10px 4px;
+}
+
+.background {
+    fill: #FFFFFF;
+    fill-opacity: 0.01;
+}
+
+.component {
+    fill: #e1e1e1;
+}
+
+.component .label {
+    font-family: Myriad, "Helvetic Neue", Helvetica, Arial;
+    text-anchor: middle;
+    fill: #0000FF;
+}
+
+.arc {
+    stroke-weight: 0.1;
+    fill: #4e8fff;
+}
+
+.arc2 {
+    stroke-weight: 0.1;
+    fill: #3660b0;
+}
+
+.label {
+    font-family: Myriad, "Helvetic Neue", Helvetica, Arial;
+    text-anchor: middle;
+}
+
+.radial-svg {
+    display: block;
+    margin: 0 auto;
+}
+
+

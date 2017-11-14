@@ -1,0 +1,1125 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">교실 현황</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12 form-group">
+    <button type="button" class="btn btn-default" data-target="#myModal_classroom_new" data-toggle="modal">교실 등록</button>
+    <span class="pull-right">
+      <table class="">
+        <tbody>
+          <tr>
+            <!--td>
+              <select class="form-control">
+                <option>전체</option>
+                <option>교원</option>
+                <option>일반직</option>
+                <option>스마트스쿨 관리자</option>
+                <option>기타</option>
+              </select>
+            </td>
+            <td>&nbsp;&nbsp;</td-->
+            <td>
+              <select class="form-control">
+                <option>전체</option>
+                <option>교실</option>
+                <option>과학실</option>
+                <option>음악실</option>
+                <option>기타</option>
+                <option>강당</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </span>
+  </div>
+</div>
+<div class="row">
+  <!--교실 리스트-->
+  <div class="col-lg-12">
+    <div>
+      <!-- /.panel-heading -->
+      <table class="table table-striped table-bordered table-hover" width="100%" id="dataTables-example">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>교실명</th>
+            <th>담임</th>
+            <th>학생수</th>
+            <th>센서설치유무</th>
+            <th>센서ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info_1">1-1</a>
+            </td>
+            <td>박재동</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">15</a>
+            </td>
+            <td>유</td>
+            <td>D86595040364</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info_1">1-2</a>
+            </td>
+            <td>이재동</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">20</a>
+            </td>
+            <td>유</td>
+            <td>D86595040364</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info_1">과학실</a>
+            </td>
+            <td>김과학</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">0</a>
+            </td>
+            <td>무</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info_1">2-1</a>
+            </td>
+            <td>박재동</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">15</a>
+            </td>
+            <td>유</td>
+            <td>D86595040364</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info_1">2-2</a>
+            </td>
+            <td>박재동</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">15</a>
+            </td>
+            <td>유</td>
+            <td>D86595040364</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info_1">3-1</a>
+            </td>
+            <td>박재동</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">15</a>
+            </td>
+            <td>유</td>
+            <td>D86595040364</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info_1">3-2</a>
+            </td>
+            <td>박재동</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">15</a>
+            </td>
+            <td>유</td>
+            <td>D86595040364</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info_1">3-3</a>
+            </td>
+            <td>박재동</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">15</a>
+            </td>
+            <td>유</td>
+            <td>D86595040364</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>4-1</td>
+            <td>박재동</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">15</a>
+            </td>
+            <td>유</td>
+            <td>D86595040364</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>4-2</td>
+            <td>박재동</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">15</a>
+            </td>
+            <td>유</td>
+            <td>D86595040364</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>4-3</td>
+            <td>박재동</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal_classroom_info">30</a>
+            </td>
+            <td>유</td>
+            <td>D86595040364</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group text-center">
+    <button type="button" class="btn btn-default pull-left" data-target="#myModal_classroom_new" data-toggle="modal">교실 등록</button>
+    <ul class="pagination">
+      <li>
+        <a href="#">Prev</a>
+      </li>
+      <li>
+        <a href="#">1</a>
+      </li>
+      <li>
+        <a href="#">2</a>
+      </li>
+      <li>
+        <a href="#">3</a>
+      </li>
+      <li>
+        <a href="#">4</a>
+      </li>
+      <li>
+        <a href="#">5</a>
+      </li>
+      <li>
+        <a href="#">Next</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- /.row -->
+<!-- /.row -->
+<!-- 교실 학생정보 모달창 시작 -->
+<div class="fade modal text-center" id="myModal_classroom_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">1-1반 학생정보</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--일정 입력창 시작-->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <td width="50px">번호</td>
+                <td>이름</td>
+                <td>상태</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td>등교</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td class="warning">조퇴</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td class="success">기타</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td class="danger">결석</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td>등교</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td>등교</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td>등교</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td>등교</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td>등교</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td>등교</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td>등교</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td>등교</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>
+                  <a data-toggle="modal" data-target="#myModal_student_info">김초롱</a>
+                </td>
+                <td>등교</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--학생정보 모달 시작-->
+<div class="fade modal text-center" id="myModal_student_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">학생정보</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--일정 입력창 시작-->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td>이름</td>
+                <td>김재동</td>
+              </tr>
+              <tr>
+                <td>생년월일</td>
+                <td>20130901</td>
+              </tr>
+              <tr>
+                <td>담임</td>
+                <td>박재룡 선생님</td>
+              </tr>
+              <tr>
+                <td>반</td>
+                <td>1-3</td>
+              </tr>
+              <tr>
+                <td>스마트 밴드</td>
+                <td>TS0101010101</td>
+              </tr>
+              <tr>
+                <td>연락처</td>
+                <td>010-0000-0000</td>
+              </tr>
+              <tr>
+                <td>이메일</td>
+                <td>abcdef@hanmail.net</td>
+              </tr>
+              <tr>
+                <td>주소</td>
+                <td>00000 서울특별시 구로구 디지털로 00길 00 SBA 2014</td>
+              </tr>
+              
+              <tr>
+                <td>학부모</td>
+                <td>김아빠</td>
+              </tr>
+              <tr>
+                <td>학부모연락처</td>
+                <td>010-0000-0000</td>
+              </tr>
+              <tr>
+                <td>상태</td>
+                <td>재학중</td>
+              </tr>
+              <tr>
+                <td>기타</td>
+                <td>부모님이 맞벌이</td>
+              </tr>
+            </tbody>
+          </table>
+          <!--학생 출결 현황 리스트-->
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <td>등교</td>
+                <td>결석</td>
+                <td>조퇴</td>
+                <td>기타</td>
+                <td>밴드착용</td>
+                <td>밴드미착용</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>000</td>
+                <td class="danger">000</td>
+                <td class="warning">000</td>
+                <td class="success">000</td>
+                <td>000</td>
+                <td>000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--일정 입력창 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-target="#myModal_student_info_edit" data-toggle="modal">정보수정</button>
+        <button type="button" class="btn btn-default" data-target="#myModal_student_info_del" data-toggle="modal">삭제</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--교실등록 모달창 -->
+<div class="fade modal text-center" id="myModal_classroom_new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">교실등록</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--일정 입력창 시작-->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td>분류</td>
+                <td>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <select class="form-control">
+                            <option>교실</option>
+                            <option>기타교실</option>
+                            <option>사무실</option>
+                            <option>창고</option>
+                            <option>기타</option>
+                          </select>
+                        </td>
+                        <td>&nbsp;&nbsp;
+                          <button type="button" class="btn btn-primary btn-sm" data-target="#myModal_classroom_info_edit_group" data-toggle="modal">분류 관리</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>교실명</td>
+                <td>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <select class="form-control">
+                            <option>교장실</option>
+                            <option>교감실</option>
+                            <option>교실</option>
+                            <option>음악실</option>
+                            <option>과학실</option>
+                            <option>미술실</option>
+                            <option>강당</option>
+                            <option>창고1</option>
+                            <option>창고2</option>
+                            <option>기타</option>
+                          </select>
+                        </td>
+                        <td>&nbsp;&nbsp;
+                          <button type="button" class="btn btn-primary btn-sm" data-target="#myModal_classroom_info_edit_name" data-toggle="modal">교실명 관리</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>담당반</td>
+                <td>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                          </select>
+                        </td>
+                        <td>학년</td>
+                        <td>
+                          <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                            <option>25</option>
+                            <option>26</option>
+                            <option>27</option>
+                            <option>28</option>
+                            <option>29</option>
+                            <option>30</option>
+                          </select>
+                        </td>
+                        <td>반</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>담임</td>
+                <td>
+                  <input class="form-control" placeholder="" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td>학생수</td>
+                <td>
+                  <input class="form-control" placeholder="" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td>센서설치여부</td>
+                <td>
+                  <input class="form-control" placeholder="" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td>센서ID</td>
+                <td>
+                  <input class="form-control" placeholder="" type="text">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--교실 등록 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-target="#myModal_student_info_edit" data-toggle="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="fade modal text-center" id="myModal_classroom_info_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">교실정보</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--일정 입력창 시작-->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td>분류</td>
+                <td>교실</td>
+              </tr>
+              <tr>
+                <td>교실명</td>
+                <td>교실</td>
+              </tr>
+              <tr>
+                <td>담당반</td>
+                <td>1-1</td>
+              </tr>
+              <tr>
+                <td>담임</td>
+                <td>김교실선생님</td>
+              </tr>
+              <tr>
+                <td>학생수</td>
+                <td>20명</td>
+              </tr>
+              <tr>
+                <td>센서설치여부</td>
+                <td>유</td>
+              </tr>
+              <tr>
+                <td>센서ID</td>
+                <td>TS000000000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--교실 등록 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-target="#myModal_classroom_info_edit" data-toggle="modal">정보수정</button>
+        <button type="button" class="btn btn-default" data-target="#myModal_classroom_info_del" data-toggle="modal">삭제</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="fade modal text-center" id="myModal_classroom_info_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">교실정보수정</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--일정 입력창 시작-->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td>분류</td>
+                <td>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <select class="form-control">
+                            <option>교실</option>
+                            <option>기타교실</option>
+                            <option>사무실</option>
+                            <option>창고</option>
+                            <option>기타</option>
+                          </select>
+                        </td>
+                        <td>&nbsp;&nbsp;
+                          <button type="button" class="btn btn-primary btn-sm" data-target="#myModal_classroom_info_edit_group" data-toggle="modal">분류 관리</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>교실명</td>
+                <td>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <select class="form-control">
+                            <option>교장실</option>
+                            <option>교감실</option>
+                            <option>교실</option>
+                            <option>음악실</option>
+                            <option>과학실</option>
+                            <option>미술실</option>
+                            <option>강당</option>
+                            <option>창고1</option>
+                            <option>창고2</option>
+                            <option>기타</option>
+                          </select>
+                        </td>
+                        <td>&nbsp;&nbsp;
+                          <button type="button" class="btn btn-primary btn-sm" data-target="#myModal_classroom_info_edit_name" data-toggle="modal">교실명 관리</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>담당반</td>
+                <td>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                          </select>
+                        </td>
+                        <td>학년</td>
+                        <td>
+                          <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                            <option>25</option>
+                            <option>26</option>
+                            <option>27</option>
+                            <option>28</option>
+                            <option>29</option>
+                            <option>30</option>
+                          </select>
+                        </td>
+                        <td>반</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>담임</td>
+                <td>
+                  <input class="form-control" placeholder="" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td>학생수</td>
+                <td>
+                  <input class="form-control" placeholder="" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td>센서설치여부</td>
+                <td>
+                  <input class="form-control" placeholder="" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td>센서ID</td>
+                <td>
+                  <input class="form-control" placeholder="" type="text">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--교실 등록 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-target="#myModal_student_info_edit" data-toggle="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--학생 정보 모달 끝-->
+<!--교실 분류 모달 시작-->
+<div class="fade modal text-center" id="myModal_classroom_info_edit_group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">분류 관리</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--분류항목 시작-->
+        <!--p class="text-muted">담당하고 있는 과목을 선택해 주십시오.</p-->
+        <div class="table-responsive">
+          <!--분류 리스트-->
+          <table class="table table-striped table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td>교실</td>
+                <td width="120px">
+                  <button type="button" class="btn btn-success btn-sm" data-target="#myModal_classroom_info_edit_group_edit" data-toggle="modal">수정</button>
+                  <button type="button" class="btn btn-warning btn-sm" data-target="#myModal_classroom_info_edit_group_del" data-toggle="modal">삭제</button>
+                </td>
+              </tr>
+              <tr>
+                <td>기타교실</td>
+                <td>
+                  <button type="button" class="btn btn-success btn-sm" data-target="#myModal_classroom_info_edit_group_edit" data-toggle="modal">수정</button>
+                  <button type="button" class="btn btn-warning btn-sm" data-target="#myModal_classroom_info_edit_group_del" data-toggle="modal">삭제</button>
+                </td>
+              </tr>
+              <tr>
+                <td>사무실</td>
+                <td>
+                  <button type="button" class="btn btn-success btn-sm" data-target="#myModal_classroom_info_edit_group_edit" data-toggle="modal">수정</button>
+                  <button type="button" class="btn btn-warning btn-sm" data-target="#myModal_classroom_info_edit_group_del" data-toggle="modal">삭제</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--신규 분류 등록 분류명 중복확인-->
+          <table class="table table-bordered ">
+            <tbody>
+              <tr>
+                <td>
+                  <input class="form-control" placeholder="추가할 분류명을 입력해 주십시오" type="text">
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm">중복확인</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--중복된 분류명이 있을경우-->
+        <p class="text-danger">중복된 분류명이 없습니다 등록 가능합니다.</p>
+        <!--중복된 분류명이 없을경우-->
+        <p class="text-danger">중복된 분류명이 있습니다.</p>
+        <!--분류명 입력창 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--분류 관리 모달창 끝-->
+<!--분류 삭제 확인 모달창 시작-->
+<div class="fade modal text-center" id="myModal_classroom_info_edit_group_del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">선택한 분류를 삭제하시겠습니까.</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <p class="text-muted">해당 분류의 교실에도 반영이 됩니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--분류 삭제 모달창 끝-->
+<!--분류 수정 모달창 시작-->
+<div class="fade modal text-center" id="myModal_classroom_info_edit_group_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">선택한 분류를 수정하시겠습니까.</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--분류 입력창 시작-->
+        <p class="text-muted">해당 분류의 교실에도 반영이 됩니다.</p>
+        <!--신규 분류 등록 과목명 중복확인-->
+        <table class="table table-bordered ">
+          <tbody>
+            <tr>
+              <td>교실</td>
+              <td>
+                <input class="form-control" placeholder="분류명을 입력해 주십시오" type="text">
+              </td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm">중복확인</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!--중복된 분류명이 있을경우-->
+        <p class="text-danger">중복된 분류명이 없습니다 수정 가능합니다.</p>
+        <!--중복된 분류명이 없을경우-->
+        <p class="text-danger">중복된 분류명이 있습니다.</p>
+        <!--분류입력창 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--분류 수정 모달창 끝-->
+<!--교실명 관리 모달창 시작-->
+<div class="fade modal text-center" id="myModal_classroom_info_edit_name" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">교실명관리</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--분류 추가 시작-->
+        <!--p class="text-muted">담당하고 있는 과목을 선택해 주십시오.</p-->
+        <div class="table-responsive">
+          <!--등록된 분류 리스트-->
+          <table class="table table-striped table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td>교실</td>
+                <td width="120px">
+                  <button type="button" class="btn btn-success btn-sm" data-target="#myModal_classroom_info_name_edit" data-toggle="modal">수정</button>
+                  <button type="button" class="btn btn-warning btn-sm" data-target="#myModal_classroom_info_edit_name_del" data-toggle="modal">삭제</button>
+                </td>
+              </tr>
+              <tr>
+                <td>교장실</td>
+                <td>
+                  <button type="button" class="btn btn-success btn-sm" data-target="#myModal_classroom_info_name_edit" data-toggle="modal">수정</button>
+                  <button type="button" class="btn btn-warning btn-sm" data-target="#myModal_classroom_info_edit_name_del" data-toggle="modal">삭제</button>
+                </td>
+              </tr>
+              <tr>
+                <td>교감실</td>
+                <td>
+                  <button type="button" class="btn btn-success btn-sm" data-target="#myModal_classroom_info_name_edit" data-toggle="modal">수정</button>
+                  <button type="button" class="btn btn-warning btn-sm" data-target="#myModal_classroom_info_edit_name_del" data-toggle="modal">삭제</button>
+                </td>
+              </tr>
+              <tr>
+                <td>과학실</td>
+                <td>
+                  <button type="button" class="btn btn-success btn-sm" data-target="#myModal_classroom_info_name_edit" data-toggle="modal">수정</button>
+                  <button type="button" class="btn btn-warning btn-sm" data-target="#myModal_classroom_info_edit_name_del" data-toggle="modal">삭제</button>
+                </td>
+              </tr>
+              <tr>
+                <td>창고</td>
+                <td>
+                  <button type="button" class="btn btn-success btn-sm" data-target="#myModal_classroom_info_name_edit" data-toggle="modal">수정</button>
+                  <button type="button" class="btn btn-warning btn-sm" data-target="#myModal_classroom_info_edit_name_del" data-toggle="modal">삭제</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--신규 교실명등록 & 교실명 중복확인-->
+          <table class="table table-bordered ">
+            <tbody>
+              <tr>
+                <td>
+                  <input class="form-control" placeholder="추가할 교실명을 입력해 주십시오" type="text">
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm">중복확인</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--중복된 교실명이 있을경우-->
+        <p class="text-danger">중복된 교실명이 없습니다 등록 가능합니다.</p>
+        <!--중복된 교실명이 없을경우-->
+        <p class="text-danger">중복된 교실명이 있습니다.</p>
+        <!--교실명입력창 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--교실명 관리 모달창 끝-->
+<!--교실명 삭제 확인 모달창 시작-->
+<div class="fade modal text-center" id="myModal_classroom_info_del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">선택한 교실명을 삭제하시겠습니까.</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--과목 입력창 시작-->
+        <p class="text-muted">삭제된 교실명을 선택한 교실은 새로 선택해야 합니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--교실명 삭제 모달창 끝-->
+<!--교실명 수정 모달창 시작-->
+<div class="fade modal text-center" id="myModal_classroom_info_name_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">선택한 교실명을 수정하시겠습니까.</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--교실명 입력창 시작-->
+        <p class="text-muted">해당 교실명의 교실도 반영이 됩니다.</p>
+        <!--신규 교실명 등록 교실명 중복확인-->
+        <table class="table table-bordered ">
+          <tbody>
+            <tr>
+              <td>과학실</td>
+              <td>
+                <input class="form-control" placeholder="수정될 교실명을 입력해 주십시오" type="text">
+              </td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm">중복확인</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!--중복된 교실명이 있을경우-->
+        <p class="text-danger">중복된 교실명이 없습니다 수정 가능합니다.</p>
+        <!--중복된 교실명이 없을경우-->
+        <p class="text-danger">중복된 교실명이 있습니다.</p>
+        <!--교실명 입력창 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="fade modal text-center" id="myModal_classroom_info_del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">1-1반 교실정보를 삭제하시겠습니까.</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <p class="text-muted">교실정보만 삭제될뿐 학생 및 선생님 정보는 삭제되지 않습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="fade modal text-center" id="myModal_student_info_del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">학생정보를 삭제하시겠습니까.</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <p class="text-muted">해당학생의 정보만 삭제될뿐 스마트밴드의 정보는 삭제되지 않습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--교실명 수정 모달창 끝-->

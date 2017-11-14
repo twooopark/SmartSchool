@@ -1,0 +1,299 @@
+
+<link rel="stylesheet" href="css/stylenew.css" />
+<style>
+#mloader{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99999;
+  background-color: #000;
+  opacity: 0.7;
+  display:none;
+}
+
+#mloader .masterkey_blink {
+  font-size:20px;
+  font-weight:bold;
+  margin: 10% 45%;
+    -webkit-animation: masterkey_blink 3s linear infinite;
+} 
+@-webkit-keyframes masterkey_blink {
+    15% { color: white; }
+    40% { color: black; }
+    75% { color: white; }
+}
+#sensor_bar_chart{
+  width : 100%;
+}
+#daily_line_chart{
+  width : 100%;
+}
+#range_chart{
+  width : 100%;
+}
+</style>
+
+<div id="mloader"><div class="masterkey_blink">LOADING...</div></div>
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header"> 오류 현황</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+
+<div class="row">
+  <div class="col-lg-12">
+
+    <div id="chartGroupDiv">
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="chart-wrapper" id="total-projects">
+            <div class="chart-title">
+              <strong> 총 오류 개수 </strong><a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a>  
+            </div> 
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="chart-wrapper" id="sensor_bar_chart">
+            <div class="chart-title">
+              <strong> 교실별 오류 확인 </strong>
+            </div>  
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="chart-wrapper" id="daily_line_chart">
+            <div class="chart-title">
+              <strong> 시간별 오류 확인 </strong><a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a>   
+            </div>
+          </div>
+          <div id="range_chart"></div>  
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="chart-wrapper" id="type_row_chart">
+            <div class="chart-title">
+              <strong> 센서별 오류 확인 </strong>
+            </div> 
+          </div> 
+        </div>
+        <div class="col-lg-6">
+          <div class="chart-wrapper" id="type_pie_chart">
+            <div class="chart-title">
+              <strong> 센서별 오류 확인 </strong>
+            </div> 
+          </div> 
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+//https://packagecontrol.io/packages/D3.js%20Snippets
+var totalProjects = dc.numberDisplay("#total-projects"),
+    sensor_bar_chart = dc.barChart("#sensor_bar_chart"),
+    daily_line_chart = dc.lineChart("#daily_line_chart"),
+    range_chart = dc.barChart('#range_chart'),
+    type_row_chart = dc.rowChart("#type_row_chart"),
+    type_pie_chart = dc.pieChart("#type_pie_chart");
+
+
+//mongoDB
+//$.getJSON("/api/raws", function(result) {
+//mysql
+//$.getJSON("/api/stat-data", function(result) {
+var data;
+$.ajax({//로딩화면 띄우기 위해... http://shovelman.tistory.com/829
+  type: "GET",
+  url: "/api/stat-data",
+  dataType: 'json',
+  beforeSend: function() { 
+    $('#mloader').show();
+  },
+  success: function(result){
+    data = result;
+
+    var time_format_hourly =d3.time.format.iso;
+    //실제 DB에 들어가 있는 시간은 2017-10-30 15:00:00 부터 2017-11-08 17:00:00
+    
+    //d3.time.format.iso == d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ")
+      //처음   : data[0] = {time: "2017-10-30T06:00:00.000Z", d3format_time: Mon Oct 30 2017 15:00:00 GMT+0900 (대한민국 표준시), …}
+      //마지막 : data.slice(-1)[0] = {time: "2017-11-08T08:00:00.000Z", d3format_time: Wed Nov 08 2017 17:00:00 GMT+0900 (대한민국 표준시), …}
+    // d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ")
+      //처음   : data[0] = {time: "2017-10-30T06:00:00.000Z", d3format_time: Mon Oct 30 2017 06:00:00 GMT+0900 (대한민국 표준시), …}
+      //마지막 : data.slice(-1)[0] = {time: "2017-11-08T08:00:00.000Z", d3format_time: Wed Nov 08 2017 08:00:00 GMT+0900 (대한민국 표준시), …}
+    
+    // 디멘션으로 분류할 기준을 데이터에 추가합니다.
+    data.forEach(function(row) {
+      // dc는 d3라이브러리의 time format을 사용하며 다른 time format을 사용하게 해주는 api나 메서드를 지원하지 않습니다.
+      // row.d3format_time = time_format_hourly.parse(row._id.time.replace(/[-:\s\t]/g, "").substr(0, 8))
+      row.d3format_time = time_format_hourly.parse(row.time);
+      //row.week = row.d3format_time.getDay()
+      row.total_cnt = +row.total_cnt;
+    })
+
+    /*data.slice(-1)[0] charat 하고, +1해서 :00:00 이런거 추가해서 concat*/
+    var domain = [ data[0].d3format_time, data.slice(-1)[0].d3format_time ]; //맨 처음 data와 맨 마지막 data
+    // 크로스필터에 데이터 객체를 집어넣습니다.
+    var filter = crossfilter(data);
+    var all = filter.groupAll();
+  /************************************************************************/
+    var totalcnts = all.reduceSum(function(d) {return d.cnt;});
+
+    totalProjects
+      .formatNumber(d3.format(",d")) //decimal (ex) 100,000)
+      .valueAccessor(function(d){return d; })
+      .group(totalcnts);
+  /************************************************************************/
+    //var sensor_dimension = filter.dimension(row => row._id.loc)
+    var sensor_dimension = filter.dimension(row => row.loc)
+    var sensor_group = sensor_dimension.group().reduceSum(row => row.cnt)
+    dom = $("#sensor_bar_chart").parent()
+    width = dom.width()
+
+    sensor_bar_chart
+      .width(width).height(300)
+      .margins({top: 20, right: 50, bottom: 20, left: 60})
+      .dimension(sensor_dimension).group(sensor_group)
+      .title(d => d.value)
+      .x(d3.scale.ordinal())
+      .xUnits(dc.units.ordinal)
+      //.outerPadding(0.05)
+      .elasticY(true)
+      .renderHorizontalGridLines(true)
+      .render();
+  /************************************************************************/
+    //The value returned by a dimension's accessor function for a given record should be deterministic 
+    // 데이터를 일자별로 분리한 디멘션을 생성
+    var daily_dimension = filter.dimension(row => row.d3format_time)
+    //https://github.com/square/crossfilter/wiki/API-Reference#dimension_group
+    // group 메서드는 데이터를 기준별로 분리한 디멘션의 그룹별 대표 데이터를 만들어냅니다.
+    var daily_group = daily_dimension.group().reduceSum(row => row.cnt)
+
+    var dom = $("#daily_line_chart").parent()
+    var width = dom.width()
+
+    range_chart
+      .margins({top: 0, right: 30, bottom: 20, left: 60})
+      .height(40)
+      .dimension(daily_dimension)
+      .group(daily_group)
+      .x(d3.time.scale().domain(domain))
+      .xUnits(d3.time.day)
+      //.round(d3.time.day.round) //뭔지 모르겠지만, 주석 안하면, reset all 했을 때 볼륨바의 범위 에러
+      //.tick(0)
+      .centerBar(true)
+      .render();
+
+    daily_line_chart
+      .renderArea(true)//라인차트 라인 아래 색 채움
+      .width(width).height(300)
+      .margins({top: 20, right: 50, bottom: 20, left: 60})
+      .dimension(daily_dimension).group(daily_group)
+      .rangeChart(range_chart)
+      .x(d3.time.scale().domain(domain))
+      .xUnits(d3.time.hour)
+      .brushOn(false) //범위 드래그하는 창
+      .renderHorizontalGridLines(true)
+      .renderVerticalGridLines(true)
+      .elasticY(true)
+      .mouseZoomable(true)
+      .zoomScale([1, 100])
+      .transitionDuration(500)//그래프 변하는 기간
+      .render();
+  /************************************************************************/
+    //var type_dimension1 = filter.dimension(row => row._id.type)
+    var type_dimension1 = filter.dimension(row => row.type)
+    var type_group1 = type_dimension1.group().reduceSum(row => row.cnt)
+    dom = $("#type_row_chart").parent()
+    width = dom.width()
+
+    type_row_chart
+      .width(width).height(200)
+      .dimension(type_dimension1).group(type_group1)
+      .label(d => d.key + ": " + d.value)
+      .title(d => d.key + ": " + d.value)
+      //.xAxis().ticks(8)
+      .elasticX(true)
+
+  /************************************************************************/
+    //var type_dimension2 = filter.dimension(row => row._id.type)
+    var type_dimension2 = filter.dimension(row => row.type)
+    var type_group2 = type_dimension2.group().reduceSum(row => row.cnt)
+    dom = $("#type_pie_chart").parent()
+    width = dom.width()
+
+    type_pie_chart
+      .width(width).height(200)
+      .dimension(type_dimension2).group(type_group2)
+      .label(function (d) {
+        if (type_pie_chart.hasFilter() && !type_pie_chart.hasFilter(d.key)) {
+          return d.key + '(0%)';
+        }
+        var label = d.key;
+        if (all.value()) {
+          label += '(' + Math.floor(d.value / all.value() * 100) + '%)';
+        }
+        return label;
+      })
+      .title(d => d.key + ": " + d.value)
+
+      /**/
+      window.addEventListener("resize", resizeFunction);
+
+      var xa = 0;
+      function resizeFunction() {
+        var txt = ++xa;
+
+        var wt = $("#sensor_bar_chart").parent().width()
+        sensor_bar_chart
+            .width(wt)
+            .rescale()
+            .render()
+            //.xAxis().tickValues([values]).
+
+        daily_line_chart
+            .width(wt)
+            .rescale()
+            .render()
+
+        range_chart
+            .width(wt)
+            .rescale()
+            .render()
+
+        $("#range_chart .y").remove()// axis Y 제거ㅠㅠ;; 잘 안되서 이렇게함;;
+      }  
+
+    dc.renderAll()
+        $("#range_chart .y").remove()// axis Y 제거
+
+  }, 
+  error: function(xhr, option, error){
+    alert(xhr.status); 
+    alert(error);
+  },
+  complete: function(){
+    $('#mloader').hide();
+
+  }
+});
+  
+</script>
