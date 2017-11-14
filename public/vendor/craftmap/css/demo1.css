@@ -36,7 +36,7 @@ text-indent:-9999px;
 width:32px;
 height:32px;
 outline:none;
-background:url(http://localhost/images/wifi_blue.png) no-repeat;
+background:url(/images/wifi_blue.png) no-repeat;
 cursor:pointer;
 /*
 width:15px;

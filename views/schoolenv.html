@@ -77,6 +77,10 @@ $.getJSON("/api/class-data" , function(data) {
   update_data() 
   document.getElementById("rowCnt").innerHTML = $("#sensor_table_tbody tr").length;
   $('.demo1').craftmap({
+    h: 500,
+    map: {
+      position: 'center2'
+    },
     image: {
       width: 3060,
       height: 600
@@ -201,6 +205,5 @@ window.onclick = function(event) {
     }
   }
 }
-
 </script>
 <script src="vendor/craftmap/js/craftmap2.js" type="text/javascript"></script>   

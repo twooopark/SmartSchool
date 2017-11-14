@@ -16,12 +16,10 @@ var x = $.noConflict();//jquery 버전 충돌 방지 https://www.cmsfactory.net/
  				name: 'imgContent'
  			},
  			image: {
- 				width: 1475,
- 				height: 1200,
  				name: 'imgMap'
  			},
- 			map: {
- 				position: 'center'
+			map: {
+ 				position: 'top_left'
  			},
  			marker: {
  				name: 'marker',
@@ -283,11 +281,15 @@ var x = $.noConflict();//jquery 버전 충돌 방지 https://www.cmsfactory.net/
 									y = position[1];
 								} else {
 									var x = (D.w-I.w)/2, 
-									y = (D.h-I.h)/2;
+									y = (S.h-I.h)/2;
 								}
 							} else {
 								var position = S.map.position;
 								switch (position){
+									case 'center2':
+									var x = (D.w-I.w)/2,
+									y = (S.h-I.h)/2;
+									break;
 									case 'center':
 									var x = (D.w-I.w)/2,
 									y = (D.h-I.h)/2;
@@ -321,8 +323,8 @@ var x = $.noConflict();//jquery 버전 충돌 방지 https://www.cmsfactory.net/
 							C.css(css);
 						},
 						check: function(x, y){
-							if (y < (D.h-I.h)){
-								y = D.h-I.h;
+							if (y < (S.h-I.h)){
+								y = S.h-I.h;
 							} else if (y > 0){
 								y = 0;
 							}
@@ -418,7 +420,7 @@ var x = $.noConflict();//jquery 버전 충돌 방지 https://www.cmsfactory.net/
 									tbFilter();
 									
 									if (marker.center){
-										var cy = -y+D.h/2-h/2,
+										var cy = -y+S.h/2-h/2,
 										cx = -x+D.w/2-w/2,
 										c = P.map.position.check(cx, cy),
 										animate = {
