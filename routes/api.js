@@ -1,11 +1,28 @@
 var router = express.Router()
-router.get("/stat-data", (req, res) => {
+router.get("/error-data", (req, res) => {
   var data = req.query || {}
   var start_day = data.start_day || data["start-day"] || "20171020"
   var end_day = data.end_day || data["end-day"] || "20171120"
   var query =
   'SELECT loc, time, type, cnt ' +
   'from sensor_error_hourly order by time';
+
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    res.end(JSON.stringify(result))
+  })
+})
+router.get("/sensor_daily-data", (req, res) => {
+  var data = req.query || {}
+  var start_day = data.start_day || data["start-day"] || "20171020"
+  var end_day = data.end_day || data["end-day"] || "20171120"
+  var query =
+  'SELECT loc, time, type, avge ' +
+  'from sensor_data_daily order by time';
 
   db.query(query, (err, result) => {
     if(err) {
