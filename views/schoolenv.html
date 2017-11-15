@@ -51,7 +51,7 @@
 <div class="row">
   <div class="col-lg-12">
     <!-- craftmap -->
-    <div id="content">
+    <div class="panel-body" id="content">
       <div class="relative">
         <div class="demo1">
           <img src="images/Nschool.png" class="imgMap" />
@@ -75,58 +75,67 @@
     <!--Graph-->
     <div class="row">
       <div class="col-lg-12">
-        <div id="chartGroupDiv">
+        <div class="panel-body" id="chartGroupDiv">
 
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="chart-wrapper" id="daily_line_chart">
+              <!--div class="chart-wrapper" id="daily_line_chart">
                 <div class="chart-title">
                   <strong> 일별 데이터 </strong><a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a>   
                 </div>
               </div>
-              <div id="range_chart"></div>  
-            </div>
+              <div id="range_chart"></div-->                
+              <div class="chart-wrapper" id="test">
+                <div class="chart-title">
+                  <strong> 학교 환경 그래프 </strong><!--a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a-->   
+                </div>
+              </div>
 
-            <div class="col-lg-4">
+            <!--div class="col-lg-4">
               <div class="chart-wrapper" id="type_pie_chart">
                 <div class="chart-title">
                   <strong> 센서별 데이터 </strong>
                 </div> 
               </div> 
-            </div>
-          </div>
+            </div-->
 
-          <div class="row">
+          <!--div class="row">
             <div class="col-lg-12">
               <div id="test"></div>
             </div>
-          </div>
+          </div-->
 
         </div>
       </div>
     </div>
 
     <!--Table-->
-    <div class="col-lg-12" style="font-size: 9pt;">
-      <input type="text" id="myInput" onkeyup="tbFilter()" placeholder="Search for datas.." title="Type in a name">
-      <span id="rowCnt"> 0</span>
-      <table class="table table-bordered text-center table-scrollable table-hover table-fixed" id="sensor_table" style="margin-bottom: 0px;">
-        <thead class="fixed_thead">
-          <tr>
-            <td colspan="2">Sensor Info</td>
-            <td colspan="3">Realtime Sensor Data</td>
-          </tr>
-          <tr>
-            <td width="13%">location</td>
-            <td width="26%">Mac</td>
-            <td width="17%">Type</td>
-            <td width="17%">Data</td>
-            <td width="27%">Time</td>
-          </tr>
-        </thead>
-        <tbody id="sensor_table_tbody">
-        </tbody>
-      </table>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel-body" id="class-table">
+          <div class="chart-wrapper">
+            <div class="chart-title">
+              <strong> 교실 상세현황 </strong>
+              <input position="left" type="text" id="myInput" onkeyup="tbFilter()" placeholder="Search for datas.." title="Type in a name"><span id="rowCnt"> 0</span><!--a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a-->   
+            </div>
+            <table  style="font-size: 9pt;" class="table table-bordered text-center table-scrollable table-hover table-fixed" id="sensor_table" style="margin-bottom: 0px;">
+              <thead class="fixed_thead">
+                <tr>
+                  <td colspan="2">Sensor Info</td>
+                  <td colspan="3">Realtime Sensor Data</td>
+                </tr>
+                <tr>
+                  <td width="13%">location</td>
+                  <td width="26%">Mac</td>
+                  <td width="17%">Type</td>
+                  <td width="17%">Data</td>
+                  <td width="27%">Time</td>
+                </tr>
+              </thead>
+              <tbody id="sensor_table_tbody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -295,7 +304,7 @@ $.ajax({
 /*
   {loc: "1학년2반", time: "2017-10-17T15:00:00.000Z", type: "미세먼지", avge: 6, d3format_time: Wed Oct 18 2017 00:00:00 GMT+0900 (대한민국 표준시)}
 */
-    var runDimension = filter.dimension(function(d) {return [+d.type, +d.d3format_time]; });
+    var runDimension = filter.dimension(row => [row.type, row.d3format_time]);
     var runGroup = runDimension.group().reduce(
         function (p, v) {
             ++p.d3format_time;
@@ -313,34 +322,65 @@ $.ajax({
             return {d3format_time: 0, total: 0, avg: 0};
         }
     );//.reduceSum(function(d) { return +d.avge; });.reduceSum(function(d) { return +d.avge; });
+
+function transeData2(tempType,v){
+  switch(tempType){
+    case "습도" : v=v/10;
+     break;
+    case "온도" : v=v/10;
+      break;
+    case "이산화탄소" : v=v/100;
+      break;
+    default : v+="";
+  }
+  return Math.round(v);
+}
     var dom = $("#test").parent()
     var width = dom.width()
     var adjustX = 10, adjustY = 40;
     chart
-        .width(width-adjustX).height(300-adjustY)
+        .width(width-adjustX).height(400-adjustY)
+        //.margins({top: 20, right: 30, bottom: 20, left: 60})
         .chart(function(c) { return dc.lineChart(c).interpolate('cardinal'); })
+        // .chart(function (c) {
+        //   var child = dc.lineChart(c);
+        //   dc.override(child, 'yAxisMin', function () {
+        //       var min = d3.min(child.data(), function (layer) {
+        //           return d3.min(layer.values, function (p) {
+        //               return p.y + p.y0;
+        //           });
+        //       });
+        //       return dc.utils.subtract(min, child.yAxisPadding());
+        //   });
+        //   return child;
+        // })
         .x(d3.time.scale().domain(domain))
+        .margins({top: 50, right: 30, bottom: 20, left: 60})
+        //.y([0, 100])
         .brushOn(false)
-        .yAxisLabel("Measured Speed km/s")
-        .xAxisLabel("Run")
-        .clipPadding(10)
+        //.yAxisLabel("수치")
+        //.xAxisLabel("일자")
+        .clipPadding(100)
         .elasticY(true)
         .dimension(runDimension)
         .group(runGroup)
+        .renderHorizontalGridLines(true)
+        .renderVerticalGridLines(true)
         .mouseZoomable(true)
-        .seriesAccessor(function(d) {return "Expt: "+d.key[0];})
-        .keyAccessor(function(d) {return +d.key[1];})
-        .valueAccessor(function(d) {return d.value.avg;})
+        .seriesAccessor(function(d) {return d.key[0];})
+        .keyAccessor(function(d) {return d.key[1];})
+        .valueAccessor(d => transeData2(d.key[0], d.value.avg))
         .title(function (d) {
           var value = d.value.avg ? d.value.avg : d.value;
           if (isNaN(value)) {
               value = 0;
           }
-          return d.key[0] + '\n' +d.key[1] + '\n' + numberFormat(value);
+          return d.key[0] + '\n' +d.key[1] + '\n' + transeData(d.key[0], value);
         });
-    chart.legend(dc.legend().x(window.innerWidth-200).y(0).itemHeight(13).gap(5)
+    chart.legend(dc.legend().x(width-adjustX-200).y(0).itemHeight(13).gap(5)
                  .horizontal(1).legendWidth(140).itemWidth(70));
-    chart.margins().left += 40;
+    //chart.margins().left += 40;
+
     /*
      apply_resizing(chart, adjustX, adjustY, function(chart) {
         chart.legend().x(window.innerWidth-200);
@@ -427,6 +467,7 @@ $.ajax({
       })
       .title(d => d.key + ": " + d.value)
 
+  /************************************************************************/
       window.addEventListener("resize", resizeFunction);
 
       var xa = 0;
@@ -434,29 +475,40 @@ $.ajax({
         var txt = ++xa;
 
         var wt = $("#test").parent().width()
+ 
+          chart
+              .width(wt)
+              .rescale()
+              .render()
 
-            
-        chart
-            .width(wt)
-            .rescale()
-            .render()
+        // if(wt > 900){   
+        //   daily_line_chart
+        //       .width(wt*0.7)
+        //       .rescale()
+        //       .render()
 
-        daily_line_chart
-            .width(wt*0.65)
-            .rescale()
-            .render()
+        //   range_chart
+        //       .width(wt*0.7)
+        //       .rescale()
+        //       .render()
+        //   }else{   
+        //   daily_line_chart
+        //       .width(wt)
+        //       .rescale()
+        //       .render()
 
-        range_chart
-            .width(wt*0.65)
-            .rescale()
-            .render()
+        //   range_chart
+        //       .width(wt)
+        //       .rescale()
+        //       .render()
 
-
-        $("#range_chart .y").remove()
+        //   }
+        //   $("#range_chart .y").remove()
+        
       }  
 
     dc.renderAll()
-        $("#range_chart .y").remove()
+      //  $("#range_chart .y").remove()
 
   }, 
   error: function(xhr, option, error){

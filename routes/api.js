@@ -2,7 +2,7 @@ var router = express.Router()
 
 router.get("/dashboard-data", (req, res) => {
   var query =
-  'SELECT INFO AS TYPE, round(avg(DATA)) '+
+  'SELECT INFO AS type, round(avg(DATA)) as data '+
   'FROM sensor_data_update '+
   'join sensor on sensor.TYPE = sensor_data_update.TYPE '+
   'group by TYPE '+
@@ -35,9 +35,13 @@ router.get("/error-data", (req, res) => {
 
 router.get("/sensor_daily-data", (req, res) => {
   var query =
+  'SELECT type, time, avge '+
+  'from sensor_data_daily order by type, time;';//hourly order by type, time;';//
+
+/*
   'SELECT loc, time, type, avge ' +
   'from sensor_data_daily order by time';
-
+*/
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)

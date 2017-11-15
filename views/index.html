@@ -1263,32 +1263,7 @@
                 <i class="fa fa-cube  fa-fw"></i>교실 환경 정보</div>
               <!-- /.panel-heading -->
               <div class="panel-body">
-                <div class="list-group">
-                  <a href="#" class="list-group-item">
-                                    <!--i class="fa fa-comment fa-fw"></i--> 온도
-                                    <span class="pull-right text-muted small"><em>00℃</em>
-                                    </span>
-                                </a>
-                  <a href="#" class="list-group-item">
-                                    <!--i class="fa fa-twitter fa-fw"></i-->습도
-                                    <span class="pull-right text-muted small"><em>00%</em>
-                                    </span>
-                                </a>
-                  <a href="#" class="list-group-item">
-                                    <!--i class="fa fa-envelope fa-fw"></i-->CO2
-                                    <span class="pull-right text-muted small"><em>0000</em>
-                                    </span>
-                                </a>
-                  <a href="#" class="list-group-item">
-                                    <!--i class="fa fa-tasks fa-fw"></i-->미세먼지
-                                    <span class="pull-right text-muted small"><em>0000ppm</em>
-                                    </span>
-                                </a>
-                  <a href="#" class="list-group-item">
-                                    <!--i class="fa fa-upload fa-fw"></i-->초미세먼지
-                                    <span class="pull-right text-muted small"><em>0000ppm</em>
-                                    </span>
-                                </a>
+                <div class="list-group" id="Environment">
                 </div>
                 <!-- /.list-group -->
               </div>
@@ -1449,26 +1424,29 @@ $("a[href]").on("click", function(e) {
   }
 })
 /*
-$.getJSON("/dashboard-data" , function(data) {
-  $.each(data, function(r, vr) { 
-    var V = vr.LOC, X = vr.x-10, Y = vr.y-20;
-    addMarker += "<div class=\"marker\" id="+V+" data-coords="+vr.x+","+vr.y+"><h3>"+V+"</h3><div class=\"popup_Contents\" >"+
-    "<table width=\"100%\"><tr><td><img src=\"images/temp.png\"/></td><td style = \"width : 110px\">temperature<p class =\"온도\"> - </p></td><td><img src=\"images/humi.png\"/></td><td style = \"width : 110px\">humidity<p class =\"습도\"> - </p></td></tr><tr><td><img src=\"images/noise.png\"/></td><td>dust<p class =\"미세먼지\"> - </p></td><td><img src=\"images/co2.png\"/></td><td>co2<p class =\"이산화탄소\"> - </p></td></tr></table></div></div>";
-    V.substring(1,3) == "학년" ? addControl_1 += "<a rel="+V+">"+V+"</a>" : addControl_2 += "<a rel="+V+">"+V+"</a>"
+<div class="list-group" id="Environment">
+  <a href="#" class="list-group-item">
+                    <!--i class="fa fa-comment fa-fw"></i--> 온도
+                    <span class="pull-right text-muted small"><em>00℃</em>
+                    </span>
+                </a>
+
+              */
+$.getJSON("/api/dashboard-data" , function(data) {
+   var temp_target = $(".list-group#Environment")
+   var addList = "";
+   $.each(data, function(r, vr) {
+    var T = vr.type, D = vr.data;
+    addList += "<a class=\"list-group-item\">"+T+"<span class=\"pull-right text-muted small\"><em>"+transeData(T,D)+"</em></span></a>";
   })
-  $("#GeneralClass").append(addControl_1);
-  $("#SpecialClass").append(addControl_2);
-  $(".demo1").append(addMarker);
-  update_data() 
-  document.getElementById("rowCnt").innerHTML = $("#sensor_table_tbody tr").length;
-  $('.demo1').craftmap({
-    image: {
-      width: 3060,
-      height: 600
-    }
-  });
+  temp_target.append(addList);
 })
-*/
+
+
+
+
+
+
 var nT = document.getElementById("nowTime");
 nT.innerHTML = moment().format('YYYY-MM-DD hh:mm');
 
