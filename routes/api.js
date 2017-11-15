@@ -72,7 +72,7 @@ router.get("/sensor-data", (req, res) => {
 
 router.get("/class-data", (req, res) => {
   var query =
-  'SELECT NO, LOCATION as LOC, SERIAL, MAC_DEC, MAC_HEX, COORD_X as x, COORD_Y as y '+
+  'SELECT NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
   'FROM classroom ORDER BY LOC'
 
   db.query(query, (err, result) => {

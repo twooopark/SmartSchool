@@ -25,14 +25,14 @@
       <table class="table tablesorter">
         <thead>
           <tr>
-            <th width="5%">No</th>
-            <th width="12%">Location</th>
-            <th width="17%">Serial</th>
-            <th width="19%">MAC_DEC</th>
-            <th width="19%">MAC_HEX</th>
-            <th width="9%">X</th>
-            <th width="9%">Y</th>
-            <th width="5%"></th>
+            <th width="5%">번호</th>
+            <th width="15%">위치</th>
+            <th width="15%">이름</th>
+            <th width="12%">교체일</th>
+            <th width="18%">물리주소</th>
+            <th width="20%">설명</th>
+            <th width="5%">X</th>
+            <th width="5%">Y</th>
             <th width="5%">
               <span class="table-add glyphicon glyphicon-plus"></span>
             </th>
@@ -41,6 +41,7 @@
         <tbody id="classroom_info">
           <tr class="hide">
             <td contenteditable="true">test</td>
+            <td contenteditable="true">null</td>
             <td contenteditable="true">null</td>
             <td contenteditable="true">null</td>
             <td contenteditable="true">null</td>
@@ -88,7 +89,7 @@ $.getJSON("/api/class-data" , function(data) {
   $(".mMap").append(addMarker);
   $("tbody#classroom_info").append(tbl_body);
 
-  var trCount = $(".table > tbody tr").length-1;
+  var trCount = $("#editableTable .table > tbody tr").length-1;
   $(".hide > td:first").text(trCount);
 
 
@@ -120,14 +121,14 @@ $.getJSON("/api/class-data" , function(data) {
 });
 
 $(".table").on('click','.table-add',function () {
-  var trCount = $(".table > tbody tr").length-1;
-  $(".hide > td:first").text(++trCount - 1);
+  var trCount = $("#editableTable .table > tbody tr").length-1;
+  $(".hide > td:first").text(++trCount);
   var $clone = $("tbody#classroom_info > tr.hide").clone(true).removeClass('hide table-line');
   $('.table').append($clone);
 });
 $(".table").on('click','.table-remove',function () {
   $(this).parents('tr').detach();
-  var trCount = $(".table > tbody tr").length-1;
+  var trCount = $("#editableTable .table > tbody tr").length-1;
   $(".hide > td:first").text(--trCount)
 });
 $(".table").on('click','.table-up',function () {
@@ -144,7 +145,7 @@ $.fn.pop = [].pop;
 $.fn.shift = [].shift;
 
 $('#export-btn').click(function () {
-  var rows = $(".table").find('tr:not(:hidden)');
+  var rows = $("#editableTable .table").find('tr:not(:hidden)');
   var headers = [];
   var data = [];
   

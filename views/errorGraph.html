@@ -177,6 +177,7 @@ $.ajax({
       .render();
 
     daily_line_chart
+      .interpolate("monotone") 
       .renderArea(true)
       .width(width).height(300)
       .margins({top: 20, right: 50, bottom: 20, left: 60})
@@ -225,7 +226,7 @@ $.ajax({
         }
         return label;
       })
-      .title(d => d.key + ": " + d.value)
+      .title(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
 
       window.addEventListener("resize", resizeFunction);
 
