@@ -74,12 +74,13 @@
 
       <div class="row">
         <div class="col-lg-12">
-          <div class="chart-wrapper" id="daily_line_chart">
+          <div class="chart-wrapper" id="daily_line_chart" style="margin-bottom: -2px";
+>
             <div class="chart-title">
               <strong> 시간별 오류 확인 </strong><a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a>   
             </div>
-          </div>
-          <div id="range_chart"></div>  
+          </div> 
+          <div class="chart-wrapper" id="range_chart"> </div>
         </div>
       </div>
 
@@ -125,9 +126,10 @@ $.ajax({
     data = result;
 
     var time_format_hourly =d3.time.format.iso;
-      data.forEach(function(row) {
+    data.forEach(function(row) {
       row.d3format_time = time_format_hourly.parse(row.time);
       row.total_cnt = +row.total_cnt;
+      row.loc = row.loc.replace('학년', '-').replace('교실','');
     })
 
     var domain = [ data[0].d3format_time, data.slice(-1)[0].d3format_time ];
@@ -165,7 +167,7 @@ $.ajax({
     var width = dom.width()
 
     range_chart
-      .margins({top: 0, right: 30, bottom: 20, left: 60})
+      .margins({top: 0, right: 50, bottom: 20, left: 60})
       .height(40)
       .dimension(daily_dimension)
       .group(daily_group)
