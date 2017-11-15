@@ -27,4 +27,4 @@ app.use("/", require("./routes/render"))
 app.use("/api", require("./routes/api"))
 
 // server on
-app.listen(8090)
+app.listen(80)
