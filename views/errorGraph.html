@@ -199,8 +199,8 @@ $.ajax({
     type_row_chart
       .width(width).height(200)
       .dimension(type_dimension1).group(type_group1)
-      .label(d => d.key + ": " + d.value)
-      .title(d => d.key + ": " + d.value)
+      .label(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
+      .title(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
       //.xAxis().ticks(8)
       .elasticX(true)
 
