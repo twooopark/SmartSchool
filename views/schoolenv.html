@@ -113,18 +113,18 @@
         <div class="panel-body" id="class-table">
           <div class="chart-wrapper">
             <div class="chart-title">
-              <strong> 교실 센서별 상세현황 </strong>
+              <strong> 교실 상세현황 </strong>
               <input position="left" type="text" id="myInput" onkeyup="tbFilter()" placeholder="Search for datas.." title="Type in a name"><span id="rowCnt"> 0</span><!--a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a-->   
             </div>
             <table  style="font-size: 9pt;" class="table table-bordered text-center table-scrollable table-hover table-fixed" id="sensor_table" style="margin-bottom: 0px;">
               <thead class="fixed_thead">
                 <tr>
-                  <td colspan="1">Sensor Info</td>
+                  <td colspan="2">Sensor Info</td>
                   <td colspan="3">Realtime Sensor Data</td>
                 </tr>
                 <tr>
                   <td width="13%">location</td>
-                  <!--td width="26%">Mac</td-->
+                  <td width="26%">Mac</td>
                   <td width="17%">Type</td>
                   <td width="17%">Data</td>
                   <td width="27%">Time</td>
@@ -211,8 +211,6 @@ function update_data() {
             v = v == null ? "-" : transeData(tempType,v);
             tbl_row += "<td>"+v+"</td>";
             $(".marker#"+tempId+" .popup_Contents p."+tempType).text(v);
-            break;
-          case "MAC" :
             break;
           default : tbl_row += "<td>"+v+"</td>";
         }
