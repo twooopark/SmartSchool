@@ -1223,7 +1223,7 @@
       <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h1 class="page-header">학교 환경정보 [<span id="nowTime"></span>]</h1>
+            <h1 class="page-header">학교 정보 [<span id="nowTime"></span>]</h1>
           </div>
           <!-- /.col-lg-12 -->
         </div>
@@ -1428,23 +1428,26 @@ $("a[href]").on("click", function(e) {
                 </a>
 
               */
-$.getJSON("/api/dashboard-data" , function(data) {
-   var temp_target = $(".list-group#Environment")
-   var addList = "";
-   $.each(data, function(r, vr) {
-    var T = vr.type, D = vr.data;
-    addList += "<a class=\"list-group-item\">"+T+"<span class=\"pull-right text-muted small\"><em>"+transeData(T,D)+"</em></span></a>";
+
+
+
+
+
+
+
+
+setInterval(function(){ 
+  $("#nowTime").text(moment().format('YYYY-MM-DD hh:mm:ss'));
+  $.getJSON("/api/dashboard-data" , function(data) {
+    var temp_target = $(".list-group#Environment")
+    var addList = "";
+    $.each(data, function(r, vr) {
+      var T = vr.type, D = vr.data;
+      addList += "<a class=\"list-group-item\">"+T+"<span class=\"pull-right text-muted small\"><em>"+transeData(T,D)+"</em></span></a>";
+    })
+    temp_target.html(addList);
   })
-  temp_target.append(addList);
-})
-
-
-
-
-
-
-var nT = document.getElementById("nowTime");
-nT.innerHTML = moment().format('YYYY-MM-DD hh:mm');
+}, 1000); 
 
 function transeData(tempType,v){
   switch(tempType){
