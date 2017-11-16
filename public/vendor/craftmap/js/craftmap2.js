@@ -418,6 +418,9 @@ var x = $.noConflict();//jquery 버전 충돌 방지 https://www.cmsfactory.net/
 									// ㅜㅜ제발되라
 									document.getElementById("myInput").value = id;
 									tbFilter();
+
+									formData.loc = id;
+									DataReload(formData);
 									
 									if (marker.center){
 										var cy = -y+S.h/2-h/2,
@@ -437,10 +440,17 @@ var x = $.noConflict();//jquery 버전 충돌 방지 https://www.cmsfactory.net/
 											zIndex:'3'
 										}
 										t.after(
+
 											$('<div />').addClass(marker.popup_name+' '+id).css(css).html(html).append(
-												$('<a href=\"'+id+'\" />').addClass('close').text("상세보기")
-												)//$(".close").siblings(3)[0].innerHTML
+												$('<a />').addClass('close')
+												)
 											);
+
+											// $('<div />').addClass(marker.popup_name+' '+id).css(css).html(html).append(
+											// 	$('<a href=\"'+id+'\" />').addClass('close').text("상세보기")
+											// 	//$('<a href=\"'+id+'\" />').addClass('close').text("상세보기")
+											// 	)//$(".close").siblings(3)[0].innerHTML
+											// );
 										var POPUP = t.next('.'+marker.popup_name), 
 										pw = POPUP.innerWidth(), 
 										ph = POPUP.innerHeight(),
@@ -487,26 +497,26 @@ var x = $.noConflict();//jquery 버전 충돌 방지 https://www.cmsfactory.net/
 					},
 					close: function(){
 						C.find('.close').on('click', function(){
-							/*
 							var t = $(this), popup = t.parents('.'+S.marker.popup_name), marker = popup.prev('.'+S.marker.name);
 							popup.remove();
 							P.controls.active.remove();
 							S.marker.onClose.call(this, marker, popup);
 							return false;
-							*/
-							//171110 상세보기
-						    var targ_div = $(this).attr("targ-div")
-						    if(targ_div != undefined) {
-						      var href = $(this).attr("href")
-						      if(href) {
-						        $(targ_div).load("/page/" + href) //필요없어보여서 생략...10/12 .replace(".html", ""))
-						        return false
-						      }
-						    }
-
-
 						});
 					}
+					// 		// //171110 상세보기
+					// 	 //    var targ_div = $(this).attr("targ-div")
+					// 	 //    if(targ_div != undefined) {
+					// 	 //      var href = $(this).attr("href")
+					// 	 //      if(href) {
+					// 	 //        $(targ_div).load("/page/" + href) //필요없어보여서 생략...10/12 .replace(".html", ""))
+					// 	 //        return false
+					// 	 //      }
+					// 	 //    }
+
+
+					// 	});
+					// }
 				},
 				controls: {
 					init: function(){
@@ -518,6 +528,10 @@ var x = $.noConflict();//jquery 버전 충돌 방지 https://www.cmsfactory.net/
 							div = C.find('.'+ S.marker.name).filter('#'+rel);
 							div.trigger('click');
 							S.controls.onClick.call(this, div);
+
+							formData.loc = rel;
+							DataReload(formData);
+
 							return false;
 						});
 					},

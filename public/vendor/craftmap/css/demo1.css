@@ -86,8 +86,20 @@ font-weight:bold;
 color : black;
 }
 
-
 .popup .close {
+display:block;
+text-indent:-9999px;
+position:absolute;
+top:4px;
+right:4px;
+width:16px;
+height:16px;
+outline:none;
+/*background:url(../images/close.gif) no-repeat;
+cursor:pointer;*/
+}
+
+/*.popup .close {
 text-align: center;
 font-weight:normal;
 font-size:13px;
@@ -103,9 +115,9 @@ width:100px;
 height:20px;
 /*background:url(../images/close.gif) no-repeat;
 text-indent:-9999px;*/
-cursor:pointer;
+/*cursor:pointer;
 }
-
+*/
 .relative {
 position:relative;
 }

@@ -38,10 +38,6 @@ router.get("/sensor_daily-data", (req, res) => {
   'SELECT type, time, avge, loc '+
   'from sensor_data_daily order by type, time;';//hourly order by type, time;';//
 
-/*
-  'SELECT loc, time, type, avge ' +
-  'from sensor_data_daily order by time';
-*/
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)
@@ -49,6 +45,24 @@ router.get("/sensor_daily-data", (req, res) => {
       return
     }
     res.end(JSON.stringify(result))
+  })
+})
+
+//hourly ? daily? where?
+router.post("/sensor_dh-data", (req, res) => {
+  var jsondata = req.body;
+  var query =
+  'SELECT type, time, avge, loc '+
+  'from sensor_data_'+jsondata.sel;
+  if(jsondata.loc) query += ' where loc = \"'+jsondata.loc+'\" ';
+  query += ' order by type, time ';
+  console.log(query);
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }else res.end(JSON.stringify(result))//JSON.stringify(result))
   })
 })
 
