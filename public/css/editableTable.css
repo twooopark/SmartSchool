@@ -32,3 +32,8 @@
     color: #0b0;
   }
 }
+td:empty:before{
+  content: attr(placeholder);
+  display: block;
+  color:#aaa;
+}

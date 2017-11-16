@@ -33,6 +33,18 @@
     #range_chart{
       width : 100%;
     }
+    #type_row_chart{
+      width : 100%;
+    }
+    #type_pie_chart{
+      width : 100%;
+    }
+    .dc-chart  g.row text {  
+      text-shadow: 1px 1px #aaa;
+    }
+   .dc-chart .pie-slice {  
+      text-shadow: 1px 1px #aaa;
+    }
   </style>
 </head>
 
@@ -204,8 +216,10 @@ $.ajax({
       .dimension(type_dimension1).group(type_group1)
       .label(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
       .title(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
-      //.xAxis().ticks(8)
+      .ordering(function(d) { return - d.value })
+      .colors(d3.scale.category10())
       .elasticX(true)
+      .xAxis().ticks(8)
 
   /************************************************************************/
     var type_dimension2 = filter.dimension(row => row.type)

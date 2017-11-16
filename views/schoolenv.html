@@ -43,7 +43,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header"><span id="nowTime"></span> 학교 환경정보</h1>
+    <h1 class="page-header"><span id="nowTime"></span> 환경정보</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -85,7 +85,7 @@
               <div id="range_chart"></div-->                
               <div class="chart-wrapper" id="test">
                 <div class="chart-title">
-                  <strong> 학교 환경 그래프 </strong><!--a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a-->   
+                  <strong> 환경 그래프 </strong><!--a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a-->   
                 </div>
               </div>
 
@@ -375,7 +375,7 @@ function transeData2(tempType,v){
           if (isNaN(value)) {
               value = 0;
           }
-          return d.key[0] + '\n' +d.key[1] + '\n' + transeData(d.key[0], value);
+          return d.key[0]+' : '+transeData(d.key[0], value)+'\n'+d.key[1];
         });
     chart.legend(dc.legend().x(width-adjustX-200).y(0).itemHeight(13).gap(5)
                  .horizontal(1).legendWidth(140).itemWidth(70));

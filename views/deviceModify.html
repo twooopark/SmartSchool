@@ -5,7 +5,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header"> 모듈 수정</h1>
+    <h1 class="page-header"> 기기 관리</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -40,14 +40,14 @@
         </thead>
         <tbody id="classroom_info">
           <tr class="hide">
-            <td contenteditable="true">test</td>
-            <td contenteditable="true">null</td>
-            <td contenteditable="true">null</td>
-            <td contenteditable="true">null</td>
-            <td contenteditable="true">null</td>
-            <td contenteditable="true">null</td>
-            <td contenteditable="true">null</td>
-            <td contenteditable="true">null</td>
+            <td contenteditable="false"></td>
+            <td placeholder="입력하세요." contenteditable="true"></td>
+            <td placeholder="이름" contenteditable="true"></td>
+            <td placeholder="교체일" contenteditable="true"></td>
+            <td placeholder="물리주소" contenteditable="true"></td>
+            <td placeholder="설명" contenteditable="true"></td>
+            <td id="cx" contenteditable="true">100</td>
+            <td id="cy" contenteditable="true">100</td>
             <td>
               <span class="table-remove glyphicon glyphicon-remove"></span>
             </td>
@@ -58,12 +58,23 @@
           </tr>
           <!--DynamicTable-->
         </tbody>
-        
       </table>
     </div>
 
-    <button id="export-btn" class="btn btn-primary">데이터 수정</button>
-    <p id="export"></p>
+    <table width="100%">
+    <tr>
+      <td rowspan="2"><button id="export-btn" class="btn btn-primary">데이터 수정</button></td>
+      <td style="text-align: right;">
+        <p> ※번호, 이름, 물리주소는 수정할 수 없습니다. (추가는 예외) </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: right;">
+        <p> [추가] 먼저, 데이터를 입력하여 추가하고, 좌표는 상단의 맵에서 수정해주세요.</p>
+      </td>
+    </tr>
+    </table>
+    <!--p id="export"></p-->
 
   </div>
 </div>
@@ -76,9 +87,12 @@ $.getJSON("/api/class-data" , function(data) {
   $.each(data, function(r, vr) { 
     var V = vr.LOC, X = vr.x-35, Y = vr.y-25;
     var tbl_row = "";
+    var editable = true;
     addMarker += "<div class=\"marker\" id=_"+V+" data-coords="+vr.x+","+vr.y+"></div><div class=\"markerDiv\" id=_"+V+" style = \"top:"+Y+"px; left:"+X+"px;\">"+V+"</div>";
-    $.each(this, function(k , v) { 
-      tbl_row += "<td contenteditable=\"true\">"+v+"</td>";
+    $.each(this, function(k , v) {
+      editable = true; 
+      if(k=="NO"||k=="SERIAL"||k=="MAC") editable = false;
+      tbl_row += "<td id=\""+k+"\" contenteditable=\""+editable+"\">"+v+"</td>";
     })
     tbl_body += "<tr id=_"+V+">"+tbl_row+
     "<td><span class=\"table-remove glyphicon glyphicon-remove\"></span></td>"+
@@ -111,8 +125,8 @@ $.getJSON("/api/class-data" , function(data) {
           var sX = $(".mMap").scrollLeft();
           var X = x+sX;
           var id = $(this).attr("id");
-          $("tbody#classroom_info > tr#"+id).children().eq(5).text(X);
-          $("tbody#classroom_info > tr#"+id).children().eq(6).text(y);
+          $("tbody#classroom_info > tr#"+id+" > td#x").text(X);
+          $("tbody#classroom_info > tr#"+id+" > td#y").text(y);
           $(".markerDiv#"+id).css({top:y-25, left:X-35});
         },
       scroll: true,
@@ -143,7 +157,7 @@ $(".table").on('click','.table-down',function () {
 
 $.fn.pop = [].pop;
 $.fn.shift = [].shift;
-
+var Jdata;
 $('#export-btn').click(function () {
   var rows = $("#editableTable .table").find('tr:not(:hidden)');
   var headers = [];
@@ -163,14 +177,14 @@ $('#export-btn').click(function () {
     
     data.push(h);
   });
-  var Jdata = JSON.stringify(data);
+  Jdata = JSON.stringify(data);
   $('#export').text(Jdata);
 
   var returnValue = confirm("정말로 데이터를 수정하시겠습니까?");
-  if(returnValue){Json_To_DB(Jdata);}
+  if(returnValue){POST_func(Jdata);}
 });
 
-function Json_To_DB(Jdata) {  
+function POST_func(Jdata) {  
   var xmlhttp = new XMLHttpRequest(); 
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState === 4) {
@@ -184,5 +198,5 @@ function Json_To_DB(Jdata) {
   xmlhttp.open("POST", "/api/class-data-update");
   xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xmlhttp.send(Jdata);
- }
+}
 </script>

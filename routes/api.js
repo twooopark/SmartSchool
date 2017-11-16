@@ -35,7 +35,7 @@ router.get("/error-data", (req, res) => {
 
 router.get("/sensor_daily-data", (req, res) => {
   var query =
-  'SELECT type, time, avge '+
+  'SELECT type, time, avge, loc '+
   'from sensor_data_daily order by type, time;';//hourly order by type, time;';//
 
 /*
@@ -85,21 +85,31 @@ router.get("/class-data", (req, res) => {
   })
 })
 
+function HexToDec(Hex){
+  var tempArr = Hex.split("-");
+  tempArr.reverse();
+  var temp = tempArr.toString();
+  temp = temp.replace(/,/g,"");
+  var Dec = parseInt(temp, 16);
+  return Dec;
+}
+
 router.post("/class-data-update", (req, res) => {
   var jsondata = req.body;
   var values = "";
   for(var i=0; i< jsondata.length; i++){
-    values += "("+jsondata[i].No+",\""+jsondata[i].Location+"\",\""+jsondata[i].Serial+"\","+jsondata[i].MAC_DEC+",\""+jsondata[i].MAC_HEX+"\","+jsondata[i].X+","+jsondata[i].Y+"),";
+    values += "("+jsondata[i].번호+",\""+jsondata[i].위치+"\",\""+jsondata[i].이름+"\","+HexToDec(jsondata[i].물리주소)+","+
+                "\""+jsondata[i].물리주소+"\","+jsondata[i].X+","+jsondata[i].Y+",\""+jsondata[i].교체일+"\",\""+jsondata[i].설명+"\"),";
   }
   values = values.slice(0,-1);
-  values += "ON DUPLICATE KEY UPDATE location=VALUES(location),COORD_X=VALUES(coord_x),coord_y=VALUES(coord_y);"
+  values += "ON DUPLICATE KEY UPDATE LOCATION=VALUES(LOCATION),COORD_X=VALUES(COORD_X),COORD_Y=VALUES(COORD_Y),REPLACED_DATE=VALUES(REPLACED_DATE),DESCRIPTION=VALUES(DESCRIPTION);"
   
-  var query = "INSERT INTO classroom (NO,LOCATION,SERIAL,MAC_DEC,MAC_HEX,COORD_X,COORD_Y) VALUES " ;
+  var query = "DELETE FROM classroom; INSERT INTO classroom (NO,LOCATION,SERIAL,MAC_DEC,MAC_HEX,COORD_X,COORD_Y,REPLACED_DATE,DESCRIPTION) VALUES " ;
   query += values;
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)
-      res.end("error")
+      res.end("error : "+err)
       return
     }else{res.status(200).send('Complete!');}
   })
