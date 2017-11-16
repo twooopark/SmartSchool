@@ -386,7 +386,7 @@ function DataReload(formData){
           }
           return d.key[0]+' : '+transeData(d.key[0], value)+'\n'+d.key[1];
         });
-    chart.legend(dc.legend().x(width-adjustX-200).y(0).itemHeight(13).gap(5)
+    chart.legend(dc.legend().x(width-width*0.15).y(5).itemHeight(13).gap(5)
                  .horizontal(1).legendWidth(140).itemWidth(70));
  
       window.addEventListener("resize", resizeFunction);
@@ -399,6 +399,8 @@ function DataReload(formData){
  
           chart
               .width(wt)
+              .legend(dc.legend().x(wt-wt*0.15).y(5).itemHeight(13).gap(5)
+                 .horizontal(1).legendWidth(140).itemWidth(70))
               .rescale()
               .render()
         

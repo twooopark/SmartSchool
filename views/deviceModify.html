@@ -20,48 +20,55 @@
         <!--DynamicMarker-->
       </div>
     </div>
-
-    <div id="editableTable" style="font-size: 9pt;">
-      <table class="table tablesorter">
-        <thead>
-          <tr>
-            <th width="5%">번호</th>
-            <th width="15%">위치</th>
-            <th width="15%">이름</th>
-            <th width="12%">교체일</th>
-            <th width="18%">물리주소</th>
-            <th width="20%">설명</th>
-            <th width="5%">X</th>
-            <th width="5%">Y</th>
-            <th width="5%">
-              <span class="table-add glyphicon glyphicon-plus"></span>
-            </th>
-          </tr>
-        </thead>
-        <tbody id="classroom_info">
-          <tr class="hide">
-            <td contenteditable="false"></td>
-            <td placeholder="입력하세요." contenteditable="true"></td>
-            <td placeholder="이름" contenteditable="true"></td>
-            <td placeholder="교체일" contenteditable="true"></td>
-            <td placeholder="물리주소" contenteditable="true"></td>
-            <td placeholder="설명" contenteditable="true"></td>
-            <td id="cx" contenteditable="true">100</td>
-            <td id="cy" contenteditable="true">100</td>
-            <td>
-              <span class="table-remove glyphicon glyphicon-remove"></span>
-            </td>
-            <td>
-              <span class="table-up glyphicon glyphicon-arrow-up"></span>
-              <span class="table-down glyphicon glyphicon-arrow-down"></span>
-            </td>
-          </tr>
-          <!--DynamicTable-->
-        </tbody>
-      </table>
+<div class="panel panel-default">
+      <div class="panel-heading"> 디바이스 목록
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div id="editableTable" style="font-size: 9pt;">
+          <table class="table tablesorter">
+            <thead>
+              <tr>
+                <th width="5%">번호</th>
+                <th width="15%">위치</th>
+                <th width="15%">이름</th>
+                <th width="12%">교체일</th>
+                <th width="18%">물리주소</th>
+                <th width="20%">설명</th>
+                <th width="5%">X</th>
+                <th width="5%">Y</th>
+                <th width="5%">
+                  <span class="table-add glyphicon glyphicon-plus"></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="classroom_info">
+              <tr class="hide">
+                <td contenteditable="false"></td>
+                <td placeholder="입력하세요." contenteditable="true"></td>
+                <td placeholder="이름" contenteditable="true"></td>
+                <td placeholder="교체일" contenteditable="true"></td>
+                <td placeholder="물리주소" contenteditable="true"></td>
+                <td placeholder="설명" contenteditable="true"></td>
+                <td id="cx" contenteditable="true">100</td>
+                <td id="cy" contenteditable="true">100</td>
+                <td>
+                  <span class="table-remove glyphicon glyphicon-remove"></span>
+                </td>
+                <td>
+                  <span class="table-up glyphicon glyphicon-arrow-up"></span>
+                  <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                </td>
+              </tr>
+              <!--DynamicTable-->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- /.panel-body -->
     </div>
 
-    <table width="100%">
+    <table width="100%" style="margin-bottom: 50px;">
     <tr>
       <td rowspan="2"><button id="export-btn" class="btn btn-primary">데이터 수정</button></td>
       <td style="text-align: right;">
