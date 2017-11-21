@@ -317,6 +317,10 @@ function DataReload(formData){
     },
     success: function(result){
       data = result;
+      if(data.length == 0){
+        alert("데이터가 없습니다.")
+        return;
+      }
        //filter.remove();
        //filter.add(result);
       // dc.redrawAll();
@@ -330,31 +334,32 @@ function DataReload(formData){
     var domain = [ data[0].d3format_time, data.slice(-1)[0].d3format_time ];
     filter = crossfilter(data);
     var all = filter.groupAll();
-     runDimension = filter.dimension(row => [row.type, row.d3format_time]);
-     runGroup = runDimension.group().reduce(
-        function (p, v) {
-            ++p.d3format_time;
-            p.total += v.avge;
-            p.avg = Math.round(p.total / p.d3format_time);
-            return p;
-        },
-        function (p, v) {
-            --p.d3format_time;
-            p.total -= v.avge;
-            p.avg = p.d3format_time ? Math.round(p.total / p.d3format_time) : 0;
-            return p;
-        },
-        function () {
-            return {d3format_time: 0, total: 0, avg: 0};
-        }
+    runDimension = filter.dimension(row => [row.type, row.d3format_time]);
+    runGroup = runDimension.group().reduce(
+      function (p, v) {
+          ++p.d3format_time;
+          p.total += v.avge;
+          p.avg = Math.round(p.total / p.d3format_time);
+          return p;
+      },
+      function (p, v) {
+          --p.d3format_time;
+          p.total -= v.avge;
+          p.avg = p.d3format_time ? Math.round(p.total / p.d3format_time) : 0;
+          return p;
+      },
+      function () {
+          return {d3format_time: 0, total: 0, avg: 0};
+      }
     );
+    
     function transeData2(tempType,v){
       switch(tempType){
         case "습도" : v=v/10;
          break;
         case "온도" : v=v/10;
           break;
-        case "이산화탄소" : v=v/100;
+        case "이산화탄소" : v=v/10;
           break;
         default : v+="";
       }

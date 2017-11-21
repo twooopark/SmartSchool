@@ -416,6 +416,7 @@ var x = $.noConflict();//jquery 버전 충돌 방지 https://www.cmsfactory.net/
 							html = t.find('.'+marker.name+'Content').html();
 
 									// ㅜㅜ제발되라
+									
 									document.getElementById("myInput").value = id;
 									tbFilter();
 
