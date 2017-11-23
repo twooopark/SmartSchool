@@ -10,8 +10,7 @@
     <!-- dc Charts CSS -->
   <link rel="stylesheet" href="vendor/dc/dc.css" />
     <!-- Bootstrap Core CSS -->
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-  <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css" />
     <!-- MetisMenu CSS -->
   <link rel="stylesheet" href="vendor/metisMenu/metisMenu.min.css">
   <link rel="stylesheet" href="vendor/metisMenu/metisMenu.css" />
@@ -21,6 +20,9 @@
   <link rel="stylesheet" href="sb-admin/css/sb-admin-2.css" />
     <!-- Custom Table CSS -->
   <link href="css/editableTable.css" rel="stylesheet" type="text/css" />
+    <!-- DataTables CSS -->
+  <link rel="stylesheet" href="vendor/datatables/css/dataTables.bootstrap4.min.css"/>
+  <link rel="stylesheet" href="vendor/datatables/css/dataTables.buttons.min.css"/>
 
     <!-- jQuery -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -28,13 +30,15 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- Bootstrap Core JavaScript -->
-  <script src="../bootstrap/js/bootstrap.min.js"></script>
+  <script src="vendor//bootstrap/js/bootstrap.min.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
   <script src="vendor/metisMenu/metisMenu.js"></script>
     <!-- DataTables JavaScript -->
-  <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
-  <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-  <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+  <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+  <script src="vendor/datatables-responsive/dataTables.responsive.js"></script>
+  <script src="vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
+  <script src="vendor/datatables/js/dataTables.buttons.min.js"></script>
     <!-- dc Charts JavaScript -->
   <script src="vendor/crossfilter/crossfilter.js"></script>
   <script src="vendor/d3/d3.js"></script>
@@ -1408,45 +1412,37 @@
 
 
 <script>
-//a[href] 클릭 시 발생, 
 $("a[href]").on("click", function(e) {
   var targ_div = $(this).attr("targ-div")
   if(targ_div != undefined) {
     var href = $(this).attr("href")
     if(href) {
-      $(targ_div).load("/page/" + href) //필요없어보여서 생략...10/12 .replace(".html", ""))
+      $(targ_div).load("/page/" + href)
       return false
     }
   }
 })
-/*
-<div class="list-group" id="Environment">
-  <a href="#" class="list-group-item">
-                    <!--i class="fa fa-comment fa-fw"></i--> 온도
-                    <span class="pull-right text-muted small"><em>00℃</em>
-                    </span>
-                </a>
-
-              */
 
 
-
-
-
-
-
-
-setInterval(function(){ 
+function TimeReload(){
   $("#nowTime").text(moment().format('YYYY-MM-DD hh:mm:ss'));
-  $.getJSON("/api/dashboard-data" , function(data) {
-    var temp_target = $(".list-group#Environment")
-    var addList = "";
-    $.each(data, function(r, vr) {
-      var T = vr.type, D = vr.data;
-      addList += "<a class=\"list-group-item\">"+T+"<span class=\"pull-right text-muted small\"><em>"+transeData(T,D)+"</em></span></a>";
+
+  if($(".page-header").text().slice(0,5)=="학교 정보")
+    $.getJSON("/api/dashboard-data" , function(data){
+      var temp_target = $(".list-group#Environment")
+      var addList = "";
+      $.each(data, function(r, vr) {
+        var T = vr.type, D = vr.data;
+        addList += "<a class=\"list-group-item\">"+T+"<span class=\"pull-right text-muted small\"><em>"+transeData(T,D)+"</em></span></a>";
+      })
+      temp_target.html(addList);
     })
-    temp_target.html(addList);
-  })
+}
+
+TimeReload()
+setInterval(function(){ 
+  if($(".page-header").text().slice(3,5)=="정보")
+    TimeReload()
 }, 1000); 
 
 function transeData(tempType,v){

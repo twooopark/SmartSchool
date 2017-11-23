@@ -85,9 +85,10 @@ router.get("/sensor-data", (req, res) => {
 
 router.get("/class-data", (req, res) => {
   var query =
-  'SELECT (@cnt := @cnt + 1) as NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
+//  'SELECT (@cnt := @cnt + 1) as NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
+  'SELECT classroom.no as NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
   'FROM classroom '+
-  'CROSS JOIN (SELECT @cnt := 0) AS dummy '+
+//  'CROSS JOIN (SELECT @cnt := 0) AS dummy '+
   'ORDER BY LOC';
 
   db.query(query, (err, result) => {
@@ -102,13 +103,14 @@ router.get("/class-data", (req, res) => {
 
 router.get("/class_mng-data", (req, res) => {
   var query =
-  'SELECT (@cnt := @cnt + 1) as no, c.LOCATION as class_name, t.NAME as teacher_name, s.cnt as student_cnt, \"유\" as sensor_in,c.SERIAL as device_id '+
+  'SELECT c.no as no, c.LOCATION as class_name, t.NAME as teacher_name, s.cnt as student_cnt, \"유\" as sensor_in,c.SERIAL as device_id '+
   'FROM classroom as c left outer join teacher as t on c.MAC_DEC = t.CLASSROOM_MAC, '+
     '(SELECT student.CLASSROOM_MAC, count(*) as cnt '+
     'FROM student '+
-    'CROSS JOIN (SELECT @cnt := 0) as dummy '+
+//    'CROSS JOIN (SELECT @cnt := 0) as dummy '+
     'GROUP BY student.CLASSROOM_MAC) as s '+
-  'WHERE c.MAC_DEC = s.CLASSROOM_MAC ';
+  'WHERE c.MAC_DEC = s.CLASSROOM_MAC '+
+  'ORDER BY c.LOCATION ';
 
   db.query(query, (err, result) => {
     if(err) {
@@ -120,14 +122,37 @@ router.get("/class_mng-data", (req, res) => {
   })
 })
 
-router.post("/student-data", (req, res) => {
+router.post("/students-data", (req, res) => {
   var jsondata = req.body;
   var query =
-  'SELECT s.name as student_name, \"등교\" as student_state '+
+  'SELECT s.idx as no, s.name as student_name, \"등교\" as student_state '+
   'FROM classroom as c, student as s '+
+ // 'CROSS JOIN (SELECT @cnt := 0) as dummy '+
   'WHERE c.MAC_DEC = s.CLASSROOM_MAC ';
   if(jsondata.c_name) 
     query += 'and c.LOCATION = \"'+jsondata.c_name+'\" ';
+  
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    res.end(JSON.stringify(result))
+  })
+})
+/*
+router.post("/student-data", (req, res) => {
+  var jsondata = req.body;
+  var query =
+  'SELECT (@cnt := @cnt + 1) as no, s.name as student_name, \"등교\" as student_state '+
+  'FROM classroom as c, student as s '+
+  'CROSS JOIN (SELECT @cnt := 0) as dummy '+
+  'WHERE c.MAC_DEC = s.CLASSROOM_MAC ';
+  if(jsondata.c_name) 
+    query += 'and c.LOCATION = \"'+jsondata.c_name+'\" ';
+  if(jsondata.s_name) 
+    query += 'and s.NAME = \"'+jsondata.s_name+'\" ';
   
   console.log(query)
   db.query(query, (err, result) => {
@@ -139,7 +164,7 @@ router.post("/student-data", (req, res) => {
     res.end(JSON.stringify(result))
   })
 })
-
+*/
 
 function HexToDec(Hex){
   var tempArr, temp, Dec;

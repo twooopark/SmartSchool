@@ -55,10 +55,6 @@
                 <td>
                   <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
-                <td>
-                  <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                  <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                </td>
               </tr>
               <!--DynamicTable-->
             </tbody>
@@ -102,9 +98,7 @@ $.getJSON("/api/class-data" , function(data) {
       tbl_row += "<td id=\""+k+"\" contenteditable=\""+editable+"\">"+v+"</td>";
     })
     tbl_body += "<tr id=_"+V+">"+tbl_row+
-    "<td><span class=\"table-remove glyphicon glyphicon-remove\"></span></td>"+
-    "<td><span class=\"table-up glyphicon glyphicon-arrow-up\"></span>"+
-    "<span class=\"table-down glyphicon glyphicon-arrow-down\"></span></td></tr>";
+    "<td><span class=\"table-remove glyphicon glyphicon-remove\"></span></td></tr>";
 
   })
   $(".mMap").append(addMarker);
@@ -152,15 +146,7 @@ $(".table").on('click','.table-remove',function () {
   var trCount = $("#editableTable .table > tbody tr").length-1;
   $(".hide > td:first").text(--trCount)
 });
-$(".table").on('click','.table-up',function () {
-  var $row = $(this).parents('tr');
-  if ($row.index() === 1) return;
-  $row.prev().before($row.get(0));
-});
-$(".table").on('click','.table-down',function () {
-  var $row = $(this).parents('tr');
-  $row.next().after($row.get(0));
-});
+
 
 $.fn.pop = [].pop;
 $.fn.shift = [].shift;
