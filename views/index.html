@@ -1,6 +1,20 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "7e9b8655-ee5f-400b-bf5c-aaa895c6a08e",
+      autoRegister: false, /* Set to true to automatically prompt visitors */
+      notifyButton: {
+          enable: true /* Set to false to hide */
+      }
+    }]);
+  </script>
+</head>
+
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
