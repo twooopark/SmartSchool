@@ -752,17 +752,7 @@
           <!-- /.modal-dialog -->
           <!-- /#page-wrapper -->
           <!-- /#wrapper -->
-          <script>
-            $(document).ready(function() {
-                                                                                                            $('#dataTables-example').DataTable({
-                                                                                                                responsive: false,
-                                                                                                                searching: true,
-                                                                                                                paging:   true,
-                                                                                                                ordering: false,
-                                                                                                                info:     false
-                                                                                                            });
-                                                                                                        });
-          </script>
+
         </div>
         <div class="fade modal text-center" id="myModal_user_info_edit_position" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -925,17 +915,7 @@
           <!-- /#page-wrapper -->
           <!-- /#wrapper -->
           <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-          <script>
-            $(document).ready(function() {
-                                                                                                            $('#dataTables-example').DataTable({
-                                                                                                                responsive: false,
-                                                                                                                searching: true,
-                                                                                                                paging:   true,
-                                                                                                                ordering: false,
-                                                                                                                info:     false
-                                                                                                            });
-                                                                                                        });
-          </script>
+
         </div>
         <div class="fade modal text-center" id="myModal_user_info_edit_subject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -1437,6 +1417,24 @@ $("a[href]").on("click", function(e) {
   }
 })
 
+function POST_func(Jdata) {  
+  var xmlhttp = new XMLHttpRequest(); 
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState === 4) {
+      if (xmlhttp.status === 200) {
+        alert(xmlhttp.responseText);
+        $("#page-wrapper").load("/page/deviceModify.html")
+        
+
+      } else {
+        alert('There was a problem with the request.');
+      }
+    }
+   };
+  xmlhttp.open("POST", "/api/class-data-update");
+  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xmlhttp.send(Jdata);
+}
 
 function TimeReload(){
   $("#nowTime").text(moment().format('YYYY-MM-DD hh:mm:ss'));

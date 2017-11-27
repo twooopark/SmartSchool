@@ -127,10 +127,9 @@ router.post("/students-data", (req, res) => {
   var query =
   'SELECT s.idx as no, s.name as student_name, \"등교\" as student_state '+
   'FROM classroom as c, student as s '+
- // 'CROSS JOIN (SELECT @cnt := 0) as dummy '+
   'WHERE c.MAC_DEC = s.CLASSROOM_MAC ';
   if(jsondata.c_name) 
-    query += 'and c.LOCATION = \"'+jsondata.c_name+'\" ';
+    query += 'and c.LOCATION = \"'+jsondata.c_name+'\" GROUP BY s.idx';
   
   db.query(query, (err, result) => {
     if(err) {

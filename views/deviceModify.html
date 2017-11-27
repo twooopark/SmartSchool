@@ -177,19 +177,5 @@ $('#export-btn').click(function () {
   if(returnValue){POST_func(Jdata);}
 });
 
-function POST_func(Jdata) {  
-  var xmlhttp = new XMLHttpRequest(); 
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState === 4) {
-      if (xmlhttp.status === 200) {
-        alert(xmlhttp.responseText);
-      } else {
-        alert('There was a problem with the request.');
-      }
-    }
-   };
-  xmlhttp.open("POST", "/api/class-data-update");
-  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xmlhttp.send(Jdata);
-}
+
 </script>
