@@ -92,7 +92,7 @@ router.get("/sensor-data", (req, res) => {
     res.end(Rs)
   })
 })
-//class-data
+
 router.get("/device-data", (req, res) => {
 //   var query =
 // //  'SELECT (@cnt := @cnt + 1) as NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
@@ -101,7 +101,7 @@ router.get("/device-data", (req, res) => {
 // //  'CROSS JOIN (SELECT @cnt := 0) AS dummy '+
 //   'ORDER BY LOC';
   var query =
-  'SELECT z.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description '+
+  'SELECT z.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, COORD_Y as y '+
   'FROM zone as z, module as m '+
   'WHERE z.MAC = m.MAC '+
   'ORDER BY LOC';
@@ -121,15 +121,21 @@ router.get("/device-data", (req, res) => {
   })
 })
 
-//class_name-data
-router.post("/class_name-data", (req, res) => {
+router.post("/device-data", (req, res) => {
   var jsondata = req.body;
 
+//   var query =
+// //  'SELECT (@cnt := @cnt + 1) as NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
+//   'SELECT classroom.no as NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
+//   'FROM classroom '+
+// //  'CROSS JOIN (SELECT @cnt := 0) AS dummy '+
+//   'ORDER BY LOC';
   var query =
-  'SELECT z.LOCATION as loc '+
-  'FROM zone as z '+
-  'WHERE loc = "'+jsondata.c_name+'" '+ 
-  'ORDER BY loc';
+  'SELECT z.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, COORD_Y as y '+
+  'FROM zone as z, module as m '+
+  'WHERE z.MAC = m.MAC and m.SERIAL = "'+jsondata.d_name+'" ' +
+  'ORDER BY LOC';
+
 
   db.query(query, (err, result) => {
     if(err) {
@@ -137,10 +143,105 @@ router.post("/class_name-data", (req, res) => {
       res.end("error")
       return
     }
-    res.end(JSON.stringify(result))
+    for(var i=0; i<result.length; i++){
+      result[i].mac = DecToHex(result[i].mac);
+    }
+    var Rs = JSON.stringify(result);
+    res.end(Rs)
   })
 })
 
+
+
+
+
+//class_name-data (GET)
+router.get("/class_name-data", (req, res) => {
+  var query =
+  'SELECT z.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, COORD_Y as y '+
+  'FROM zone as z, module as m '+
+  'WHERE z.MAC = m.MAC '+
+  'ORDER BY LOC';
+
+
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    for(var i=0; i<result.length; i++){
+      result[i].mac = DecToHex(result[i].mac);
+    }
+    var Rs = JSON.stringify(result);
+    res.end(Rs)
+  })
+})
+
+//class_name-data (POST)
+router.post("/class_name-data", (req, res) => {
+  var jsondata = req.body;
+  switch(jsondata.flag){
+    case "chk" : 
+       var query =
+        'SELECT LOCATION '+
+        'FROM zone '+
+        'WHERE location = "'+jsondata.c_name+'"';
+      break;
+    case "delete" : 
+       var query =
+        'DELETE '+
+        'FROM zone '+
+        'WHERE loc = "'+jsondata.c_name+'";';
+     //break;
+    case "edit" || "add": 
+       var query =
+        'INSERT INTO `smartschool`.`zone`';
+        '(`LOCATION`) '+
+        'VALUES '+
+        '("'+jsondata.c_name+'");';
+      break;
+    default : 
+       res.end("Flag-error");
+      break;
+  }
+  
+  db.query(query, (err, result) => {
+    if(err) {
+      console.log(query, err);
+      res.send({ success: false, message: 'query error', error: err });
+      return;
+    }
+    else{
+      switch(jsondata.flag){
+        case "chk" : 
+            if(result==""){
+              res.end(JSON.stringify("중복된 교실명이 없습니다. 수정 가능합니다."))
+            }
+            else{
+              res.end(JSON.stringify("중복된 교실명이 있습니다."))
+            }
+          break;
+        case "delete" : 
+           var query =
+            'DELETE '+
+            'FROM zone '+
+            'WHERE loc = "'+jsondata.c_name+'";';
+         //break;
+        case "edit" || "add": 
+           var query =
+            'INSERT INTO `smartschool`.`zone`';
+            '(`LOCATION`) '+
+            'VALUES '+
+            '("'+jsondata.c_name+'");';
+          break;
+        default : 
+           res.end("Flag-error");
+          break;
+      }
+    }
+  })
+})
 //class_mng-data
 router.get("/class-data", (req, res) => {
 // var query =

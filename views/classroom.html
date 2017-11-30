@@ -84,7 +84,7 @@ table.dataTable tbody td {
         <!--교실 등록 끝-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-target="#myModal_student_info_edit" data-toggle="modal">확인</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">등록</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
       </div>
     </div>
@@ -146,7 +146,7 @@ table.dataTable tbody td {
         <!--교실 등록 끝-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-target="#myModal_student_info_edit" data-toggle="modal">확인</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">수정</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
       </div>
     </div>
@@ -193,24 +193,17 @@ table.dataTable tbody td {
           <table class="table table-bordered ">
             <tbody>
               <tr>
-                <td>
-                  <input class="form-control" placeholder="추가할 교실명을 입력해 주십시오" type="text">
-                </td>
-                <td>
-                  <button type="button" class="btn btn-primary btn-sm" id="config">중복확인</button>
+                <td class="text-muted" id="c_name_add_chk" placeholder="추가할 교실명을 입력해 주십시오" contenteditable="true"></td>                <td>
+                  <button type="button" onclick="CName_CHK('add')" class="btn btn-primary btn-sm" id="add_chk">중복 확인</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <!--중복된 교실명이 있을경우-->
-        <p class="text-danger">중복된 교실명이 없습니다 등록 가능합니다.</p>
-        <!--중복된 교실명이 없을경우-->
-        <p class="text-danger">중복된 교실명이 있습니다.</p>
         <!--교실명입력창 끝-->
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="add">확인</button>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-default" onclick="CName_Add('')" data-dismiss="modal">추가</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
       </div>
     </div>
@@ -232,7 +225,7 @@ table.dataTable tbody td {
         <p class="text-muted">삭제된 교실명을 선택한 교실은 새로 선택해야 합니다.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="delete">확인</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="delete">삭제</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
       </div>
     </div>
@@ -252,28 +245,23 @@ table.dataTable tbody td {
       <div class="modal-body text-danger">
         <!--교실명 입력창 시작-->
         <p class="text-muted">해당 교실명의 교실도 반영이 됩니다.</p>
+
         <!--신규 교실명 등록 교실명 중복확인-->
-        <table class="table table-bordered ">
-          <tbody>
-            <tr>
-              <td>과학실</td>
-              <td>
-                <input class="form-control" placeholder="수정될 교실명을 입력해 주십시오" type="text">
-              </td>
-              <td>
-                <button type="button" class="btn btn-primary btn-sm" id="config">중복확인</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <!--중복된 교실명이 있을경우-->
-        <p class="text-danger">중복된 교실명이 없습니다 수정 가능합니다.</p>
-        <!--중복된 교실명이 없을경우-->
-        <p class="text-danger">중복된 교실명이 있습니다.</p>
+          <table class="table table-bordered ">
+            <tbody>
+              <tr>
+                <td>-</td>
+                <td class="text-muted" id="c_name_edit_chk" placeholder="수정될 교실명을 입력해 주십시오" contenteditable="true"></td>
+                <td>
+                  <button type="submit" onclick="CName_CHK('edit')" class="btn btn-primary btn-sm" id="edit_chk">중복 확인</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         <!--교실명 입력창 끝-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="edit">확인</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="edit">수정</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
       </div>
     </div>
@@ -340,7 +328,69 @@ $(document).ready(function(){
     dData.c_name = C_dData.class_name;
     $("#myModal_classroom_info_edit").modal();
     $("#myModal_classroom_info_edit .modal-title").text(dData.c_name+" / 교실 정보 수정")
-   
+  
+  dData.flag = "get";
+  getCLASS(dData);
+
+
+
+
+  });
+
+  // 교실명 수정 모달창
+  $('#Class_name_dataTable tbody').on('click', 'button', function(){
+    dData.c_name = $(this).parents('tr').children()[0].textContent;
+    $("#myModal_classroom_info_name_edit td").first().text(dData.c_name);
+  });  
+});
+
+
+
+// 교실 리스트
+function C_DataReload(formData){
+  $.ajax({ 
+    url : "/api/class-data",
+    type: "POST",
+    data: dData,
+    dataType: 'json',
+    success: function(result){
+      data = result;
+      var tbl_body = "";
+      $.each(data, function() {
+        var tbl_row = "";
+        $.each(this, function(k , v) {
+         tbl_row += "<td id=\""+k+"\">"+v+"</td>";
+        })
+        tbl_body += "<tr>"+tbl_row+"</tr>";
+      })
+      $("#Student_dataTable tbody").html(tbl_body);
+    }, 
+    error: function(xhr, option, error){
+      alert(xhr.status); 
+      alert(error);
+    }
+  });
+}
+// 교실명 관리
+function CName_Func(formData){
+  $.ajax({ 
+    url : "/api/class_name-data",
+    type: "POST",
+    data: dData,
+    dataType: 'json',
+    success: function(result){
+      data = result;
+      alert(data);
+    }, 
+    error: function(xhr, option, error){
+      alert(xhr.status); 
+      alert(error);
+    }
+  });
+}
+// 교실 정보 SELECT로 불러오기
+function getCLASS(formData){
+  $.getJSON("/api/class_name-data" , function(data) {
     var sel_Class = "<option> 선택하세요. </option>",
         sel_Teacher = "<option> 선택하세요. </option>",
         sel_Device = "<option> 선택하세요. </option>";
@@ -369,99 +419,33 @@ $(document).ready(function(){
     $("#myModal_classroom_info_edit #myModal_device_id").html(sel_Device);
 
     $("#Class_name_dataTable tbody").html(tbl_body);
-  });
-
-  //수정
-  $('#Class_name_dataTable tbody').on('click', 'button', function(){
-    dData.c_name = $(this).parents('tr').children()[0].textContent;
-    $("#myModal_classroom_info_name_edit td").first().text(dData.c_name);
-  });  
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-  //중복확인
-  $('#config').on('click', 'button', function(){
-    
-    dData.flag = "config";
-    CN_Edit(dData);
-  }); 
-
-  //추가
-  $('#add').on('click', 'button', function(){
-    dData.flag = "add";
-    CN_Edit(dData);
-  }); 
-
-   //수정
-  $('#edit').on('click', 'button', function(){
-    dData.flag = "edit";
-    CN_Edit(dData);
-  });
-
-   //삭제
-  $('#delete').on('click', 'button', function(){
-    dData.flag = "delete";
-    CN_Edit(dData);
-  });
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/* 학생 개인 정보
-  $('#Student_dataTable tbody').on('click', 'tr', function (){
-    dData.s_name = this.children.student_name.textContent;
-    $("#myModal_student_info").modal();
-    $("#myModal_student_info .modal-title").text(dData.s_name)
-    S_DataReload(dData);
-  });
-*/
-});
-// 교실 리스트
-function C_DataReload(formData){
-  $.ajax({ 
-    url : "/api/class-data",
-    type: "POST",
-    data: dData,
-    dataType: 'json',
-    success: function(result){
-      data = result;
-      var tbl_body = "";
-      $.each(data, function() {
-        var tbl_row = "";
-        $.each(this, function(k , v) {
-         tbl_row += "<td id=\""+k+"\">"+v+"</td>";
-        })
-        tbl_body += "<tr>"+tbl_row+"</tr>";
-      })
-      $("#Student_dataTable tbody").html(tbl_body);
-    }, 
-    error: function(xhr, option, error){
-      alert(xhr.status); 
-      alert(error);
-    }
-  });
+  }
 }
-// 교실명 관리
-function CN_Edit_DEL(formData){
-  $.ajax({ 
-    url : "/api/class_name-data",
-    type: "POST",
-    data: dData,
-    dataType: 'json',
-    success: function(result){
-      data = result;
-      var tbl_body = "";
-      $.each(data, function() {
-        var tbl_row = "";
-        $.each(this, function(k , v) {
-         tbl_row += "<td id=\""+k+"\">"+v+"</td>";
-        })
-        tbl_body += "<tr>"+tbl_row+"</tr>";
-      })
-      $("#Student_dataTable tbody").html(tbl_body);
-    }, 
-    error: function(xhr, option, error){
-      alert(xhr.status); 
-      alert(error);
-    }
-  });
+
+// 교실명 중복 확인
+function CName_CHK(req){
+  dData.flag = "chk";
+  dData.c_name  = $("#c_name_"+req+"_chk").text().replace(/ /g,'');
+  dData.c_name.replace(/\r\n/g,"");
+  if(dData.c_name==""){
+    alert("교실명을 입력해주세요.");
+  }
+  else{
+    CName_Func(dData);
+  }
+}
+
+// 교실명 추가
+function CName_Edit(req){
+  dData.flag = req;
+}
+// 교실명 추가
+function CName_Add(req){
+  dData.flag = req;
+}
+
+function CName_Del(req){
+  dData.flag = req;
 }
 
 

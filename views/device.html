@@ -21,6 +21,8 @@
             <th>최종교체일</th>
             <th>물리주소</th>
             <th>기타</th>
+            <th>x</th>
+            <th>y</th>
           </tr>
         </thead>
       </table>
@@ -41,30 +43,6 @@
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover">
             <tbody>
-              <!--tr>
-                <td>ID</td>
-                <td>D123456789</td>
-              </tr>
-              <tr>
-                <td>종류</td>
-                <td>스캔+센서</td>
-              </tr>
-              <tr>
-                <td>설치위치</td>
-                <td>3층 과학실</td>
-              </tr>
-              <tr>
-                <td>최종교체일</td>
-                <td>2017년 9월 1일</td>
-              </tr>
-              <tr>
-                <td>동작상태</td>
-                <td>작동중</td>
-              </tr>
-              <tr>
-                <td>기타</td>
-                <td>이곳에 위의 항목외에 알아두어야 할 내용이 있다면 기록합니다.</td>
-              </tr-->
             </tbody>
           </table>
         </div>
@@ -539,10 +517,22 @@ $(document).ready(function(){
         "data" : "mac"
     }, {
         "data" : "description"
+    }, {
+        "data" : "x"
+    }, {
+        "data" : "y"
+    }],
+    "columnDefs": [{
+            "targets": [ 6 ],
+            "visible": false,
+            "searchable": false
+    },{
+            "targets": [ 7 ],
+            "visible": false,
+            "searchable": false
     }],
     "dom"     : 'Bfrtip',
-    "buttons" : [
-      {  
+    "buttons" : [{  
           text: '디바이스 등록',
           action: function ( e, dt, node, config ) {
               $('#myModal_device_new').modal('show')
@@ -567,7 +557,6 @@ $(document).ready(function(){
   });
 });
 
-
 function D_DataReload(formData){
   $.ajax({ 
     url : "/api/device-data",
@@ -580,11 +569,12 @@ function D_DataReload(formData){
       $.each(data, function() {
         var tbl_row = "";
         $.each(this, function(k , v) {
-         tbl_row += "<td id=\""+k+"\">"+v+"</td>";
+          if(k=="no" || k=="x" || k=="y" || k=="loc") return;
+         tbl_row += "<tr><td>"+k+"<td contenteditable=\"true\" id=\""+k+"\">"+v+"</td></tr>";
         })
-        tbl_body += "<tr>"+tbl_row+"</tr>";
+        tbl_body += tbl_row;
       })
-      $("#Device_dataTable tbody").html(tbl_body);
+      $("#myModal_device_info tbody").html(tbl_body);
     }, 
     error: function(xhr, option, error){
       alert(xhr.status); 
