@@ -193,7 +193,8 @@ table.dataTable tbody td {
           <table class="table table-bordered ">
             <tbody>
               <tr>
-                <td class="text-muted" id="c_name_add_chk" placeholder="추가할 교실명을 입력해 주십시오" contenteditable="true"></td>                <td>
+                <td class="text-muted" id="c_name_add_chk" placeholder="추가할 교실명을 입력해 주십시오" contenteditable="true"></td>
+                <td>
                   <button type="button" onclick="CName_CHK('add')" class="btn btn-primary btn-sm" id="add_chk">중복 확인</button>
                 </td>
               </tr>
@@ -419,7 +420,7 @@ function getCLASS(formData){
     $("#myModal_classroom_info_edit #myModal_device_id").html(sel_Device);
 
     $("#Class_name_dataTable tbody").html(tbl_body);
-  }
+  });
 }
 
 // 교실명 중복 확인
@@ -434,20 +435,6 @@ function CName_CHK(req){
     CName_Func(dData);
   }
 }
-
-// 교실명 추가
-function CName_Edit(req){
-  dData.flag = req;
-}
-// 교실명 추가
-function CName_Add(req){
-  dData.flag = req;
-}
-
-function CName_Del(req){
-  dData.flag = req;
-}
-
 
 
 /* 학생 리스트

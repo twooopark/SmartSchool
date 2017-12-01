@@ -329,6 +329,35 @@ router.post("/student-data", (req, res) => {
 })
 */
 
+router.post("/device_update", (req, res) => {
+  var jsondata = req.body;
+  
+  var query = "INSERT INTO module (SERIAL,MAC,REPLACED_DATE,DESCRIPTION) VALUES " +
+             "(\""+jsondata.이름+"\","+HexToDec(jsondata.물리주소)+",\""+jsondata.최종교체일+"\",\""+jsondata.기타+"\") "+
+            "ON DUPLICATE KEY UPDATE SERIAL=VALUES(SERIAL), REPLACED_DATE=VALUES(REPLACED_DATE), DESCRIPTION=VALUES(DESCRIPTION);"
+  
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error : "+err)
+      return
+    }else{res.status(200).send('수정 완료');}
+  })
+})
+
+router.post("/device_delete", (req, res) => {
+  var jsondata = req.body;
+  var query = "DELETE FROM module WHERE SERIAL = \""+jsondata.이름+"\"";
+
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error : "+err)
+      return
+    }else{res.status(200).send('삭제 완료');}
+  })
+})
+
 function HexToDec(Hex){
   var tempArr, temp, Dec;
   tempArr = Hex.split("-");
@@ -338,6 +367,7 @@ function HexToDec(Hex){
   Dec = parseInt(temp, 16);
   return Dec;
 }
+
 
 function DecToHex(Dec){
   var tempArr = new Array(),
@@ -350,27 +380,5 @@ function DecToHex(Dec){
   Hex = temp.join("-");
   return Hex;
 }
-
-router.post("/class-data-update", (req, res) => {
-  var jsondata = req.body;
-  
-  var query = "DELETE FROM classroom; INSERT INTO classroom (NO,LOCATION,SERIAL,MAC_DEC,MAC_HEX,COORD_X,COORD_Y,REPLACED_DATE,DESCRIPTION) VALUES " ;
-  var values = "";
-  for(var i=0; i< jsondata.length; i++){
-    values += "("+jsondata[i].번호+",\""+jsondata[i].위치+"\",\""+jsondata[i].이름+"\","+HexToDec(jsondata[i].물리주소)+","+
-                "\""+jsondata[i].물리주소+"\","+jsondata[i].X+","+jsondata[i].Y+",\""+jsondata[i].교체일+"\",\""+jsondata[i].설명+"\"),";
-  }
-  values = values.slice(0,-1);
-  values += "ON DUPLICATE KEY UPDATE LOCATION=VALUES(LOCATION),COORD_X=VALUES(COORD_X),COORD_Y=VALUES(COORD_Y),REPLACED_DATE=VALUES(REPLACED_DATE),DESCRIPTION=VALUES(DESCRIPTION);"
-  
-  query += values;
-  db.query(query, (err, result) => {
-    if(err) {
-      console.error(query, err)
-      res.end("error : "+err)
-      return
-    }else{res.status(200).send('Complete!');}
-  })
-})
 
 module.exports = router

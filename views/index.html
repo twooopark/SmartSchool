@@ -1417,21 +1417,20 @@ $("a[href]").on("click", function(e) {
   }
 })
 
-function POST_func(Jdata) {  
+function POST_func(Jdata, Info) {  
   var xmlhttp = new XMLHttpRequest(); 
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState === 4) {
       if (xmlhttp.status === 200) {
         alert(xmlhttp.responseText);
-        $("#page-wrapper").load("/page/deviceModify.html")
-        
-
+        D_dTable.ajax.reload();
+        //$("#page-wrapper").load("/page/deviceModify.html")
       } else {
         alert('There was a problem with the request.');
       }
     }
    };
-  xmlhttp.open("POST", "/api/class-data-update");
+  xmlhttp.open("POST", "/api/"+Info);
   xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xmlhttp.send(Jdata);
 }
