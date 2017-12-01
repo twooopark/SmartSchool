@@ -53,7 +53,7 @@
               </tr>
               <tr>
                 <td>물리주소</td>
-                <td contenteditable="true" id="mac">-</td>
+                <td contenteditable="false" id="mac">-</td>
               </tr>
               <tr>
                 <td>기타</td>
@@ -62,6 +62,9 @@
             </tbody>
           </table>
         </div>
+      <div class="modal-body text-danger">
+        <p class="text-muted">물리주소는 변경 할 수 없습니다.</p>
+      </div>
         <!--일정 입력창 끝-->
       </div>
       <div class="modal-footer">
@@ -329,19 +332,6 @@ $(document).ready(function(){
         "data" : "mac"
     }, {
         "data" : "description"
-    }, {
-        "data" : "x"
-    }, {
-        "data" : "y"
-    }],
-    "columnDefs": [{
-            "targets": [ 6 ],
-            "visible": false,
-            "searchable": false
-    },{
-            "targets": [ 7 ],
-            "visible": false,
-            "searchable": false
     }],
     "dom"     : 'Bfrtip',
     "buttons" : [{  
@@ -363,11 +353,14 @@ $(document).ready(function(){
   $('#Device_dataTable tbody').on('click', 'tr', function (){
     var d_dData = D_dTable.row(this).data();
     dData.d_name = d_dData.device_name;
+    dData.d_mac = d_dData.mac;
     $("#myModal_device_info").modal();
     $("#myModal_device_info .modal-title").text(dData.d_name+" - 디바이스 정보")
     D_DataReload(dData);
   });
 });
+
+
 
 function D_DataReload(formData){
   $.ajax({ 
@@ -412,7 +405,6 @@ $('#btn_device_edit').click(function () {
     res[headers[i]] = data[i];
 
   Jdata = JSON.stringify(res);
-  $('#export').text(Jdata);
 
   var returnValue = confirm("정말로 데이터를 수정하시겠습니까?");
   if(returnValue){POST_func(Jdata, "device_update");}
@@ -420,7 +412,8 @@ $('#btn_device_edit').click(function () {
 });
 
 
-$('.btn-primary').click(function () {
+$('#btn_device_delete').click(function () {
+  POST_func(Jdata, "device_delete");
 });
 
 

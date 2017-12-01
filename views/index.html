@@ -1424,6 +1424,8 @@ function POST_func(Jdata, Info) {
       if (xmlhttp.status === 200) {
         alert(xmlhttp.responseText);
         D_dTable.ajax.reload();
+        //초기화
+        dData = {"c_name":"", "c_name_new":"", "d_name":"", "d_mac":"", "flag":""};
         //$("#page-wrapper").load("/page/deviceModify.html")
       } else {
         alert('There was a problem with the request.');
@@ -1492,7 +1494,7 @@ function make_style(obj) {
 }
 
 //관리 - 교실, 학생, 디바이스
-var dData = {"c_name":"", "c_name_new":"", "d_name":"", "flag":""};
+var dData = {"c_name":"", "c_name_new":"", "d_name":"", "d_mac":"", "flag":""};
 
 </script>
 </html>

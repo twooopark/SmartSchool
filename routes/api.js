@@ -1,5 +1,28 @@
 var router = express.Router()
 
+function HexToDec(Hex){
+  var tempArr, temp, Dec;
+  tempArr = Hex.split("-");
+  tempArr.reverse();
+  temp = tempArr.toString();
+  temp = temp.replace(/,/g,"");
+  Dec = parseInt(temp, 16);
+  return Dec;
+}
+
+
+function DecToHex(Dec){
+  var tempArr = new Array(),
+      temp = Dec.toString(16).toUpperCase(),
+      Hex;
+  for(var i = 0; i <= 5; i++){
+    tempArr[i] = temp.slice(i*2,i*2+2);
+  }
+  temp = tempArr.reverse();
+  Hex = temp.join("-");
+  return Hex;
+}
+
 router.get("/dashboard-data", (req, res) => {
   var query =
   'SELECT INFO AS type, round(avg(DATA)) as data '+
@@ -17,6 +40,12 @@ router.get("/dashboard-data", (req, res) => {
     res.end(JSON.stringify(result))
   })
 })
+
+
+//////////////////////////////////////////////////////////////////////////
+///////////////////////////////////sensor/////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
 
 router.get("/error-data", (req, res) => {
   var query =
@@ -66,12 +95,6 @@ router.post("/sensor_dh-data", (req, res) => {
 })
 
 router.get("/sensor-data", (req, res) => {
-  // var query =
-  // 'SELECT LOCATION AS LOC, MAC_HEX AS MAC, INFO AS TYPE, DATA, DATE_FORMAT(TIME, "%Y-%m-%d %H:%i:%s") AS TIME '+
-  // 'FROM classroom '+
-  // 'left outer join sensor_data_update on sensor_data_update.MAC = classroom.MAC_DEC '+
-  // 'left outer join sensor on sensor.TYPE = sensor_data_update.TYPE '+
-  // 'ORDER BY LOC , TYPE';
   var query =
   'SELECT zone.LOCATION AS LOC, zone.MAC AS MAC, INFO AS TYPE, DATA, DATE_FORMAT(TIME, "%Y-%m-%d %H:%i:%s") AS TIME '+
   'FROM zone '+
@@ -93,15 +116,10 @@ router.get("/sensor-data", (req, res) => {
   })
 })
 
-router.get("/device-data", (req, res) => {
-//   var query =
-// //  'SELECT (@cnt := @cnt + 1) as NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
-//   'SELECT classroom.no as NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
-//   'FROM classroom '+
-// //  'CROSS JOIN (SELECT @cnt := 0) AS dummy '+
-//   'ORDER BY LOC';
+//(craftMap)
+router.get("/devicesensor-data", (req, res) => {
   var query =
-  'SELECT z.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, COORD_Y as y '+
+  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, COORD_Y as y '+
   'FROM zone as z, module as m '+
   'WHERE z.MAC = m.MAC '+
   'ORDER BY LOC';
@@ -121,19 +139,39 @@ router.get("/device-data", (req, res) => {
   })
 })
 
+//////////////////////////////////////////////////////////////////////////
+///////////////////////////////////device/////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+//(GET)
+router.get("/device-data", (req, res) => {
+  var query =
+  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description '+
+  'FROM zone as z right outer join module as m on z.MAC = m.MAC '+
+  'ORDER BY LOC';
+
+
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    for(var i=0; i<result.length; i++){
+      result[i].mac = DecToHex(result[i].mac);
+    }
+    var Rs = JSON.stringify(result);
+    res.end(Rs)
+  })
+})
+//(POST)
 router.post("/device-data", (req, res) => {
   var jsondata = req.body;
-
-//   var query =
-// //  'SELECT (@cnt := @cnt + 1) as NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
-//   'SELECT classroom.no as NO, LOCATION as LOC, SERIAL, DATE_FORMAT(REPLACED_DATE, "%Y-%m-%d") AS TIME, MAC_HEX as MAC, DESCRIPTION, COORD_X as x, COORD_Y as y '+
-//   'FROM classroom '+
-// //  'CROSS JOIN (SELECT @cnt := 0) AS dummy '+
-//   'ORDER BY LOC';
   var query =
-  'SELECT z.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, COORD_Y as y '+
-  'FROM zone as z, module as m '+
-  'WHERE z.MAC = m.MAC and m.SERIAL = "'+jsondata.d_name+'" ' +
+  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, COORD_Y as y '+
+  'FROM zone as z right outer join module as m on z.MAC = m.MAC '+
+  'WHERE m.SERIAL = "'+jsondata.d_name+'" ' +
   'ORDER BY LOC';
 
 
@@ -151,9 +189,103 @@ router.post("/device-data", (req, res) => {
   })
 })
 
+router.post("/device_insert", (req, res) => {
+  var jsondata = req.body;
+
+  var query = "INSERT INTO module (SERIAL,MAC,REPLACED_DATE,DESCRIPTION) VALUES " +
+             "(\""+jsondata.이름+"\", "+HexToDec(jsondata.물리주소)+" ,\""+jsondata.최종교체일+"\",\""+jsondata.기타+"\") ";//+
+            //"ON DUPLICATE KEY UPDATE SERIAL=VALUES(SERIAL), REPLACED_DATE=VALUES(REPLACED_DATE), DESCRIPTION=VALUES(DESCRIPTION);"
+  
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error : "+err)
+      return
+    }else{res.status(200).send('삽입 완료');}
+  })
+})
+
+router.post("/device_update", (req, res) => {
+  var jsondata = req.body;
+
+  var query = 'UPDATE `smartschool`.`module` '+
+              'SET '+
+              '`SERIAL` = \"'+jsondata.이름+'\", '+
+              '`REPLACED_DATE` = \"'+jsondata.최종교체일+'\", '+
+              '`DESCRIPTION` = \"'+jsondata.기타+'\" '+
+              'WHERE `MAC` = '+HexToDec(jsondata.물리주소)+' ';
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error : "+err)
+      return
+    }else{res.status(200).send('수정 완료');}
+  })
+})
+
+router.post("/device_delete", (req, res) => {
+  var jsondata = req.body;
+console.log(jsondata)
+  var query = "DELETE FROM module WHERE MAC = "+HexToDec(jsondata.d_mac)+" ";
+console.log(query)
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error : "+err)
+      return
+    }else{res.status(200).send('삭제 완료');}
+  })
+})
 
 
+//////////////////////////////////////////////////////////////////////////
+///////////////////////////////////class//////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
+
+//class_mng-data
+router.get("/class-data", (req, res) => {
+// var query =
+//   'SELECT c.no as no, c.LOCATION as class_name, t.NAME as teacher_name, s.cnt as student_cnt, \"유\" as sensor_in,c.SERIAL as device_id '+
+//   'FROM classroom as c left outer join teacher as t on c.MAC_DEC = t.CLASSROOM_MAC, '+
+//     '(SELECT student.CLASSROOM_MAC, count(*) as cnt '+
+//     'FROM student '+
+// //    'CROSS JOIN (SELECT @cnt := 0) as dummy '+
+//     'GROUP BY student.CLASSROOM_MAC) as s '+
+//   'WHERE c.MAC_DEC = s.CLASSROOM_MAC '+
+//   'ORDER BY c.LOCATION ';
+
+  var query =
+    'SELECT z.no as no, z.LOCATION as class_name, t.NAME as teacher_name, sc.cnt as student_cnt, m.SERIAL as device_id '+
+    'FROM zone as z '+
+    'left outer join teacher as t on z.MAC = t.CLASSROOM_MAC '+
+    'left outer join module as m on m.MAC = z.MAC '+
+    'left outer join (SELECT st.CLASSROOM_MAC, count(*) as cnt '+
+                     'FROM student as st GROUP BY st.CLASSROOM_MAC) as sc '+
+                  'on z.MAC = sc.CLASSROOM_MAC '+
+    'ORDER BY z.LOCATION ;';
+
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    for(var i=0; i<result.length; i++){
+      if(!result[i].SERIAL){
+          result[i].SERIAL = "-"
+      }
+      if(!result[i].teacher_name){
+          result[i].teacher_name = "-"
+      }
+      if(!result[i].student_cnt){
+          result[i].student_cnt = 0
+      }
+    }
+    var Rs = JSON.stringify(result);
+    res.end(Rs);
+  })
+})
 
 //class_name-data (GET)
 router.get("/class_name-data", (req, res) => {
@@ -242,50 +374,9 @@ router.post("/class_name-data", (req, res) => {
     }
   })
 })
-//class_mng-data
-router.get("/class-data", (req, res) => {
-// var query =
-//   'SELECT c.no as no, c.LOCATION as class_name, t.NAME as teacher_name, s.cnt as student_cnt, \"유\" as sensor_in,c.SERIAL as device_id '+
-//   'FROM classroom as c left outer join teacher as t on c.MAC_DEC = t.CLASSROOM_MAC, '+
-//     '(SELECT student.CLASSROOM_MAC, count(*) as cnt '+
-//     'FROM student '+
-// //    'CROSS JOIN (SELECT @cnt := 0) as dummy '+
-//     'GROUP BY student.CLASSROOM_MAC) as s '+
-//   'WHERE c.MAC_DEC = s.CLASSROOM_MAC '+
-//   'ORDER BY c.LOCATION ';
 
-  var query =
-    'SELECT z.no as no, z.LOCATION as class_name, t.NAME as teacher_name, sc.cnt as student_cnt, m.SERIAL as device_id '+
-    'FROM zone as z '+
-    'left outer join teacher as t on z.MAC = t.CLASSROOM_MAC '+
-    'left outer join module as m on m.MAC = z.MAC '+
-    'left outer join (SELECT st.CLASSROOM_MAC, count(*) as cnt '+
-                     'FROM student as st GROUP BY st.CLASSROOM_MAC) as sc '+
-                  'on z.MAC = sc.CLASSROOM_MAC '+
-    'ORDER BY z.LOCATION ;';
 
-  db.query(query, (err, result) => {
-    if(err) {
-      console.error(query, err)
-      res.end("error")
-      return
-    }
-    for(var i=0; i<result.length; i++){
-      if(!result[i].SERIAL){
-          result[i].SERIAL = "-"
-      }
-      if(!result[i].teacher_name){
-          result[i].teacher_name = "-"
-      }
-      if(!result[i].student_cnt){
-          result[i].student_cnt = 0
-      }
-    }
-    var Rs = JSON.stringify(result);
-    res.end(Rs);
-  })
-})
-
+/*
 router.post("/students-data", (req, res) => {
   var jsondata = req.body;
   var query =
@@ -304,6 +395,7 @@ router.post("/students-data", (req, res) => {
     res.end(JSON.stringify(result))
   })
 })
+*/
 /*
 router.post("/student-data", (req, res) => {
   var jsondata = req.body;
@@ -329,56 +421,5 @@ router.post("/student-data", (req, res) => {
 })
 */
 
-router.post("/device_update", (req, res) => {
-  var jsondata = req.body;
-  
-  var query = "INSERT INTO module (SERIAL,MAC,REPLACED_DATE,DESCRIPTION) VALUES " +
-             "(\""+jsondata.이름+"\","+HexToDec(jsondata.물리주소)+",\""+jsondata.최종교체일+"\",\""+jsondata.기타+"\") "+
-            "ON DUPLICATE KEY UPDATE SERIAL=VALUES(SERIAL), REPLACED_DATE=VALUES(REPLACED_DATE), DESCRIPTION=VALUES(DESCRIPTION);"
-  
-  db.query(query, (err, result) => {
-    if(err) {
-      console.error(query, err)
-      res.end("error : "+err)
-      return
-    }else{res.status(200).send('수정 완료');}
-  })
-})
-
-router.post("/device_delete", (req, res) => {
-  var jsondata = req.body;
-  var query = "DELETE FROM module WHERE SERIAL = \""+jsondata.이름+"\"";
-
-  db.query(query, (err, result) => {
-    if(err) {
-      console.error(query, err)
-      res.end("error : "+err)
-      return
-    }else{res.status(200).send('삭제 완료');}
-  })
-})
-
-function HexToDec(Hex){
-  var tempArr, temp, Dec;
-  tempArr = Hex.split("-");
-  tempArr.reverse();
-  temp = tempArr.toString();
-  temp = temp.replace(/,/g,"");
-  Dec = parseInt(temp, 16);
-  return Dec;
-}
-
-
-function DecToHex(Dec){
-  var tempArr = new Array(),
-      temp = Dec.toString(16).toUpperCase(),
-      Hex;
-  for(var i = 0; i <= 5; i++){
-    tempArr[i] = temp.slice(i*2,i*2+2);
-  }
-  temp = tempArr.reverse();
-  Hex = temp.join("-");
-  return Hex;
-}
 
 module.exports = router
