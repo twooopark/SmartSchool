@@ -139,6 +139,9 @@ router.get("/devicesensor-data", (req, res) => {
   })
 })
 
+
+
+
 //////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////device/////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -151,7 +154,6 @@ router.get("/device-data", (req, res) => {
   'FROM zone as z right outer join module as m on z.MAC = m.MAC '+
   'ORDER BY LOC';
 
-
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)
@@ -160,11 +162,14 @@ router.get("/device-data", (req, res) => {
     }
     for(var i=0; i<result.length; i++){
       result[i].mac = DecToHex(result[i].mac);
+      if(!result[i].loc)
+          result[i].loc = "-"
     }
     var Rs = JSON.stringify(result);
     res.end(Rs)
   })
 })
+
 //(POST)
 router.post("/device-data", (req, res) => {
   var jsondata = req.body;
@@ -174,7 +179,6 @@ router.post("/device-data", (req, res) => {
   'WHERE m.SERIAL = "'+jsondata.d_name+'" ' +
   'ORDER BY LOC';
 
-
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)
@@ -189,25 +193,41 @@ router.post("/device-data", (req, res) => {
   })
 })
 
+
+//device_insert
 router.post("/device_insert", (req, res) => {
   var jsondata = req.body;
 
+  if(jsondata.물리주소.length != 17){
+    res.end("물리주소 값이 올바르지 않습니다.");
+    return
+  }
   var query = "INSERT INTO module (SERIAL,MAC,REPLACED_DATE,DESCRIPTION) VALUES " +
              "(\""+jsondata.이름+"\", "+HexToDec(jsondata.물리주소)+" ,\""+jsondata.최종교체일+"\",\""+jsondata.기타+"\") ";//+
             //"ON DUPLICATE KEY UPDATE SERIAL=VALUES(SERIAL), REPLACED_DATE=VALUES(REPLACED_DATE), DESCRIPTION=VALUES(DESCRIPTION);"
-  
+console.log(query) 
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)
-      res.end("error : "+err)
+      if(err.code == 'ER_DUP_ENTRY'){
+        res.end("이미 등록 된 디바이스(물리주소)가 있습니다.")
+      }
+      else if(err.code == 'ER_TRUNCATED_WRONG_VALUE' || err.code =='ER_BAD_FIELD_ERROR'){
+        res.end("입력된 값이 올바르지 않습니다.")
+      }
+      else{
+        res.end("error : "+err)
+      }
       return
-    }else{res.status(200).send('삽입 완료');}
+    }else{res.status(200).send('등록 완료되었습니다.');}
   })
 })
 
+//device_update
 router.post("/device_update", (req, res) => {
   var jsondata = req.body;
 
+console.log(jsondata)
   var query = 'UPDATE `smartschool`.`module` '+
               'SET '+
               '`SERIAL` = \"'+jsondata.이름+'\", '+
@@ -217,31 +237,40 @@ router.post("/device_update", (req, res) => {
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)
-      res.end("error : "+err)
+      if(err.code == 'ER_TRUNCATED_WRONG_VALUE' || err.code =='ER_BAD_FIELD_ERROR'){
+        res.end("입력된 값이 올바르지 않습니다.")
+      }
+      else{
+        res.end("error : "+err)
+      }
       return
-    }else{res.status(200).send('수정 완료');}
+    }else{res.status(200).send('수정 완료되었습니다.');}
   })
 })
 
+//device_delete
 router.post("/device_delete", (req, res) => {
   var jsondata = req.body;
-console.log(jsondata)
   var query = "DELETE FROM module WHERE MAC = "+HexToDec(jsondata.d_mac)+" ";
-console.log(query)
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)
-      res.end("error : "+err)
+       if(err.code == 'ER_TRUNCATED_WRONG_VALUE' || err.code =='ER_BAD_FIELD_ERROR'){
+         res.end("이미 삭제되었거나, 입력된 값이 올바르지 않습니다.")
+       }
+       else{
+        res.end("error : "+err)
+       }
       return
-    }else{res.status(200).send('삭제 완료');}
+    }else{res.status(200).send('삭제 완료되었습니다.');}
   })
 })
+
 
 
 //////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////class//////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-
 
 //class_mng-data
 router.get("/class-data", (req, res) => {

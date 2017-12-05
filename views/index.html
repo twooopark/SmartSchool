@@ -75,8 +75,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <!--상단제목-->
-          <a href="index.html" class="navbar-brand"><span style="font-size:18px;"><b>서울재동초등학교 SmartSchool</b> 관리자 화면</span></a>
+          <!--상단 제목 수정 시작-->
+          <img src="..\images\jaedong.png" height="50px" style="float:left; padding:5px;">
+          <div style="width:400px; float:left; margin-left:20px; height:50px;">
+            <h4>
+              <a href="/index.html"><small>Seoul Jaedong Elementary School<br></small><b>서울 재동초등학교 스마트스쿨</b></a>
+            </h4>
+          </div>
+          <!--상단 제목 수정 끝-->
         </div>
         <!-- /.navbar-header -->
         <ul class="nav navbar-top-links navbar-right">
@@ -84,9 +90,9 @@
             <p>&nbsp;&nbsp;
               <b>박두리</b>님 안녕하세요.</p>
           </li>
-          <li>
+<!--           <li>
             <a class="btn btn-primary" href="login.html">로그아웃</a>
-          </li>
+          </li> -->
           <li>
             <a class="btn btn-info" data-toggle="modal" data-target="#myModal">개인정보수정</a>
           </li>
@@ -103,9 +109,9 @@
                 <a targ-div="#page-wrapper" href="schoolenv.html"><i class="fa fa-sun-o fa-fw"></i> 환경정보</a>
               </li>
           
-              <li>
+              <!--li>
                 <a targ-div="#page-wrapper" href="student_all.html"><i class="fa fa-group  fa-fw"></i> 전교생현황</a>
-              </li>
+              </li-->
 
 
              <li class="">
@@ -594,6 +600,47 @@
                         <td>기타</td>
                         <td>
                           <textarea class="form-control" rows="3"></textarea>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table table-striped table-bordered table-hover " style="text-align:center;">
+                    <thead>
+                      <tr>
+                        <th colspan="6">디바이스 알림 설정</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>담당교실 알림</td>
+                        <td>전체 알림</td>
+                        <td colspan="2">알림시간설정</td>
+                        <td colspan="2">알림종류</td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2">
+                          <input type="checkbox" value="">
+                        </td>
+                        <td rowspan="2">
+                          <input type="checkbox" value="">
+                        </td>
+                        <td>30분</td>
+                        <td>1시간</td>
+                        <td>환경센서</td>
+                        <td>디바이스에러</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" value="">
+                        </td>
+                        <td>
+                          <input type="checkbox" value="">
+                        </td>
+                        <td>
+                          <input type="checkbox" value="">
+                        </td>
+                        <td>
+                          <input type="checkbox" value="">
                         </td>
                       </tr>
                     </tbody>
@@ -1221,7 +1268,7 @@
       <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h1 class="page-header">학교 정보 [<span id="nowTime"></span>]</h1>
+            <h1 class="page-header"><span id="nowTime"></span> 교실 환경 및 재학생 등교 현황</h1>
           </div>
           <!-- /.col-lg-12 -->
         </div>
@@ -1332,72 +1379,204 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <!--교직원현황-->
-          <div class="col-lg-6">
-            <div class="panel panel-default text-center">
-              <div class="panel-heading">교직원 현황</div>
-              <!-- /.panel-heading -->
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-hover table-bordered ">
-                    <thead>
-                      <tr>
-                        <th>전체</th>
-                        <th>교원</th>
-                        <th>일반직</th>
-                        <th>스마트스쿨관리자</th>
-                        <th>기타</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>40</td>
-                        <td>20</td>
-                        <td>10</td>
-                        <td>2</td>
-                        <td>4</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.table-responsive -->
+                  <!--설치 디바이스 현황 시작-->
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <!--타이틀 시작-->
+                <i class="glyphicon glyphicon-hdd"></i>&nbsp;설치 디바이스 현황
+                <a targ-div="#page-wrapper" href="device.html">
+                <span class="pull-right">자세히보기&nbsp;
+                  <i class="fa fa-arrow-circle-right"></i>
+                </span>
+                </a>
               </div>
-              <!-- /.panel-body -->
+              <!--타이틀 끝-->
+              <!--내용 시작-->
+      <div class="panel-body">
+        <!--탭메뉴시작-->
+        <!--탭메뉴 끝-->
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="device_info">
+            <!--본관 시작-->
+            <div class="col-lg-12 table-responsive">
+              <table style="text-align:center;" class="table">
+                <thead>
+                  <tr>
+                    <th colspan="11">
+                      <center>본관</center>
+                      <span class="pull-right " style="margin-bottom:-18px; font-size:15px; margin-top:-25px; ">
+                        <font color="#8fc31f" size="5">■</font>작동중
+                        <font color="#fff100" size="5">■</font>확인필요</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <small>3층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs " style="background-color:#8fc31f;">미래교실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6학년1반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6학년2반</a>
+                    </td>
+                    <td colspan="6">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>2층</small>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">도서실</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#fff100;">음악실</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5학년1반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5학년2반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">열린교육실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>1층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">과학실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>지하</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">세미나실</a>
+                    </td>
+                    <td colspan="9">&nbsp;</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </div>
-          <!--교실 현황-->
-          <div class="col-lg-6">
-            <div class="panel panel-default text-center">
-              <div class="panel-heading">교실 현황</div>
-              <!-- /.panel-heading -->
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-hover table-bordered ">
-                    <thead>
-                      <tr>
-                        <th>총학급</th>
-                        <th>공통교실</th>
-                        <th>기타</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>40</td>
-                        <td>20</td>
-                        <td>10</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.table-responsive -->
-              </div>
-              <!-- /.panel-body -->
+            <!--본관 끝-->
+            <!--별관 시작-->
+            <div class="col-lg-12 table-responsive">
+              <table style="text-align:center;" class="table">
+                <thead>
+                  <tr>
+                    <th colspan="11">
+                      <center>별관</center>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <small>3층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3학년2반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4학년2반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>2층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2학년2반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">영어교실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>1층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1학년2반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">꿈나무교실2</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">꿈나무교실1</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+            <!--별관 끝-->
           </div>
         </div>
-        <!-- /.row -->
-        <!-- /.row -->
+        <!--내용 끝-->
+      </div>
+              <!-- /#page-wrapper -->
+            </div>
+          </div>
     </div>
     <!-- /#page-wrapper -->
     <!-- /#wrapper -->
@@ -1417,6 +1596,8 @@ $("a[href]").on("click", function(e) {
   }
 })
 
+//관리 - 교실, 학생, 디바이스
+var dData = {"c_name":"", "c_name_new":"", "d_name":"", "d_mac":"", "flag":""};
 function POST_func(Jdata, Info) {  
   var xmlhttp = new XMLHttpRequest(); 
   xmlhttp.onreadystatechange = function() {
@@ -1425,9 +1606,12 @@ function POST_func(Jdata, Info) {
         alert(xmlhttp.responseText);
         D_dTable.ajax.reload();
         //초기화
-        dData = {"c_name":"", "c_name_new":"", "d_name":"", "d_mac":"", "flag":""};
-        //$("#page-wrapper").load("/page/deviceModify.html")
-      } else {
+        if(dData.flag!="chk")
+          dData = {"c_name":"", "c_name_new":"", "d_name":"", "d_mac":"", "flag":""};
+        else dData.flag = ""
+
+      }
+       else {
         alert('There was a problem with the request.');
       }
     }
@@ -1438,9 +1622,9 @@ function POST_func(Jdata, Info) {
 }
 
 function TimeReload(){
-  $("#nowTime").text(moment().format('YYYY-MM-DD hh:mm:ss'));
+  $("#nowTime").text(moment().format('YYYY-MM-DD'));
 
-  if($(".page-header").text().slice(0,5)=="학교 정보")
+  if($(".page-header").text().slice(11,28)=="교실 환경 및 재학생 등교 현황")
     $.getJSON("/api/dashboard-data" , function(data){
       var temp_target = $(".list-group#Environment")
       var addList = "";
@@ -1454,7 +1638,7 @@ function TimeReload(){
 
 TimeReload()
 setInterval(function(){ 
-  if($(".page-header").text().slice(3,5)=="정보")
+  if($(".page-header").text().slice(1,6)=="교실 환경")
     TimeReload()
 }, 1000); 
 
@@ -1492,9 +1676,6 @@ function make_style(obj) {
   }
   return str
 }
-
-//관리 - 교실, 학생, 디바이스
-var dData = {"c_name":"", "c_name_new":"", "d_name":"", "d_mac":"", "flag":""};
 
 </script>
 </html>

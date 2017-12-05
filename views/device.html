@@ -6,31 +6,246 @@
 </div>
 <!-- /.row -->
 
-<!--디바이스 리스트-->
 
+
+<!--설치 디바이스 현황 시작-->
 <div class="row">
   <div class="col-lg-12">
-    <div>
-      <!-- /.panel-heading -->
-      <table class="table table-striped table-bordered table-hover" width="100%" id="Device_dataTable">
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>이름</th>
-            <th>설치위치</th>
-            <th>최종교체일</th>
-            <th>물리주소</th>
-            <th>기타</th>
-            <th>x</th>
-            <th>y</th>
-          </tr>
-        </thead>
-      </table>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <!--타이틀 시작-->
+        <i class="glyphicon glyphicon-hdd"></i>&nbsp;설치 디바이스 현황
+        <a targ-div="#page-wrapper" href="device.html">
+        <span class="pull-right">자세히보기&nbsp;
+          <i class="fa fa-arrow-circle-right"></i>
+        </span>
+        </a>
+      </div>
+      <!--타이틀 끝-->
+      <!--내용 시작-->
+      <div class="panel-body">
+        <!--탭메뉴시작-->
+        <!--탭메뉴 끝-->
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="device_info">
+            <!--본관 시작-->
+            <div class="col-lg-12 table-responsive">
+              <table style="text-align:center;" class="table">
+                <thead>
+                  <tr>
+                    <th colspan="11">
+                      <center>본관</center>
+                      <span class="pull-right " style="margin-bottom:-18px; font-size:15px; margin-top:-25px; ">
+                        <font color="#8fc31f" size="5">■</font>작동중
+                        <font color="#fff100" size="5">■</font>확인필요</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <small>3층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="미래교실">미래교실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="6학년1반">6학년1반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="6학년2반">6학년2반</a>
+                    </td>
+                    <td colspan="6">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="강당">강당</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>2층</small>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="도서실">도서실</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#fff100;" id="음악실">음악실</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="5학년1반">5학년1반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="5학년2반">5학년2반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="열린교육실">열린교육실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>1층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="과학실">과학실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="현관">현관</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="보건실">보건실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="방송실">방송실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="회의실">회의실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="인쇄실">인쇄실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="">&nbsp;</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="당직실">당직실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="행정실">행정실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="교장실">교장실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>지하</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="세미나실">세미나실</a>
+                    </td>
+                    <td colspan="9">&nbsp;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--본관 끝-->
+            <!--별관 시작-->
+            <div class="col-lg-12 table-responsive">
+              <table style="text-align:center;" class="table">
+                <thead>
+                  <tr>
+                    <th colspan="11">
+                      <center>별관</center>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <small>3층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="3학년1반">3학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="3학년2반">3학년2반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="4학년1반">4학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="4학년2반">4학년2반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>2층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="2학년1반">2학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="2학년2반">2학년2반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="영어교실">영어교실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>1층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="1학년1반">1학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="1학년2반">1학년2반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="꿈나무교실2">꿈나무교실2</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="꿈나무교실1">꿈나무교실1</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--별관 끝-->
+          </div>
+        </div>
+        <!--내용 끝-->
+      </div>
     </div>
   </div>
 </div>
 <!-- /.row -->
+
+
+
+
+<!--디바이스 리스트-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <!--타이틀 시작-->
+        <i class="glyphicon glyphicon-cog"></i>&nbsp;설치 디바이스 관리
+      </div>
+      <!--내용 시작-->
+      <div class="panel-body">
+        <!-- /.panel-heading -->
+        <table class="table table-striped table-bordered table-hover" width="100%" id="Device_dataTable">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>이름</th>
+              <th>설치위치</th>
+              <th>최종교체일</th>
+              <th>물리주소</th>
+              <th>기타</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
 <!-- /.row -->
+
+
+
+
 <!--디바이스 정보 모달 시작-->
 <div class="fade modal text-center" id="myModal_device_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -45,11 +260,11 @@
             <tbody>
               <tr>
                 <td>이름</td>
-                <td contenteditable="true" id="device_name">-</td>
+                <td contenteditable="true" placeholder="입력해 주세요." id="device_name"></td>
               </tr>
               <tr>
                 <td>최종교체일</td>
-                <td contenteditable="true" id="replaced_date">-</td>
+                <td contenteditable="true" placeholder="입력해 주세요.(YYYY-WW-DD)" id="replaced_date"></td>
               </tr>
               <tr>
                 <td>물리주소</td>
@@ -57,13 +272,13 @@
               </tr>
               <tr>
                 <td>기타</td>
-                <td contenteditable="true" id="description">-</td>
+                <td contenteditable="true" placeholder="입력해 주세요." id="description"></td>
               </tr>
             </tbody>
           </table>
         </div>
       <div class="modal-body text-danger">
-        <p class="text-muted">물리주소는 변경 할 수 없습니다.</p>
+        <p class="text-muted">물리주소는 수정 할 수 없습니다.</p>
       </div>
         <!--일정 입력창 끝-->
       </div>
@@ -92,192 +307,35 @@
           <table class="table table-striped table-bordered table-hover">
             <tbody>
               <tr>
-                <td>ID</td>
-                <td>
-                  <input class="form-control" placeholder="" type="text">
-                </td>
+                <td>교실명</td>
+                <td contenteditable="true" placeholder="입력해 주세요." id="class_name"></td>
               </tr>
               <tr>
-                <td>종류</td>
-                <td>
-                  <select class="form-control">
-                    <option>스캔</option>
-                    <option>스캔+센서</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>설치위치</td>
-                <td>
-                  <table class="">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <select class="form-control">
-                            <option>1층</option>
-                            <option>2층</option>
-                            <option>3층</option>
-                            <option>4층</option>
-                            <option>5층</option>
-                            <option>옥상</option>
-                          </select>
-                        </td>
-                        <td>&nbsp;&nbsp;</td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                          </select>
-                        </td>
-                        <td>학년&nbsp;&nbsp;</td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
-                            <option>13</option>
-                            <option>14</option>
-                            <option>15</option>
-                            <option>16</option>
-                            <option>17</option>
-                            <option>18</option>
-                            <option>19</option>
-                            <option>20</option>
-                            <option>21</option>
-                            <option>22</option>
-                            <option>23</option>
-                            <option>24</option>
-                            <option>25</option>
-                            <option>26</option>
-                            <option>27</option>
-                            <option>28</option>
-                            <option>29</option>
-                            <option>30</option>
-                          </select>
-                        </td>
-                        <td>반</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
+                <td>디바이스이름</td>
+                <td contenteditable="true" placeholder="입력해 주세요." id="device_name"></td>
               </tr>
               <tr>
                 <td>최종교체일</td>
-                <td>
-                  <table class="">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <select class="form-control">
-                            <option>2017</option>
-                            <option>2018</option>
-                            <option>2019</option>
-                            <option>2020</option>
-                            <option>2021</option>
-                            <option>2022</option>
-                            <option>2023</option>
-                            <option>2024</option>
-                            <option>2025</option>
-                            <option>2026</option>
-                            <option>2027</option>
-                            <option>2028</option>
-                          </select>
-                        </td>
-                        <td>년</td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
-                          </select>
-                        </td>
-                        <td>월</td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
-                            <option>13</option>
-                            <option>14</option>
-                            <option>15</option>
-                            <option>16</option>
-                            <option>17</option>
-                            <option>18</option>
-                            <option>19</option>
-                            <option>20</option>
-                            <option>21</option>
-                            <option>22</option>
-                            <option>23</option>
-                            <option>24</option>
-                            <option>25</option>
-                            <option>26</option>
-                            <option>27</option>
-                            <option>28</option>
-                            <option>29</option>
-                            <option>30</option>
-                            <option>31</option>
-                          </select>
-                        </td>
-                        <td>일</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
+                <td contenteditable="true" placeholder="입력해 주세요.(YYYY-WW-DD)" id="replaced_date"></td>
               </tr>
               <tr>
-                <td>동작상태</td>
-                <td>
-                  <select class="form-control">
-                    <option>작동중</option>
-                    <option>정지</option>
-                    <option>사용금지</option>
-                  </select>
-                </td>
+                <td>물리주소</td>
+                <td contenteditable="true" placeholder="입력해 주세요.(D8-65-95-04-XX-XX)" id="mac"></td>
               </tr>
               <tr>
                 <td>기타</td>
-                <td>
-                  <input class="form-control" placeholder="" type="text">
-                </td>
+                <td contenteditable="true" placeholder="입력해 주세요." id="description"></td>
               </tr>
             </tbody>
           </table>
         </div>
+<!--       <div class="modal-body text-danger">
+        <p class="text-muted">설치 위치 변경은 교실 관리에서 지정합니다.</p>
+      </div> -->
         <!--일정 입력창 끝-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-target="#myModal_student_info_edit" data-toggle="modal">확인</button>
+        <button type="button" class="btn btn-default" id="btn_device_add">등록</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
       </div>
     </div>
@@ -285,6 +343,9 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+
+
+
 <div class="fade modal text-center" id="myModal_device_info_del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -412,9 +473,119 @@ $('#btn_device_edit').click(function () {
 });
 
 
+$('#btn_device_add').click(function () {
+  var rows = $("#myModal_device_new .table").find('tr');
+  var headers = [];
+  var data = [];
+  var res = {};
+  
+  $(rows).find('td:first-child').each(function () {
+    headers.push($(this).text());
+  });  
+  $(rows).find('td:last-child').each(function () {
+    data.push($(this).text());
+  });
+    
+  for(var i=0; i < data.length; i++)
+    res[headers[i]] = data[i];
+
+  Jdata = JSON.stringify(res);
+
+  var returnValue = confirm("정말로 데이터를 등록하시겠습니까?");
+  if(returnValue){POST_func(Jdata, "device_insert");}
+
+});
+
+
 $('#btn_device_delete').click(function () {
+  Jdata = JSON.stringify(dData);
   POST_func(Jdata, "device_delete");
 });
+
+
+$("#device_info").on('click', '.btn', function (){
+  // if(x.style.backgroundColor == rgb(143, 195, 31)){
+
+  // } //연두색
+  // else if(x.style.backgroundColor == rgb(255, 241, 0)){
+
+  // } //노랑색
+  if($(this).attr("style") == "background-color:#c9c9c9;"){ //회색
+    dData.c_name = $(this).text();
+    $('#class_name').text(dData.c_name)
+    $('#myModal_device_new').modal('show')
+  }
+  else{
+    $("#Device_dataTable_filter input").val($(this).text()).keyup();
+    $('html,body').animate({
+      scrollTop: $("#Device_dataTable").offset().top
+      },
+      'slow'
+    );
+  }
+})
+
+
+
+var interval = setInterval(update_device_data, 5000); 
+function update_device_data() {
+  if(document.getElementById("Device_dataTable") === null) {
+    clearInterval(interval);
+    return false;
+  }
+  $.getJSON("/api/sensor-data" , function(data) {
+    var tbl_body = "";
+    var input = document.getElementById("myInput");
+    var filter = input.value.toUpperCase();
+    $.each(data, function() {
+      var tbl_row = "";
+      var tbl_disp = "";
+      var tempId, tempType;
+      $.each(this, function(k , v) {
+        switch(k){
+          case "LOC" :
+            tempId = v;
+            if (v.toUpperCase().indexOf(filter) > -1) {
+              tbl_disp = "";
+            } else {
+              tbl_disp = "style=\"display: none;\"";
+            }
+            tbl_row = tbl_row+tbl_disp+"class = "+v+">";
+            tbl_row += "<td>"+v+"</td>";
+            break;
+          case "TIME" : 
+              if(moment().diff(v, 'minutes') >= 10 || v == null){
+                tbl_row += "<td style=\"color:Tomato;\">"+moment(v).fromNow()+"</td>";
+                $(".marker#"+tempId).css("background", "url(../images/wifi_red.png) no-repeat");
+              }
+              else{tbl_row += "<td>"+moment(v).fromNow()+"</td>";}
+            break;
+          case "TYPE" :
+            v == null ? v = "-" : tempType = v;
+            tbl_row += "<td>"+v+"</td>";
+            break;
+          case "DATA" :
+            v = v == null ? "-" : transeData(tempType,v);
+            tbl_row += "<td>"+v+"</td>";
+            $(".marker#"+tempId+" .popup_Contents p."+tempType).text(v);
+            break;
+          default : tbl_row += "<td>"+v+"</td>";
+        }
+      })
+      tbl_body += "<tr "+tbl_row+"</tr>";
+    })
+    $("#sensor_table_tbody").html(tbl_body);
+  });
+  return false;
+}
+
+
+
+
+
+
+
+
 
 
 </script>
