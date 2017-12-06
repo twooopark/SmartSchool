@@ -326,7 +326,7 @@ router.get("/class_name-data", (req, res) => {
 
 
   db.query(query, (err, result) => {
-    if(err) {
+    if(err) { 
       console.error(query, err)
       res.end("error")
       return

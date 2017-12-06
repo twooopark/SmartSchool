@@ -14,7 +14,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <!--타이틀 시작-->
-        <i class="glyphicon glyphicon-hdd"></i>&nbsp;설치 디바이스 현황
+        <i class="fa fa-cubes"></i>&nbsp;교실별 디바이스 현황
         <a targ-div="#page-wrapper" href="device.html">
         <span class="pull-right">자세히보기&nbsp;
           <i class="fa fa-arrow-circle-right"></i>
@@ -120,7 +120,7 @@
                       <small>지하</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="세미나실">세미나실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="강당">강당</a>
                     </td>
                     <td colspan="9">&nbsp;</td>
                   </tr>
@@ -223,7 +223,65 @@
       </div>
       <!--내용 시작-->
       <div class="panel-body">
-        <!-- /.panel-heading -->
+
+        <!--디바이스 상태 요약-->
+        <!--스토리보드엔 없는 내용입니다. -->
+        <!--정상-->
+        <div class="row">
+          <div class="col-lg-6" id="device_state_true" style="display: none;">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-7">
+                    <div class="huge device_state_val" id="">-학년 -반</div>
+                  </div>
+                  <div class="col-xs-5 text-right">
+                    <div>디바이스 상태</div>
+                    <div class="huge">작동중</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!--오류 확인필요-->
+        <div class="row">
+          <div class="col-lg-6" id="device_state_false" style="display: none;">
+            <div class="panel panel-yellow">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-7">
+                    <div class="huge device_state_val" id="">-학년 -반</div>
+                  </div>
+                  <div class="col-xs-5 text-right">
+                    <div>디바이스 상태</div>
+                    <div class="huge">확인필요</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--미설치-->
+        <div class="row">
+          <div class="col-lg-6" id="device_state_undefined" style="display: none;">
+            <div class="panel panel-warning">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-7">
+                    <div class="huge device_state_val" id="">-학년 -반</div>
+                  </div>
+                  <div class="col-xs-5 text-right">
+                    <div>디바이스 상태</div>
+                    <div class="huge">미설치</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <table class="table table-striped table-bordered table-hover" width="100%" id="Device_dataTable">
           <thead>
             <tr>
@@ -236,6 +294,10 @@
             </tr>
           </thead>
         </table>
+
+      <span class="col-lg-3"> ＊ 수정, 삭제 할 디바이스를 표에서 클릭하세요.</span>
+
+
       </div>
 
     </div>
@@ -399,7 +461,7 @@ $(document).ready(function(){
           text: '디바이스 등록',
           action: function ( e, dt, node, config ) {
               $('#myModal_device_new').modal('show')
-          },
+          }, 
           className: 'btn  btn-default my-class-button'
       }
     ]
@@ -504,18 +566,32 @@ $('#btn_device_delete').click(function () {
 
 
 $("#device_info").on('click', '.btn', function (){
-  // if(x.style.backgroundColor == rgb(143, 195, 31)){
 
-  // } //연두색
-  // else if(x.style.backgroundColor == rgb(255, 241, 0)){
-
-  // } //노랑색
-  if($(this).attr("style") == "background-color:#c9c9c9;"){ //회색
+  $(".device_state_val").text($(this).text());
+  
+  if($(this).css("background-color") == Device_State_Color.undefn){ //회색
     dData.c_name = $(this).text();
-    $('#class_name').text(dData.c_name)
-    $('#myModal_device_new').modal('show')
+    $('#class_name').text(dData.c_name);
+    $('#myModal_device_new').modal('show');
+
+    $("#device_state_true").hide();
+    $("#device_state_false").hide();
+    $("#device_state_undefined").show();
   }
   else{
+    if($(this).css("background-color") == Device_State_Color.alive){//초록색
+
+      $("#device_state_true").show();
+      $("#device_state_false").hide();
+      $("#device_state_undefined").hide();
+    }
+    else if($(this).css("background-color") == Device_State_Color.dead){//노랑색
+
+      $("#device_state_true").hide();
+      $("#device_state_false").show();
+      $("#device_state_undefined").hide();
+    }
+
     $("#Device_dataTable_filter input").val($(this).text()).keyup();
     $('html,body').animate({
       scrollTop: $("#Device_dataTable").offset().top
@@ -533,48 +609,61 @@ function update_device_data() {
     clearInterval(interval);
     return false;
   }
-  $.getJSON("/api/sensor-data" , function(data) {
-    var tbl_body = "";
-    var input = document.getElementById("myInput");
-    var filter = input.value.toUpperCase();
-    $.each(data, function() {
-      var tbl_row = "";
-      var tbl_disp = "";
-      var tempId, tempType;
-      $.each(this, function(k , v) {
+
+  $.ajax({ 
+    url : "/api/sensor-data",
+    type: "POST",
+    data: dData,
+    dataType: 'json',
+    success: function(result){
+      data = result;
+      $.each(data, function() {
+        var temp_Cname;
+        $.each(this, function(k , v) {
+
         switch(k){
-          case "LOC" :
-            tempId = v;
-            if (v.toUpperCase().indexOf(filter) > -1) {
-              tbl_disp = "";
-            } else {
-              tbl_disp = "style=\"display: none;\"";
-            }
-            tbl_row = tbl_row+tbl_disp+"class = "+v+">";
-            tbl_row += "<td>"+v+"</td>";
+          case "class_name" :
+            temp_Cname = v;
+
             break;
+          
           case "TIME" : 
-              if(moment().diff(v, 'minutes') >= 10 || v == null){
+              if(moment().diff(v, 'minutes') >= 10){
                 tbl_row += "<td style=\"color:Tomato;\">"+moment(v).fromNow()+"</td>";
-                $(".marker#"+tempId).css("background", "url(../images/wifi_red.png) no-repeat");
+                $("a#"+temp_Cname).css('background-color',Device_State_Color.dead);
               }
-              else{tbl_row += "<td>"+moment(v).fromNow()+"</td>";}
+              else if(v == null){ //회색
+                $("a#"+temp_Cname).css('background-color',Device_State_Color.undefn);
+              }
+              else{
+                $("a#"+temp_Cname).css('background-color',Device_State_Color.alive);
+              }
             break;
+          
           case "TYPE" :
+            var temp_Type
+            $("a#"+temp_Cname).css('background-color','#c9c9c9')
+           
+
             v == null ? v = "-" : tempType = v;
             tbl_row += "<td>"+v+"</td>";
             break;
+          
           case "DATA" :
             v = v == null ? "-" : transeData(tempType,v);
             tbl_row += "<td>"+v+"</td>";
             $(".marker#"+tempId+" .popup_Contents p."+tempType).text(v);
             break;
+          
           default : tbl_row += "<td>"+v+"</td>";
         }
+        })
       })
-      tbl_body += "<tr "+tbl_row+"</tr>";
-    })
-    $("#sensor_table_tbody").html(tbl_body);
+    }, 
+    error: function(xhr, option, error){
+      alert(xhr.status); 
+      alert(error);
+    }
   });
   return false;
 }

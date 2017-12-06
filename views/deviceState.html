@@ -1,0 +1,671 @@
+<head>
+  <link rel="stylesheet" href="css/stylenew.css" />
+  <style type="text/css">
+    #mloader{
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 99999;
+      background-color: #000;
+      opacity: 0.7;
+      display:none;
+    }
+
+    #mloader .masterkey_blink {
+      font-size:20px;
+      font-weight:bold;
+      margin: 10% 45%;
+        -webkit-animation: masterkey_blink 3s linear infinite;
+    } 
+    @-webkit-keyframes masterkey_blink {
+        15% { color: white; }
+        40% { color: black; }
+        75% { color: white; }
+    }
+    #sensor_bar_chart{
+      width : 100%;
+    }
+    #daily_line_chart{
+      width : 100%;
+    }
+    #range_chart{
+      width : 100%;
+    }
+    #type_row_chart{
+      width : 100%;
+    }
+    #type_pie_chart{
+      width : 100%;
+    }
+    .dc-chart  g.row text {  
+      text-shadow: 1px 1px #aaa;
+    }
+   .dc-chart .pie-slice {  
+      text-shadow: 1px 1px #aaa;
+    }
+  </style>
+</head>
+
+<div id="mloader"><div class="masterkey_blink">LOADING...</div></div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header"> 디바이스 현황</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+
+
+
+<!--설치 디바이스 현황 시작-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <!--타이틀 시작-->
+        <i class="fa fa-cubes"></i>&nbsp;교실별 디바이스 현황
+        <a targ-div="#page-wrapper" href="device.html">
+        <span class="pull-right">자세히보기&nbsp;
+          <i class="fa fa-arrow-circle-right"></i>
+        </span>
+        </a>
+      </div>
+      <!--타이틀 끝-->
+      <!--내용 시작-->
+      <div class="panel-body">
+        <!--탭메뉴시작-->
+        <!--탭메뉴 끝-->
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="device_info">
+            <!--본관 시작-->
+            <div class="col-lg-12 table-responsive">
+              <table style="text-align:center;" class="table">
+                <thead>
+                  <tr>
+                    <th colspan="11">
+                      <center>본관</center>
+                      <span class="pull-right " style="margin-bottom:-18px; font-size:15px; margin-top:-25px; ">
+                        <font color="#8fc31f" size="5">■</font>작동중
+                        <font color="#fff100" size="5">■</font>확인필요</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <small>3층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="미래교실">미래교실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="6학년1반">6학년1반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="6학년2반">6학년2반</a>
+                    </td>
+                    <td colspan="6">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="강당">강당</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>2층</small>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="도서실">도서실</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#fff100;" id="음악실">음악실</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="5학년1반">5학년1반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="5학년2반">5학년2반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="열린교육실">열린교육실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>1층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="과학실">과학실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="현관">현관</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="보건실">보건실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="방송실">방송실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="회의실">회의실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="인쇄실">인쇄실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="">&nbsp;</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="당직실">당직실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="행정실">행정실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="교장실">교장실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>지하</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="강당">강당</a>
+                    </td>
+                    <td colspan="9">&nbsp;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--본관 끝-->
+            <!--별관 시작-->
+            <div class="col-lg-12 table-responsive">
+              <table style="text-align:center;" class="table">
+                <thead>
+                  <tr>
+                    <th colspan="11">
+                      <center>별관</center>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <small>3층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="3학년1반">3학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="3학년2반">3학년2반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="4학년1반">4학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="4학년2반">4학년2반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>2층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="2학년1반">2학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="2학년2반">2학년2반</a>
+                    </td>
+                    <td colspan="2">
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="영어교실">영어교실</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <small>1층</small>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="1학년1반">1학년1반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="1학년2반">1학년2반</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="꿈나무교실2">꿈나무교실2</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="꿈나무교실1">꿈나무교실1</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--별관 끝-->
+          </div>
+        </div>
+        <!--내용 끝-->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.row -->
+
+
+<!--디바이스 오류 정보-->
+<div class="row" id="device_error_info">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+
+
+      <div class="panel-heading">
+        <!--타이틀 시작-->
+        <i class="fa fa-cube"></i>&nbsp;선택 교실 디바이스 정보
+      </div>
+      <!--내용 시작-->
+      <div class="panel-body">
+        <!--디바이스 상태 요약-->
+        <!--스토리보드엔 없는 내용입니다. -->
+        <!--정상-->
+        <div class="row">
+          <div class="col-lg-6" id="device_state_true" style="display: none;">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-7">
+                    <div class="huge device_state_val" id="">-학년 -반</div>
+                  </div>
+                  <div class="col-xs-5 text-right">
+                    <div>디바이스 상태</div>
+                    <div class="huge">작동중</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!--오류 확인필요-->
+        <div class="row">
+          <div class="col-lg-6" id="device_state_false" style="display: none;">
+            <div class="panel panel-yellow">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-7">
+                    <div class="huge device_state_val" id="">-학년 -반</div>
+                  </div>
+                  <div class="col-xs-5 text-right">
+                    <div>디바이스 상태</div>
+                    <div class="huge">확인필요</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--미설치-->
+        <div class="row">
+          <div class="col-lg-6" id="device_state_undefined" style="display: none;">
+            <div class="panel panel-warning">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-7">
+                    <div class="huge device_state_val" id="">-학년 -반</div>
+                  </div>
+                  <div class="col-xs-5 text-right">
+                    <div>디바이스 상태</div>
+                    <div class="huge">미설치</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <table class="table table-striped table-bordered table-hover " style="text-align:center; font-size:14px;">
+          <thead>
+            <tr>
+              <th colspan="6" style="text-align:center;" bgcolor="#ffdfbc">센서별 데이터 전송내역 (실시간)</th>
+            </tr>
+            <tr>
+              <th style="text-align:center;">온도</th>
+              <th style="text-align:center;">습도</th>
+              <th style="text-align:center;">CO2</th>
+              <th style="text-align:center;">미세먼지</th>
+              <th style="text-align:center;">초미세먼지</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1시간 전</td>
+              <td>10분 전</td>
+              <td>1초 전</td>
+              <td>내역 없음</td>
+              <td>2일 전</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <table class="table table-striped table-bordered table-hover " style="text-align:center; font-size:14px;">
+          <thead>
+            <tr>
+              <th colspan="6" style="text-align:center;" bgcolor="#ffdfbc">센서별 오류내역 (당일 오류횟수)</th>
+            </tr>
+            <tr>
+              <th style="text-align:center;">온도</th>
+              <th style="text-align:center;">습도</th>
+              <th style="text-align:center;">CO2</th>
+              <th style="text-align:center;">미세먼지</th>
+              <th style="text-align:center;">초미세먼지</th>
+              <th style="text-align:center;">총합</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1,000,000</td>
+              <td>1,000,000</td>
+              <td>1,000,000</td>
+              <td>1,000,000</td>
+              <td>1,000,000</td>
+              <td>100,000,000</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.row -->
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <!--타이틀 시작-->
+        <i class="fa fa-th-list"></i>&nbsp;오류 분석
+      </div>
+      <!--타이틀 끝-->
+      <!--내용 시작-->
+      <div class="panel-body">
+
+
+
+        <div id="chartGroupDiv">
+
+          <!-- <div class="row">
+            <div class="col-lg-12">
+              <div class="chart-wrapper" id="total-projects">
+                <div class="chart-title">
+                  <strong> 총 오류 개수 </strong><a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a>  
+                </div> 
+              </div>
+            </div>
+          </div> -->
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="chart-wrapper" id="sensor_bar_chart">
+                <div class="chart-title">
+                  <strong> 교실별 오류 확인 </strong>
+                </div>  
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="chart-wrapper" id="daily_line_chart" style="margin-bottom: -2px";
+    >
+                <div class="chart-title">
+                  <strong> 시간별 오류 확인 </strong><a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a>   
+                </div>
+              </div> 
+              <div class="chart-wrapper" id="range_chart"> </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="chart-wrapper" id="type_row_chart">
+                <div class="chart-title">
+                  <strong> 센서별 오류 확인 </strong>
+                </div> 
+              </div> 
+            </div>
+            <div class="col-lg-6">
+              <div class="chart-wrapper" id="type_pie_chart">
+                <div class="chart-title">
+                  <strong> 센서별 오류 확인 </strong>
+                </div> 
+              </div> 
+            </div>
+          </div>
+
+        </div>
+      </div>
+  </div>
+</div>
+
+<script>
+var totalProjects = dc.numberDisplay("#total-projects"),
+    sensor_bar_chart = dc.barChart("#sensor_bar_chart"),
+    daily_line_chart = dc.lineChart("#daily_line_chart"),
+    range_chart = dc.barChart('#range_chart'),
+    type_row_chart = dc.rowChart("#type_row_chart"),
+    type_pie_chart = dc.pieChart("#type_pie_chart");
+
+var data;
+$.ajax({
+  type: "GET",
+  url: "/api/error-data",
+  dataType: 'json',
+  beforeSend: function() { 
+    $('#mloader').show();
+  },
+  success: function(result){
+    data = result;
+
+    var time_format_hourly =d3.time.format.iso;
+    data.forEach(function(row) {
+      row.d3format_time = time_format_hourly.parse(row.time);
+      row.total_cnt = +row.total_cnt;
+      row.loc = row.loc.replace('학년', '-').replace('교실','');
+    })
+
+    var domain = [ data[0].d3format_time, data.slice(-1)[0].d3format_time ];
+    var filter = crossfilter(data);
+    var all = filter.groupAll();
+  /************************************************************************/
+    var totalcnts = all.reduceSum(function(d) {return d.cnt;});
+
+    totalProjects
+      .formatNumber(d3.format(",d"))
+      .valueAccessor(function(d){return d; })
+      .group(totalcnts);
+  /************************************************************************/
+    var sensor_dimension = filter.dimension(row => row.loc)
+    var sensor_group = sensor_dimension.group().reduceSum(row => row.cnt)
+    dom = $("#sensor_bar_chart").parent()
+    width = dom.width()
+
+    sensor_bar_chart
+      .width(width).height(300)
+      .margins({top: 20, right: 50, bottom: 20, left: 60})
+      .dimension(sensor_dimension).group(sensor_group)
+      .title(d => d.value)
+      .x(d3.scale.ordinal())
+      .xUnits(dc.units.ordinal)
+      //.outerPadding(0.05)
+      .elasticY(true)
+      .renderHorizontalGridLines(true)
+      .render();
+  /************************************************************************/
+    var daily_dimension = filter.dimension(row => row.d3format_time)
+    var daily_group = daily_dimension.group().reduceSum(row => row.cnt)
+
+    var dom = $("#daily_line_chart").parent()
+    var width = dom.width()
+
+    range_chart
+      .margins({top: 0, right: 50, bottom: 20, left: 60})
+      .height(40)
+      .dimension(daily_dimension)
+      .group(daily_group)
+      .x(d3.time.scale().domain(domain))
+      .xUnits(d3.time.day)
+      .centerBar(true)
+      .render();
+
+    daily_line_chart
+      .interpolate("monotone") 
+      .renderArea(true)
+      .width(width).height(300)
+      .margins({top: 20, right: 50, bottom: 20, left: 60})
+      .dimension(daily_dimension).group(daily_group)
+      .rangeChart(range_chart)
+      .x(d3.time.scale().domain(domain))
+      .xUnits(d3.time.hour)
+      .brushOn(false)
+      .renderHorizontalGridLines(true)
+      .renderVerticalGridLines(true)
+      .elasticY(true)
+      .mouseZoomable(true)
+      .zoomScale([1, 100])
+      .transitionDuration(500)
+      .render();
+  /************************************************************************/
+    var type_dimension1 = filter.dimension(row => row.type)
+    var type_group1 = type_dimension1.group().reduceSum(row => row.cnt)
+    dom = $("#type_row_chart").parent()
+    width = dom.width()
+
+    type_row_chart
+      .width(width).height(200)
+      .dimension(type_dimension1).group(type_group1)
+      .label(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
+      .title(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
+      .ordering(function(d) { return - d.value })
+      .colors(d3.scale.category10())
+      .elasticX(true)
+      .xAxis().ticks(8)
+
+  /************************************************************************/
+    var type_dimension2 = filter.dimension(row => row.type)
+    var type_group2 = type_dimension2.group().reduceSum(row => row.cnt)
+    dom = $("#type_pie_chart").parent()
+    width = dom.width()
+
+    type_pie_chart
+      .width(width).height(200)
+      .dimension(type_dimension2).group(type_group2)
+      .label(function (d) {
+        if (type_pie_chart.hasFilter() && !type_pie_chart.hasFilter(d.key)) {
+          return d.key + '(0%)';
+        }
+        var label = d.key;
+        if (all.value()) {
+          label += '(' + Math.floor(d.value / all.value() * 100) + '%)';
+        }
+        return label;
+      })
+      .title(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
+
+      window.addEventListener("resize", resizeFunction);
+
+      var xa = 0;
+      function resizeFunction() {
+        var txt = ++xa;
+
+        var wt = $("#sensor_bar_chart").parent().width()
+        sensor_bar_chart
+            .width(wt)
+            .rescale()
+            .render()
+
+        daily_line_chart
+            .width(wt)
+            .rescale()
+            .render()
+
+        range_chart
+            .width(wt)
+            .rescale()
+            .render()
+
+        $("#range_chart .y").remove()
+      }  
+
+    dc.renderAll()
+        $("#range_chart .y").remove()
+
+  }, 
+  error: function(xhr, option, error){
+    alert(xhr.status); 
+    alert(error);
+  },
+  complete: function(){
+    $('#mloader').hide();
+
+  }
+});
+  
+
+
+$("#device_info").on('click', '.btn', function (){
+
+  $(".device_state_val").text($(this).text());
+
+  if($(this).css("background-color") == Device_State_Color.undefn){ //회색
+    dData.c_name = $(this).text();
+    $('#class_name').text(dData.c_name);
+    $('#myModal_device_new').modal('show');
+
+    $("#device_state_true").hide();
+    $("#device_state_false").hide();
+    $("#device_state_undefined").show();
+  }
+  else{
+    if($(this).css("background-color") == Device_State_Color.alive){//초록색
+
+      $("#device_state_true").show();
+      $("#device_state_false").hide();
+      $("#device_state_undefined").hide();
+    }
+    else if($(this).css("background-color") == Device_State_Color.dead){//노랑색
+
+      $("#device_state_true").hide();
+      $("#device_state_false").show();
+      $("#device_state_undefined").hide();
+    }
+
+    $("#Device_dataTable_filter input").val($(this).text()).keyup();
+    $('html,body').animate({
+      scrollTop: $("#device_error_info").offset().top
+      },
+      'slow'
+    );
+  }
+})
+
+
+
+</script>

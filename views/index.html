@@ -140,10 +140,10 @@
                   <a href="#"> 디바이스 관리<span class="fa arrow"></span></a>
                   <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
                       <li>
-                          <a targ-div="#page-wrapper" href="device.html"><i class="fa fa-mobile fa-fw"></i> 디바이스 관리</a>
+                          <a targ-div="#page-wrapper" href="deviceState.html"><i class="fa fa-bar-chart-o fa-fw"></i> 디바이스 현황</a>
                       </li>
                       <li>
-                          <a targ-div="#page-wrapper" href="errorGraph.html"><i class="fa fa-bar-chart-o fa-fw"></i> 오류현황</a>
+                          <a targ-div="#page-wrapper" href="deviceEdit.html"><i class="fa fa-mobile fa-fw"></i> 디바이스 관리</a>
                       </li>
                   </ul>
                   <!-- /.nav-second-level -->
@@ -1384,8 +1384,8 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <!--타이틀 시작-->
-                <i class="glyphicon glyphicon-hdd"></i>&nbsp;설치 디바이스 현황
-                <a targ-div="#page-wrapper" href="device.html">
+                <i class="fa fa-cubes"></i>&nbsp;교실별 디바이스 현황
+                <a targ-div="#page-wrapper" href="deviceState.html">
                 <span class="pull-right">자세히보기&nbsp;
                   <i class="fa fa-arrow-circle-right"></i>
                 </span>
@@ -1397,8 +1397,8 @@
         <!--탭메뉴시작-->
         <!--탭메뉴 끝-->
         <!-- Tab panes -->
-        <div class="tab-content">
-          <div class="tab-pane fade in active" id="device_info">
+        <div class="tab-content" id="device_info">
+          <div class="tab-pane fade in active">
             <!--본관 시작-->
             <div class="col-lg-12 table-responsive">
               <table style="text-align:center;" class="table">
@@ -1418,16 +1418,16 @@
                       <small>3층</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs " style="background-color:#8fc31f;">미래교실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="미래교실">미래교실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="6학년1반">6학년1반</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="6학년2반">6학년2반</a>
                     </td>
                     <td colspan="6">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="강당">강당</a>
                     </td>
                   </tr>
                   <tr>
@@ -1435,19 +1435,19 @@
                       <small>2층</small>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">도서실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="도서실">도서실</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#fff100;">음악실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#fff100;" id="음악실">음악실</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="5학년1반">5학년1반</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="5학년2반">5학년2반</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">열린교육실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="열린교육실">열린교육실</a>
                     </td>
                   </tr>
                   <tr>
@@ -1455,34 +1455,34 @@
                       <small>1층</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">과학실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="과학실">과학실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="현관">현관</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="보건실">보건실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="방송실">방송실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="회의실">회의실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="인쇄실">인쇄실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="">&nbsp;</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="당직실">당직실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="행정실">행정실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="교장실">교장실</a>
                     </td>
                   </tr>
                   <tr>
@@ -1490,7 +1490,7 @@
                       <small>지하</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">세미나실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="강당">강당</a>
                     </td>
                     <td colspan="9">&nbsp;</td>
                   </tr>
@@ -1514,19 +1514,19 @@
                       <small>3층</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="3학년1반">3학년1반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="3학년2반">3학년2반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="4학년1반">4학년1반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="4학년2반">4학년2반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
                     </td>
                   </tr>
                   <tr>
@@ -1534,16 +1534,16 @@
                       <small>2층</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="2학년1반">2학년1반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="2학년2반">2학년2반</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">영어교실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="영어교실">영어교실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
                     </td>
                   </tr>
                   <tr>
@@ -1551,19 +1551,19 @@
                       <small>1층</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="1학년1반">1학년1반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="1학년2반">1학년2반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">꿈나무교실2</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="꿈나무교실2">꿈나무교실2</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">꿈나무교실1</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="꿈나무교실1">꿈나무교실1</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실</a>
+                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
                     </td>
                   </tr>
                 </tbody>
@@ -1596,8 +1596,24 @@ $("a[href]").on("click", function(e) {
   }
 })
 
+
+//디바이스 상태 색상
+var Device_State_Color = {
+  alive : "rgb(143, 195, 31)",//"#8fc31f",
+  dead : "rgb(255, 241, 0)",//"#fff100",
+  undefn :"rgb(201, 201, 201)"//"#c9c9c9"
+}
+
+$("#device_info").on('click', '.btn', function (){
+  //$(".device_state_val").text($(this).text());
+
+})
+
+
+
 //관리 - 교실, 학생, 디바이스
 var dData = {"c_name":"", "c_name_new":"", "d_name":"", "d_mac":"", "flag":""};
+
 function POST_func(Jdata, Info) {  
   var xmlhttp = new XMLHttpRequest(); 
   xmlhttp.onreadystatechange = function() {
