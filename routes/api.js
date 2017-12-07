@@ -1,4 +1,5 @@
 var router = express.Router()
+var dateutil  = require('date-utils')
 
 function HexToDec(Hex){
   var tempArr, temp, Dec;
@@ -94,11 +95,12 @@ router.post("/sensor_dh-data", (req, res) => {
   })
 })
 
+//환경정보 (구버전)
 router.get("/sensor-data", (req, res) => {
   var query =
-  'SELECT zone.LOCATION AS LOC, zone.MAC AS MAC, INFO AS TYPE, DATA, DATE_FORMAT(TIME, "%Y-%m-%d %H:%i:%s") AS TIME '+
-  'FROM zone '+
-  'left outer join sensor_data_update on sensor_data_update.MAC = zone.MAC '+
+  'SELECT  classroom.LOCATION AS LOC,  classroom.MAC_DEC AS MAC, INFO AS TYPE, DATA, DATE_FORMAT(TIME, "%Y-%m-%d %H:%i:%s") AS TIME '+
+  'FROM  classroom '+
+  'left outer join sensor_data_update on sensor_data_update.MAC =  classroom.MAC_DEC '+
   'left outer join sensor on sensor.TYPE = sensor_data_update.TYPE '+
   'ORDER BY LOC , TYPE';
 
@@ -116,14 +118,75 @@ router.get("/sensor-data", (req, res) => {
   })
 })
 
+//교실별 디바이스 현황(작동/확인요)
+router.get("/sensor_update-data", (req, res) => {
+  var query =
+    'SELECT z.LOCATION as class_name, MIN(su.TIME) as time '+
+    'FROM classroom_new as z '+
+    'left outer join sensor_data_update as su on su.MAC = z.MAC '+
+    'GROUP BY z.LOCATION ';
+
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    var Rs = JSON.stringify(result);
+    res.end(Rs)
+  })
+})
+
+//선택 교실 디바이스 정보(센서별 시간/오류)
+router.post("/sensor_type_rt-data", (req, res) => {
+  var jsondata = req.body;
+  var query =
+    'SELECT s.INFO as type, su.data as data, su.TIME as time '+
+    'FROM  classroom_new as z '+
+    'left outer join sensor_data_update as su on su.MAC = z.MAC '+
+    'left outer join sensor as s on su.TYPE = s.TYPE '+
+    'WHERE su.MAC = z.MAC and su.TYPE = s.TYPE and z.LOCATION = \"'+jsondata.c_name+'\" '+
+    'ORDER BY s.TYPE ;';
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    var Rs = JSON.stringify(result);
+    res.end(Rs)
+  })
+})
+
+//당일 교실 디바이스 오류(센서별 시간/오류)
+router.post("/sensor_type_error-data", (req, res) => {
+  var jsondata = req.body;
+  var dt = new Date();
+      //dt.setDate(dt.getDate()-1); 
+  var d = dt.toFormat('YYYY-MM-DD');
+  var query =
+    'SELECT se.type, DATE_FORMAT(time, "%Y-%m-%d") as time, SUM(cnt) as cnt '+
+    'FROM sensor_error_hourly as se '+
+    'WHERE time > \''+d+'\' and loc = \"'+jsondata.c_name+'\" '+
+    'GROUP BY se.type, DATE_FORMAT(time, "%Y-%m-%d") ';
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    var Rs = JSON.stringify(result);
+    res.end(Rs)
+  })
+})
+
 //(craftMap)
 router.get("/devicesensor-data", (req, res) => {
   var query =
-  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, COORD_Y as y '+
-  'FROM zone as z, module as m '+
-  'WHERE z.MAC = m.MAC '+
+  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, z.COORD_Y as y '+
+  'FROM  classroom as z, module as m '+
+  'WHERE z.MAC_DEC = m.MAC '+
   'ORDER BY LOC';
-
 
   db.query(query, (err, result) => {
     if(err) {
@@ -151,7 +214,7 @@ router.get("/devicesensor-data", (req, res) => {
 router.get("/device-data", (req, res) => {
   var query =
   'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description '+
-  'FROM zone as z right outer join module as m on z.MAC = m.MAC '+
+  'FROM  classroom_new as z right outer join module as m on z.MAC = m.MAC '+
   'ORDER BY LOC';
 
   db.query(query, (err, result) => {
@@ -174,10 +237,10 @@ router.get("/device-data", (req, res) => {
 router.post("/device-data", (req, res) => {
   var jsondata = req.body;
   var query =
-  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, COORD_Y as y '+
-  'FROM zone as z right outer join module as m on z.MAC = m.MAC '+
+  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description '+
+  'FROM  classroom_new as z right outer join module as m on z.MAC = m.MAC '+
   'WHERE m.SERIAL = "'+jsondata.d_name+'" ' +
-  'ORDER BY LOC';
+  'ORDER BY z.LOCATION';
 
   db.query(query, (err, result) => {
     if(err) {
@@ -193,7 +256,6 @@ router.post("/device-data", (req, res) => {
   })
 })
 
-
 //device_insert
 router.post("/device_insert", (req, res) => {
   var jsondata = req.body;
@@ -205,7 +267,6 @@ router.post("/device_insert", (req, res) => {
   var query = "INSERT INTO module (SERIAL,MAC,REPLACED_DATE,DESCRIPTION) VALUES " +
              "(\""+jsondata.이름+"\", "+HexToDec(jsondata.물리주소)+" ,\""+jsondata.최종교체일+"\",\""+jsondata.기타+"\") ";//+
             //"ON DUPLICATE KEY UPDATE SERIAL=VALUES(SERIAL), REPLACED_DATE=VALUES(REPLACED_DATE), DESCRIPTION=VALUES(DESCRIPTION);"
-console.log(query) 
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)
@@ -226,8 +287,6 @@ console.log(query)
 //device_update
 router.post("/device_update", (req, res) => {
   var jsondata = req.body;
-
-console.log(jsondata)
   var query = 'UPDATE `smartschool`.`module` '+
               'SET '+
               '`SERIAL` = \"'+jsondata.이름+'\", '+
@@ -286,7 +345,7 @@ router.get("/class-data", (req, res) => {
 
   var query =
     'SELECT z.no as no, z.LOCATION as class_name, t.NAME as teacher_name, sc.cnt as student_cnt, m.SERIAL as device_id '+
-    'FROM zone as z '+
+    'FROM  classroom_new as z '+
     'left outer join teacher as t on z.MAC = t.CLASSROOM_MAC '+
     'left outer join module as m on m.MAC = z.MAC '+
     'left outer join (SELECT st.CLASSROOM_MAC, count(*) as cnt '+
@@ -320,7 +379,7 @@ router.get("/class-data", (req, res) => {
 router.get("/class_name-data", (req, res) => {
   var query =
   'SELECT z.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description, z.COORD_X as x, COORD_Y as y '+
-  'FROM zone as z, module as m '+
+  'FROM  classroom as z, module as m '+
   'WHERE z.MAC = m.MAC '+
   'ORDER BY LOC';
 
@@ -346,18 +405,18 @@ router.post("/class_name-data", (req, res) => {
     case "chk" : 
        var query =
         'SELECT LOCATION '+
-        'FROM zone '+
+        'FROM  classroom_new '+
         'WHERE location = "'+jsondata.c_name+'"';
       break;
     case "delete" : 
        var query =
         'DELETE '+
-        'FROM zone '+
+        'FROM  classroom_new '+
         'WHERE loc = "'+jsondata.c_name+'";';
      //break;
     case "edit" || "add": 
        var query =
-        'INSERT INTO `smartschool`.`zone`';
+        'INSERT INTO `smartschool`.` classroom_new`';
         '(`LOCATION`) '+
         'VALUES '+
         '("'+jsondata.c_name+'");';
@@ -369,7 +428,6 @@ router.post("/class_name-data", (req, res) => {
   
   db.query(query, (err, result) => {
     if(err) {
-      console.log(query, err);
       res.send({ success: false, message: 'query error', error: err });
       return;
     }
@@ -386,12 +444,12 @@ router.post("/class_name-data", (req, res) => {
         case "delete" : 
            var query =
             'DELETE '+
-            'FROM zone '+
+            'FROM  classroom_new '+
             'WHERE loc = "'+jsondata.c_name+'";';
          //break;
         case "edit" || "add": 
            var query =
-            'INSERT INTO `smartschool`.`zone`';
+            'INSERT INTO `smartschool`.` classroom_new`';
             '(`LOCATION`) '+
             'VALUES '+
             '("'+jsondata.c_name+'");';

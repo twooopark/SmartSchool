@@ -62,5 +62,17 @@
 
 .btn-group{
   position:absolute;
-  left:50% !important;
+  left:45% !important;
+}
+
+#range_chart .y{
+    visibility: hidden !important;
+}
+  
+.table td {
+   text-align: center;
+}
+.table th {
+   text-align: center;   
+   width : 20%;
 }

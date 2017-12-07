@@ -452,7 +452,7 @@ function longDateFormat (key) {
     return this._longDateFormat[key];
 }
 
-var defaultInvalidDate = 'Invalid date';
+var defaultInvalidDate = '없음';
 
 function invalidDate () {
     return this._invalidDate;
@@ -466,20 +466,20 @@ function ordinal (number) {
 }
 
 var defaultRelativeTime = {
-    future : 'in %s',
-    past   : '%s ago',
-    s  : 'a few seconds',
-    ss : '%d seconds',
-    m  : 'a minute',
-    mm : '%d minutes',
-    h  : 'an hour',
-    hh : '%d hours',
-    d  : 'a day',
-    dd : '%d days',
-    M  : 'a month',
-    MM : '%d months',
-    y  : 'a year',
-    yy : '%d years'
+    future : '%s',
+    past   : '%s',
+    s  : '1초',
+    ss : '%d초',
+    m  : '1분',
+    mm : '%d분',
+    h  : '1시간',
+    hh : '%d시간',
+    d  : '1일',
+    dd : '%d일',
+    M  : '1달',
+    MM : '%d달',
+    y  : '1년',
+    yy : '%d년'
 };
 
 function relativeTime (number, withoutSuffix, string, isFuture) {

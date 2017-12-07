@@ -84,11 +84,11 @@
 
 <script>
 
-$.getJSON("/api/device-data" , function(data) {
+$.getJSON("/api/devicesensor-data" , function(data) {
   var addMarker = "";
   var tbl_body = "";  
   $.each(data, function(r, vr) { 
-    var V = vr.LOC, X = vr.x-35, Y = vr.y-25;
+    var V = vr.loc, X = vr.x-35, Y = vr.y-25;
     var tbl_row = "";
     var editable = true;
     addMarker += "<div class=\"marker\" id=_"+V+" data-coords="+vr.x+","+vr.y+"></div><div class=\"markerDiv\" id=_"+V+" style = \"top:"+Y+"px; left:"+X+"px;\">"+V+"</div>";

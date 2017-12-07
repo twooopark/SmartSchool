@@ -62,7 +62,11 @@
     <!-- moment JavaScript -->
   <script src="vendor/moment.js"></script> 
 
- 
+  <style type="text/css">
+    #device_info a{
+      background-color:#c9c9c9;
+    }
+  </style>
 </head>
 <body>
     <div id="wrapper">
@@ -144,6 +148,9 @@
                       </li>
                       <li>
                           <a targ-div="#page-wrapper" href="deviceEdit.html"><i class="fa fa-mobile fa-fw"></i> 디바이스 관리</a>
+                      </li>
+                      <li>
+                          <a targ-div="#page-wrapper" href="deviceModify.html"><i class="fa fa-mobile fa-fw"></i> 디바이스 관리 (구)</a>
                       </li>
                   </ul>
                   <!-- /.nav-second-level -->
@@ -1397,8 +1404,8 @@
         <!--탭메뉴시작-->
         <!--탭메뉴 끝-->
         <!-- Tab panes -->
-        <div class="tab-content" id="device_info">
-          <div class="tab-pane fade in active">
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="device_info">
             <!--본관 시작-->
             <div class="col-lg-12 table-responsive">
               <table style="text-align:center;" class="table">
@@ -1418,16 +1425,16 @@
                       <small>3층</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="미래교실">미래교실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="미래교실">미래교실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="6학년1반">6학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="6학년1반">6학년1반</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="6학년2반">6학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="6학년2반">6학년2반</a>
                     </td>
                     <td colspan="6">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="강당">강당</a>
+                      <a class="btn btn-default btn-block btn-xs" id="강당">강당</a>
                     </td>
                   </tr>
                   <tr>
@@ -1435,19 +1442,19 @@
                       <small>2층</small>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="도서실">도서실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="도서실">도서실</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#fff100;" id="음악실">음악실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="음악실">음악실</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="5학년1반">5학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="5학년1반">5학년1반</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="5학년2반">5학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="5학년2반">5학년2반</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="열린교육실">열린교육실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="열린교육실">열린교육실</a>
                     </td>
                   </tr>
                   <tr>
@@ -1455,34 +1462,34 @@
                       <small>1층</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="과학실">과학실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="과학실">과학실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="현관">현관</a>
+                      <a class="btn btn-default btn-block btn-xs" id="현관">현관</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="보건실">보건실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="보건실">보건실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="방송실">방송실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="방송실">방송실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="회의실">회의실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="회의실">회의실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="인쇄실">인쇄실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="인쇄실">인쇄실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="">&nbsp;</a>
+                      <a class="btn btn-default btn-block btn-xs" id="">&nbsp;</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="당직실">당직실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="당직실">당직실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="행정실">행정실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="행정실">행정실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="교장실">교장실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="교장실">교장실</a>
                     </td>
                   </tr>
                   <tr>
@@ -1490,7 +1497,7 @@
                       <small>지하</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="강당">강당</a>
+                      <a class="btn btn-default btn-block btn-xs" id="세미나실">세미나실</a>
                     </td>
                     <td colspan="9">&nbsp;</td>
                   </tr>
@@ -1514,19 +1521,19 @@
                       <small>3층</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="3학년1반">3학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="3학년1반">3학년1반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="3학년2반">3학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="3학년2반">3학년2반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="4학년1반">4학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="4학년1반">4학년1반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="4학년2반">4학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="4학년2반">4학년2반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="화장실">화장실</a>
                     </td>
                   </tr>
                   <tr>
@@ -1534,16 +1541,16 @@
                       <small>2층</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="2학년1반">2학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="2학년1반">2학년1반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="2학년2반">2학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="2학년2반">2학년2반</a>
                     </td>
                     <td colspan="2">
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="영어교실">영어교실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="영어교실">영어교실</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="화장실">화장실</a>
                     </td>
                   </tr>
                   <tr>
@@ -1551,19 +1558,19 @@
                       <small>1층</small>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="1학년1반">1학년1반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="1학년1반">1학년1반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;" id="1학년2반">1학년2반</a>
+                      <a class="btn btn-default btn-block btn-xs" id="1학년2반">1학년2반</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="꿈나무교실2">꿈나무교실2</a>
+                      <a class="btn btn-default btn-block btn-xs" id="꿈나무교실2">꿈나무교실2</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="꿈나무교실1">꿈나무교실1</a>
+                      <a class="btn btn-default btn-block btn-xs" id="꿈나무교실1">꿈나무교실1</a>
                     </td>
                     <td>
-                      <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;" id="화장실">화장실</a>
+                      <a class="btn btn-default btn-block btn-xs" id="화장실">화장실</a>
                     </td>
                   </tr>
                 </tbody>
@@ -1603,17 +1610,56 @@ var Device_State_Color = {
   dead : "rgb(255, 241, 0)",//"#fff100",
   undefn :"rgb(201, 201, 201)"//"#c9c9c9"
 }
+var formData = {"sel":"daily","loc":""}
+var dData = {"c_name":"", "c_name_new":"", "d_name":"", "d_mac":"", "flag":""};
+
 
 $("#device_info").on('click', '.btn', function (){
-  //$(".device_state_val").text($(this).text());
-
+      $("#page-wrapper").load("/page/" + "deviceState.html")
 })
+
+
+var interval = setInterval(update_device_data, 5000); 
+function update_device_data() {
+   if(document.getElementById("device_info") === null) {
+     clearInterval(interval);
+     return false;
+   }
+
+  $.getJSON("/api/sensor_update-data" , function(data) {
+    $.each(data, function() {
+      var temp_Cname;
+      $.each(this, function(k , v) {
+
+      switch(k){
+        case "class_name" :
+          temp_Cname = v;
+          break;
+        
+        case "time" : 
+            if(moment().diff(v, 'minutes') >= 10){
+              //tbl_row += "<td style=\"color:Tomato;\">"+moment(v).fromNow()+"</td>";
+              $("a#"+temp_Cname).css('background-color',Device_State_Color.dead);
+            }
+            else if(v == null){ //회색
+              $("a#"+temp_Cname).css('background-color',Device_State_Color.undefn);
+            }
+            else{
+              $("a#"+temp_Cname).css('background-color',Device_State_Color.alive);
+            }
+          break;        
+        default : ;
+      }
+      })
+    })
+  })
+}
+update_device_data()
+
 
 
 
 //관리 - 교실, 학생, 디바이스
-var dData = {"c_name":"", "c_name_new":"", "d_name":"", "d_mac":"", "flag":""};
-
 function POST_func(Jdata, Info) {  
   var xmlhttp = new XMLHttpRequest(); 
   xmlhttp.onreadystatechange = function() {
