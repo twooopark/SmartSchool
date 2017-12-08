@@ -541,7 +541,6 @@ $.ajax({
       .brushOn(false)
       .renderHorizontalGridLines(true)
       .renderVerticalGridLines(true)
-      .elasticY(true)
       .mouseZoomable(true)
       .zoomScale([1, 100])
       .transitionDuration(500)
@@ -582,6 +581,7 @@ $.ajax({
       })
       .title(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
 
+  /************************************************************************/
       window.addEventListener("resize", resizeFunction);
 
       var xa = 0;
@@ -617,6 +617,7 @@ $.ajax({
         $("#range_chart .y").remove()
       }  
 
+  /************************************************************************/
     dc.renderAll()
         $("#range_chart .y").remove()
 
@@ -632,6 +633,7 @@ $.ajax({
 });
   
 
+/************************************************************************/
 
 $("#device_info").on('click', '.btn', function (){
   dData.c_name = $(this).text();
@@ -666,7 +668,6 @@ $("#device_info").on('click', '.btn', function (){
       $("#device_state_undefined").hide();
     }
 
-    //$("#Device_dataTable_filter input").val($(this).text()).keyup();
     $('html,body').animate({
       scrollTop: $("#device_error_info").offset().top
       },
@@ -682,11 +683,14 @@ $("#device_info").on('click', '.btn', function (){
 var interval_2
 
 
+/************************************************************************/
 
 //device_info update
 update_device_data()
 interval = setInterval(update_device_data, 5000); 
 
+
+/************************************************************************/
 
 function selected_class_data(){
   if(document.getElementById("tb_sensor_type_rt") === null) {
@@ -782,25 +786,18 @@ function selected_class_data(){
 
 
 <script>
-/*
-var daily_line_chart = dc.lineChart("#daily_line_chart"),
-    range_chart = dc.barChart('#range_chart'),
-    type_pie_chart = dc.pieChart("#type_pie_chart");
-*/
-var chart = dc.seriesChart("#sensor_state");
 
+var chart = dc.seriesChart("#sensor_state");
 var filter;
 var runDimension;
 var runGroup;
-
-
-//조건에 따라 그래프 다시 그리기.. 잘 안되네 ㅎㅎ;
-DataReload(formData);
 
 $(".btn-group").on('click','.btn-success',function () {
   formData.sel = this.id.slice(4);
   DataReload(formData);
 });
+
+DataReload(formData);
 
 function DataReload(formData){
   $.ajax({ 
@@ -812,102 +809,102 @@ function DataReload(formData){
       $('#mloader').show();
     },
     success: function(result){
-    var data = result;
-      if(data.length == 0){
-        alert("데이터가 없습니다.")
-        return;
+      var data = result;
+        if(data.length == 0){
+          alert("데이터가 없습니다.")
+          return;
+        }
+         //filter.remove();
+         //filter.add(result);
+        // dc.redrawAll();
+      var dateFormat        = d3.time.format('%m/%d/%Y');
+      var numberFormat      = d3.format('.2f');
+      var time_format_daily = d3.time.format.iso;
+      data.forEach(function(row) {
+        row.d3format_time = time_format_daily.parse(row.time);
+      })
+
+      var domain = [ data[0].d3format_time, data.slice(-1)[0].d3format_time ];
+      filter = crossfilter(data);
+      var all = filter.groupAll();
+      runDimension = filter.dimension(row => [row.type, row.d3format_time]);
+      runGroup = runDimension.group().reduce(
+        function (p, v) {
+            ++p.d3format_time;
+            p.total += v.avge;
+            p.avg = Math.round(p.total / p.d3format_time);
+            return p;
+        },
+        function (p, v) {
+            --p.d3format_time;
+            p.total -= v.avge;
+            p.avg = p.d3format_time ? Math.round(p.total / p.d3format_time) : 0;
+            return p;
+        },
+        function () {
+            return {d3format_time: 0, total: 0, avg: 0};
+        }
+      );
+      
+      function transeData2(tempType,v){
+        switch(tempType){
+          case "습도" : v=v/10;
+           break;
+          case "온도" : v=v/10;
+            break;
+          case "이산화탄소" : v=v/10;
+            break;
+          default : v+="";
+        }
+        return Math.round(v);
       }
-       //filter.remove();
-       //filter.add(result);
-      // dc.redrawAll();
-    var dateFormat        = d3.time.format('%m/%d/%Y');
-    var numberFormat      = d3.format('.2f');
-    var time_format_daily = d3.time.format.iso;
-    data.forEach(function(row) {
-      row.d3format_time = time_format_daily.parse(row.time);
-    })
+      var dom = $("#sensor_state").parent();
+      var width = dom.width();
+      var adjustX = 10, adjustY = 40;
+      chart
+          .width(width-adjustX).height(400-adjustY)
+          .chart(function(c) { return dc.lineChart(c).interpolate('cardinal'); })
+          .x(d3.time.scale().domain(domain))
+          .margins({top: 30, right: 30, bottom: 20, left: 60})
+          .brushOn(false)
+          .clipPadding(100)
+          .elasticY(true)
+          .dimension(runDimension)
+          .group(runGroup)
+          .renderHorizontalGridLines(true)
+          .renderVerticalGridLines(true)
+          .mouseZoomable(true)
+          .seriesAccessor(function(d) {return d.key[0];})
+          .keyAccessor(function(d) {return d.key[1];})
+          .valueAccessor(d => transeData2(d.key[0], d.value.avg))
+          .title(function (d) {
+            var value = d.value.avg ? d.value.avg : d.value;
+            if (isNaN(value)) {
+                value = 0;
+            }
+            return d.key[0]+' : '+transeData(d.key[0], value)+'\n'+d.key[1];
+          });
+      chart.legend(dc.legend().x(width-200).y(50).itemHeight(13).gap(5)//x(width*0.2).y(5).itemHeight(13).gap(5)
+                   .horizontal(1).legendWidth(140).itemWidth(70));
+   
+        window.addEventListener("resize", resizeFunction);
 
-    var domain = [ data[0].d3format_time, data.slice(-1)[0].d3format_time ];
-    filter = crossfilter(data);
-    var all = filter.groupAll();
-    runDimension = filter.dimension(row => [row.type, row.d3format_time]);
-    runGroup = runDimension.group().reduce(
-      function (p, v) {
-          ++p.d3format_time;
-          p.total += v.avge;
-          p.avg = Math.round(p.total / p.d3format_time);
-          return p;
-      },
-      function (p, v) {
-          --p.d3format_time;
-          p.total -= v.avge;
-          p.avg = p.d3format_time ? Math.round(p.total / p.d3format_time) : 0;
-          return p;
-      },
-      function () {
-          return {d3format_time: 0, total: 0, avg: 0};
-      }
-    );
-    
-    function transeData2(tempType,v){
-      switch(tempType){
-        case "습도" : v=v/10;
-         break;
-        case "온도" : v=v/10;
-          break;
-        case "이산화탄소" : v=v/10;
-          break;
-        default : v+="";
-      }
-      return Math.round(v);
-    }
-    var dom = $("#sensor_state").parent()
-    var width = dom.width()
-    var adjustX = 10, adjustY = 40;
-    chart
-        .width(width-adjustX).height(400-adjustY)
-        .chart(function(c) { return dc.lineChart(c).interpolate('cardinal'); })
-        .x(d3.time.scale().domain(domain))
-        .margins({top: 30, right: 30, bottom: 20, left: 60})
-        .brushOn(false)
-        .clipPadding(100)
-        .elasticY(true)
-        .dimension(runDimension)
-        .group(runGroup)
-        .renderHorizontalGridLines(true)
-        .renderVerticalGridLines(true)
-        .mouseZoomable(true)
-        .seriesAccessor(function(d) {return d.key[0];})
-        .keyAccessor(function(d) {return d.key[1];})
-        .valueAccessor(d => transeData2(d.key[0], d.value.avg))
-        .title(function (d) {
-          var value = d.value.avg ? d.value.avg : d.value;
-          if (isNaN(value)) {
-              value = 0;
-          }
-          return d.key[0]+' : '+transeData(d.key[0], value)+'\n'+d.key[1];
-        });
-    chart.legend(dc.legend().x(width-width*0.2).y(5).itemHeight(13).gap(5)
-                 .horizontal(1).legendWidth(140).itemWidth(70));
- 
-      window.addEventListener("resize", resizeFunction);
+        var xa = 0;
+        function resizeFunction() {
+          var txt = ++xa;
 
-      var xa = 0;
-      function resizeFunction() {
-        var txt = ++xa;
+          var wt = $("#sensor_state").parent().width();
+   
+            chart
+                .width(wt)
+                .legend(dc.legend().x(wt-200).y(50).itemHeight(13).gap(5)//x(wt*0.2).y(5).itemHeight(13).gap(5)
+                   .horizontal(1).legendWidth(140).itemWidth(70))
+                .rescale()
+                .render()
+          
+        }  
 
-        var wt = $("#sensor_state").parent().width()
- 
-          chart
-              .width(wt)
-              .legend(dc.legend().x(wt-wt*0.2).y(5).itemHeight(13).gap(5)
-                 .horizontal(1).legendWidth(140).itemWidth(70))
-              .rescale()
-              .render()
-        
-      }  
-
-    dc.renderAll()
+      dc.renderAll();
     }, 
     error: function(xhr, option, error){
       alert(xhr.status); 

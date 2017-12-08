@@ -179,7 +179,7 @@ $.getJSON("/api/devicesensor-data" , function(data) {
 
 
 
-var interval = setInterval(update_sensor_data, 5000); 
+var interval = setInterval(update_sensor_data, 1000); 
 function update_sensor_data() {
   if(document.getElementById("myInput") === null) {
     clearInterval(interval);
