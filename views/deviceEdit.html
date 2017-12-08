@@ -370,23 +370,23 @@
             <tbody>
               <tr>
                 <td>교실명</td>
-                <td contenteditable="true" placeholder="입력해 주세요." id="class_name"></td>
+                <td contenteditable="true" placeholder="입력해 주세요." id="class_name"><!--/td><td width="20%"><button type="button" class="btn btn-primary btn-sm" data-target="#myModal_classroom_info_edit_name" data-toggle="modal" id="btn-class_name_edit">교실 선택</button--></td>
               </tr>
               <tr>
-                <td>디바이스이름</td>
-                <td contenteditable="true" placeholder="입력해 주세요." id="device_name"></td>
+                <td>이름</td>
+                <td colspan="2" contenteditable="true" placeholder="입력해 주세요." id="device_name"></td>
               </tr>
               <tr>
                 <td>최종교체일</td>
-                <td contenteditable="true" placeholder="입력해 주세요.(YYYY-WW-DD)" id="replaced_date"></td>
+                <td colspan="2" contenteditable="true" placeholder="입력해 주세요.(YYYY-WW-DD)" id="replaced_date"></td>
               </tr>
               <tr>
                 <td>물리주소</td>
-                <td contenteditable="true" placeholder="입력해 주세요.(D8-65-95-04-XX-XX)" id="mac"></td>
+                <td colspan="2" contenteditable="true" placeholder="입력해 주세요.(D8-65-95-04-XX-XX)" id="mac"></td>
               </tr>
               <tr>
                 <td>기타</td>
-                <td contenteditable="true" placeholder="입력해 주세요." id="description"></td>
+                <td colspan="2" contenteditable="true" placeholder="입력해 주세요." id="description"></td>
               </tr>
             </tbody>
           </table>
@@ -429,10 +429,128 @@
 </div>
 
 
+
+
+<!--교실명 관리 모달창 시작-->
+<div class="fade modal text-center" id="myModal_classroom_info_edit_name" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">교실 관리</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--분류 추가 시작-->
+        <!--p class="text-muted">담당하고 있는 과목을 선택해 주십시오.</p-->
+        <div class="table-responsive">
+          <!--등록된 분류 리스트-->
+          <table class="table table-striped table-bordered table-hover text-center" cellspacing="0" width="100%"" id="Class_name_dataTable">
+            <thead>
+              <tr>
+                <th>
+                  교실명
+                </th>
+                <th>
+                  수정/삭제
+                </th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <!--신규 교실명등록 & 교실명 중복확인-->
+          <table class="table table-bordered ">
+            <tbody>
+              <tr>
+                <td class="text-muted" id="c_name_add_chk" placeholder="등록할 교실명을 입력해 주십시오" contenteditable="true"></td>
+                <td>
+                  <button type="button" onclick="CName_CHK('add')" class="btn btn-primary btn-sm" id="add_chk">중복 확인</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--교실명입력창 끝-->
+      </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-default" onclick="CName_Add('')" data-dismiss="modal">등록</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--교실명 관리 모달창 끝-->
+<!--교실명 삭제 확인 모달창 시작-->
+<div class="fade modal text-center" id="myModal_classroom_info_del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">선택한 교실명을 삭제하시겠습니까.</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--과목 입력창 시작-->
+        <p class="text-muted">삭제된 교실명을 선택한 교실은 새로 선택해야 합니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="delete">삭제</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--교실명 삭제 모달창 끝-->
+<!--교실명 수정 모달창 시작-->
+<div class="fade modal text-center" id="myModal_classroom_info_name_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">선택한 교실명을 수정하시겠습니까.</h4>
+      </div>
+      <div class="modal-body text-danger">
+        <!--교실명 입력창 시작-->
+        <p class="text-muted">해당 교실명의 교실도 반영이 됩니다.</p>
+
+        <!--신규 교실명 등록 교실명 중복확인-->
+          <table class="table table-bordered ">
+            <tbody>
+              <tr>
+                <td>-</td>
+                <td class="text-muted" id="c_name_edit_chk" placeholder="수정될 교실명을 입력해 주십시오" contenteditable="true"></td>
+                <td>
+                  <button type="submit" onclick="CName_CHK('edit')" class="btn btn-primary btn-sm" id="edit_chk">중복 확인</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        <!--교실명 입력창 끝-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="edit">수정</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 <!--교실명 수정 모달창 끝-->
+
+
+
 <script>  
-var D_dTable ,d;
+var D_dTable , CN_dTable;
 $(document).ready(function(){
+  var calendar_new = flatpickr("#myModal_device_new #replaced_date", {
+    onChange: function(selectedDates, dateStr, instance) {
+      $("#myModal_device_new #replaced_date").text(dateStr);
+    }
+  });
+
   D_dTable = $('#Device_dataTable').DataTable({
     "info"        : false,
     "searching"   : true,
@@ -481,6 +599,31 @@ $(document).ready(function(){
     $("#myModal_device_info .modal-title").text(dData.d_name+" - 디바이스 정보")
     D_DataReload(dData);
   });
+
+
+
+
+  // // 교실명 수정 모달창
+  // CN_dTable = $('#Class_name_dataTable').DataTable({
+  //   "scrollY"       : "300px",
+  //   "scrollCollapse": true,
+  //   "paging"        : false,
+  //   "info"          : false,
+  //   "searching"     : false,
+  //   "fnInitComplete": function(oSettings) {
+  //       $('.dataTables_scrollHead thead').hide();
+  //   }
+  // });   
+
+  // dData.flag = "get";
+  // getCLASS(dData);
+
+  // // 교실명 수정 모달창
+  // $('#Class_name_dataTable tbody').on('click', 'button', function(){
+  //   dData.c_name = $(this).parents('tr').children()[0].textContent;
+  //   $("#myModal_classroom_info_name_edit td").first().text(dData.c_name);
+
+  // });  
 });
 
 
@@ -533,6 +676,7 @@ $('#btn_device_edit').click(function () {
   if(returnValue){POST_func(Jdata, "device_update");}
 
 });
+
 
 
 $('#btn_device_add').click(function () {
@@ -610,8 +754,74 @@ interval = setInterval(update_device_data, 5000);
 
 
 
+/**************************************************************************************************************************************************************************/
 
 
 
+
+// // 교실 정보 SELECT로 불러오기
+// function getCLASS(formData){
+//   $.getJSON("/api/class_name-data" , function(data) {
+//     var sel_Class = "<option> 선택하세요. </option>",
+//         sel_Teacher = "<option> 선택하세요. </option>",
+//         sel_Device = "<option> 선택하세요. </option>";
+//     var tbl_body = "";
+//     $.each(C_dTable.data(), function() {
+//       var tbl_row = "";
+//       $.each(this, function(k , v) {
+//         switch(k){
+//           case "class_name" : 
+//             sel_Class += "<option> "+v+" </option>"; 
+//             tbl_row += "<td>"+v+"</td><td><button type=\"button\" class=\"btn btn-success btn-sm\" data-target=\"#myModal_classroom_info_name_edit\" data-toggle=\"modal\">수정</button><button type=\"button\" class=\"btn btn-warning btn-sm\" data-target=\"#myModal_classroom_info_del\" data-toggle=\"modal\">삭제</button></td>";
+//             break;
+//           case "teacher_name" : if(v!="-") sel_Teacher += "<option> "+v+" </option>"; break;
+//           case "device_id" : if(v!="-") sel_Device += "<option> "+v+" </option>"; break;
+//           default : break;
+//         }
+//       })
+//       tbl_body += "<tr>"+tbl_row+"</tr>";
+//     })
+//     $("#myModal_classroom_new #myModal_class_name").html(sel_Class);
+//     $("#myModal_classroom_new #myModal_teacher_name").html(sel_Teacher);
+//     $("#myModal_classroom_new #myModal_device_id").html(sel_Device);
+    
+//     $("#myModal_classroom_info_edit #myModal_class_name").html(sel_Class);
+//     $("#myModal_classroom_info_edit #myModal_teacher_name").html(sel_Teacher);
+//     $("#myModal_classroom_info_edit #myModal_device_id").html(sel_Device);
+
+//     $("#Class_name_dataTable tbody").html(tbl_body);
+//   });
+// }
+
+// // 교실명 중복/오류 확인
+// function CName_CHK(req){
+//   dData.flag = "chk";
+//   dData.c_name  = $("#c_name_"+req+"_chk").text().replace(/ /g,'');
+//   dData.c_name.replace(/\r\n/g,"");
+//   if(dData.c_name==""){
+//     alert("교실명을 입력해주세요.");
+//   }
+//   else{
+//     CName_Func(dData);
+//   }
+// }
+
+// // 교실명
+// function CName_Func(formData){
+//   $.ajax({ 
+//     url : "/api/class_name-data",
+//     type: "POST",
+//     data: dData,
+//     dataType: 'json',
+//     success: function(result){
+//       data = result;
+//       alert(data);
+//     }, 
+//     error: function(xhr, option, error){
+//       alert(xhr.status); 
+//       alert(error);
+//     }
+//   });
+// }
 
 </script>

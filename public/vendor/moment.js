@@ -468,7 +468,7 @@ function ordinal (number) {
 var defaultRelativeTime = {
     future : '%s',
     past   : '%s',
-    s  : '1초',
+    s  : '방금',
     ss : '%d초',
     m  : '1분',
     mm : '%d분',
