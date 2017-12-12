@@ -461,6 +461,9 @@
 </div>
 
 <script>
+
+  
+/************************************************************************/
 //var totalProjects = dc.numberDisplay("#total-projects"),
 var sensor_bar_chart = dc.barChart("#sensor_bar_chart"),
     daily_line_chart = dc.lineChart("#daily_line_chart"),
@@ -468,170 +471,19 @@ var sensor_bar_chart = dc.barChart("#sensor_bar_chart"),
     type_row_chart = dc.rowChart("#type_row_chart"),
     type_pie_chart = dc.pieChart("#type_pie_chart");
 
-$.ajax({
-  type: "GET",
-  url: "/api/error-data",
-  dataType: 'json',
-  beforeSend: function() { 
-    $('#mloader').show();
-  },
-  success: function(result){
-    var data = result;
-
-    var time_format_hourly =d3.time.format.iso;
-    data.forEach(function(row) {
-      row.d3format_time = time_format_hourly.parse(row.time);
-      row.total_cnt = +row.total_cnt;
-      row.loc = row.loc.replace('학년', '-').replace('교실','').replace('반','').replace('실','');
-    })
-
-    var domain = [ data[0].d3format_time, data.slice(-1)[0].d3format_time ];
-    var filter = crossfilter(data);
-    var all = filter.groupAll();
-  /************************************************************************/
-    var totalcnts = all.reduceSum(function(d) {return d.cnt;});
-
-    // totalProjects
-    //   .formatNumber(d3.format(",d"))
-    //   .valueAccessor(function(d){return d; })
-    //   .group(totalcnts);
-  /************************************************************************/
-    var sensor_dimension = filter.dimension(row => row.loc)
-    var sensor_group = sensor_dimension.group().reduceSum(row => row.cnt)
-    dom = $("#sensor_bar_chart").parent()
-    width = dom.width()
-
-    sensor_bar_chart
-      .width(width).height(300)
-      .margins({top: 20, right: 50, bottom: 20, left: 60})
-      .dimension(sensor_dimension).group(sensor_group)
-      .title(d => d.value)
-      .x(d3.scale.ordinal())
-      .xUnits(dc.units.ordinal)
-      //.outerPadding(0.05)
-      .elasticY(true)
-      .renderHorizontalGridLines(true)
-      .render();
-  /************************************************************************/
-    var daily_dimension = filter.dimension(row => row.d3format_time)
-    var daily_group = daily_dimension.group().reduceSum(row => row.cnt)
-
-    var dom = $("#daily_line_chart").parent()
-    var width = dom.width()
-
-    range_chart
-      .margins({top: 0, right: 50, bottom: 20, left: 60})
-      .height(40)
-      .dimension(daily_dimension)
-      .group(daily_group)
-      .x(d3.time.scale().domain(domain))
-      .xUnits(d3.time.day)
-      .centerBar(true)
-      .render();
-
-    daily_line_chart
-      .interpolate("monotone") 
-      .renderArea(true)
-      .width(width).height(300)
-      .margins({top: 20, right: 50, bottom: 20, left: 60})
-      .dimension(daily_dimension).group(daily_group)
-      .rangeChart(range_chart)
-      .x(d3.time.scale().domain(domain))
-      .xUnits(d3.time.hour)
-      .brushOn(false)
-      .renderHorizontalGridLines(true)
-      .renderVerticalGridLines(true)
-      .mouseZoomable(true)
-      .zoomScale([1, 100])
-      .transitionDuration(500)
-      .render();
-  /************************************************************************/
-    var type_dimension1 = filter.dimension(row => row.type)
-    var type_group1 = type_dimension1.group().reduceSum(row => row.cnt)
-    dom = $("#type_row_chart").parent()
-    width = dom.width()
-
-    type_row_chart
-      .width(width).height(200)
-      .dimension(type_dimension1).group(type_group1)
-      .label(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
-      .title(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
-      .ordering(function(d) { return - d.value })
-      .colors(d3.scale.category10())
-      .elasticX(true)
-
-  /************************************************************************/
-    var type_dimension2 = filter.dimension(row => row.type)
-    var type_group2 = type_dimension2.group().reduceSum(row => row.cnt)
-    dom = $("#type_pie_chart").parent()
-    width = dom.width()
-
-    type_pie_chart
-      .width(width).height(200)
-      .dimension(type_dimension2).group(type_group2)
-      .label(function (d) {
-        if (type_pie_chart.hasFilter() && !type_pie_chart.hasFilter(d.key)) {
-          return d.key + '(0%)';
-        }
-        var label = d.key;
-        if (all.value()) {
-          label += '(' + Math.floor(d.value / all.value() * 100) + '%)';
-        }
-        return label;
-      })
-      .title(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
-
-  /************************************************************************/
-      window.addEventListener("resize", resizeFunction);
-
-      var xa = 0;
-      function resizeFunction() {
-        var txt = ++xa;
-
-        var wt = $("#sensor_bar_chart").parent().width()
-        sensor_bar_chart
-            .width(wt)
-            .rescale()
-            .render()
-
-        daily_line_chart
-            .width(wt)
-            .rescale()
-            .render()
-
-        range_chart
-            .width(wt)
-            .rescale()
-            .render()
-
-        var wt2 = $("#type_row_chart").parent().width()
-        type_row_chart
-            .width(wt2)
-            .render()
-            
-        type_pie_chart
-            .width(wt2)
-            .render()
 
 
-        $("#range_chart .y").remove()
-      }  
+var s_chart = dc.seriesChart("#sensor_state");
+var s_filter;
+var runDimension;
+var runGroup;
 
-  /************************************************************************/
-    dc.renderAll()
-        $("#range_chart .y").remove()
-
-  }, 
-  error: function(xhr, option, error){
-    alert(xhr.status); 
-    alert(error);
-  },
-  complete: function(){
-    $('#mloader').hide();
-
-  }
+$(".btn-group").on('click','.btn-success',function () {
+  formData.sel = this.id.slice(4);
+  DataReload(formData);
 });
-  
+
+
 
 /************************************************************************/
 
@@ -692,6 +544,162 @@ interval = setInterval(update_device_data, 5000);
 
 /************************************************************************/
 
+$.ajax({
+  type: "GET",
+  url: "/api/error-data",
+  dataType: 'json',
+  beforeSend: function() { 
+    $('#mloader').show();
+  },
+  success: function(result){
+    var data = result;
+
+    var time_format_hourly =d3.time.format.iso;
+    data.forEach(function(row) {
+      row.d3format_time = time_format_hourly.parse(row.time);
+      row.total_cnt = +row.total_cnt;
+      row.loc = row.loc.replace('학년', '-').replace('교실','').replace('반','').replace('실','');
+    })
+
+    var domain = [ data[0].d3format_time, data.slice(-1)[0].d3format_time ];
+    var filter = crossfilter(data);
+    var all = filter.groupAll();
+  /************************************************************************/
+    var totalcnts = all.reduceSum(function(d) {return d.cnt;});
+
+    // totalProjects
+    //   .formatNumber(d3.format(",d"))
+    //   .valueAccessor(function(d){return d; })
+    //   .group(totalcnts);
+  /************************************************************************/
+    var sensor_dimension = filter.dimension(row => row.loc)
+    var sensor_group = sensor_dimension.group().reduceSum(row => row.cnt)
+    dom = $("#sensor_bar_chart").parent()
+    width = dom.width()
+
+    sensor_bar_chart
+      .width(width).height(300)
+      .margins({top: 20, right: 50, bottom: 20, left: 60})
+      .dimension(sensor_dimension).group(sensor_group)
+      .title(d => d.value)
+      .x(d3.scale.ordinal())
+      .xUnits(dc.units.ordinal)
+      //.outerPadding(0.05)
+      .elasticY(true)
+      .renderHorizontalGridLines(true);
+  /************************************************************************/
+    var daily_dimension = filter.dimension(row => row.d3format_time)
+    var daily_group = daily_dimension.group().reduceSum(row => row.cnt)
+
+    var dom = $("#daily_line_chart").parent()
+    var width = dom.width()
+
+    range_chart
+      .margins({top: 0, right: 50, bottom: 20, left: 60})
+      .height(40)
+      .dimension(daily_dimension)
+      .group(daily_group)
+      .x(d3.time.scale().domain(domain))
+      .xUnits(d3.time.day)
+      .centerBar(true);
+
+    daily_line_chart
+      .interpolate("monotone") 
+      .renderArea(true)
+      .width(width).height(300)
+      .margins({top: 20, right: 50, bottom: 20, left: 60})
+      .dimension(daily_dimension).group(daily_group)
+      .rangeChart(range_chart)
+      .x(d3.time.scale().domain(domain))
+      .xUnits(d3.time.hour)
+      .brushOn(false)
+      .renderHorizontalGridLines(true)
+      .renderVerticalGridLines(true)
+      .mouseZoomable(true)
+      .zoomScale([1, 100])
+      .transitionDuration(500);
+  /************************************************************************/
+    var type_dimension1 = filter.dimension(row => row.type)
+    var type_group1 = type_dimension1.group().reduceSum(row => row.cnt)
+    dom = $("#type_row_chart").parent()
+    width = dom.width()
+
+    type_row_chart
+      .width(width).height(200)
+      .dimension(type_dimension1).group(type_group1)
+      .label(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
+      .title(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
+      .ordering(function(d) { return - d.value })
+      .colors(d3.scale.category10())
+      .elasticX(true)
+
+  /************************************************************************/
+    var type_dimension2 = filter.dimension(row => row.type)
+    var type_group2 = type_dimension2.group().reduceSum(row => row.cnt)
+    dom = $("#type_pie_chart").parent()
+    width = dom.width()
+
+    type_pie_chart
+      .width(width).height(200)
+      .dimension(type_dimension2).group(type_group2)
+      .label(function (d) {
+        if (type_pie_chart.hasFilter() && !type_pie_chart.hasFilter(d.key)) {
+          return d.key + '(0%)';
+        }
+        var label = d.key;
+        if (all.value()) {
+          label += '(' + Math.floor(d.value / all.value() * 100) + '%)';
+        }
+        return label;
+      })
+      .title(d => d.key + ((d.value < 10000) ? ": "+d.value+" 개" : ": 약 "+(d.value/10000).toFixed(0)+"만 개"))
+
+  /************************************************************************/
+      window.addEventListener("resize", resizeFunction);
+
+      function resizeFunction() {
+        var wt = $("#sensor_bar_chart").parent().width()
+        sensor_bar_chart
+            .width(wt)
+            .rescale()
+            .render()
+
+        daily_line_chart
+            .width(wt)
+            .rescale()
+            .render()
+
+        range_chart
+            .width(wt)
+            .rescale()
+            .render()
+
+        var wt2 = $("#type_row_chart").parent().width()
+        type_row_chart
+            .width(wt2)
+            .render()
+            
+        type_pie_chart
+            .width(wt2)
+            .render()
+
+
+        $("#range_chart .y").remove()
+      }  
+      $("#range_chart .y").remove()
+      DataReload(formData);
+  }, 
+  error: function(xhr, option, error){
+    alert(xhr.status+"오류분석차트 에러"); 
+    alert(error);
+  },
+  complete: function(){
+    $('#mloader').hide();
+
+  }
+});
+  
+/************************************************************************/
 function selected_class_data(){
   if(document.getElementById("tb_sensor_type_rt") === null) {
     clearInterval(interval_2);
@@ -740,7 +748,7 @@ function selected_class_data(){
       $("#tb_sensor_type_rt #sensor_type_time").html(tbl_row_time);
     }, 
     error: function(xhr, option, error){
-      alert(xhr.status); 
+      alert(xhr.status+"selected_class_data 에러"); 
       alert(error);
     }
   });
@@ -774,31 +782,13 @@ function selected_class_data(){
         $("#tb_sensor_type_error #sensor_type_error").html(tbl_row_data);
       }, 
     error: function(xhr, option, error){
-      alert(xhr.status); 
+      alert(xhr.status+"selected_class_data 에러"); 
       alert(error);
     }
   });
 }
 
-
-</script>
-
-
-
-<script>
-
-var chart = dc.seriesChart("#sensor_state");
-var filter;
-var runDimension;
-var runGroup;
-
-$(".btn-group").on('click','.btn-success',function () {
-  formData.sel = this.id.slice(4);
-  DataReload(formData);
-});
-
-DataReload(formData);
-
+/************************************************************************/
 function DataReload(formData){
   $.ajax({ 
     url : "/api/sensor_dh-data",
@@ -809,8 +799,8 @@ function DataReload(formData){
       $('#mloader').show();
     },
     success: function(result){
-      var data = result;
-        if(data.length == 0){
+      var s_data = result;
+        if(s_data.length == 0){
           alert("데이터가 없습니다.")
           return;
         }
@@ -820,14 +810,14 @@ function DataReload(formData){
       var dateFormat        = d3.time.format('%m/%d/%Y');
       var numberFormat      = d3.format('.2f');
       var time_format_daily = d3.time.format.iso;
-      data.forEach(function(row) {
+      s_data.forEach(function(row) {
         row.d3format_time = time_format_daily.parse(row.time);
       })
 
-      var domain = [ data[0].d3format_time, data.slice(-1)[0].d3format_time ];
-      filter = crossfilter(data);
-      var all = filter.groupAll();
-      runDimension = filter.dimension(row => [row.type, row.d3format_time]);
+      var s_domain = [ s_data[0].d3format_time, s_data.slice(-1)[0].d3format_time ];
+      s_filter = crossfilter(s_data);
+      var all = s_filter.groupAll();
+      runDimension = s_filter.dimension(row => [row.type, row.d3format_time]);
       runGroup = runDimension.group().reduce(
         function (p, v) {
             ++p.d3format_time;
@@ -861,10 +851,10 @@ function DataReload(formData){
       var dom = $("#sensor_state").parent();
       var width = dom.width();
       var adjustX = 10, adjustY = 40;
-      chart
+      s_chart
           .width(width-adjustX).height(400-adjustY)
           .chart(function(c) { return dc.lineChart(c).interpolate('cardinal'); })
-          .x(d3.time.scale().domain(domain))
+          .x(d3.time.scale().domain(s_domain))
           .margins({top: 30, right: 30, bottom: 20, left: 60})
           .brushOn(false)
           .clipPadding(100)
@@ -884,38 +874,29 @@ function DataReload(formData){
             }
             return d.key[0]+' : '+transeData(d.key[0], value)+'\n'+d.key[1];
           });
-      chart.legend(dc.legend().x(width-200).y(50).itemHeight(13).gap(5)//x(width*0.2).y(5).itemHeight(13).gap(5)
+      s_chart.legend(dc.legend().x(width-200).y(50).itemHeight(13).gap(5)//x(width*0.2).y(5).itemHeight(13).gap(5)
                    .horizontal(1).legendWidth(140).itemWidth(70));
    
         window.addEventListener("resize", resizeFunction);
-
-        var xa = 0;
         function resizeFunction() {
-          var txt = ++xa;
-
           var wt = $("#sensor_state").parent().width();
-   
-            chart
-                .width(wt)
-                .legend(dc.legend().x(wt-200).y(50).itemHeight(13).gap(5)//x(wt*0.2).y(5).itemHeight(13).gap(5)
-                   .horizontal(1).legendWidth(140).itemWidth(70))
-                .rescale()
-                .render()
-          
+          s_chart
+            .width(wt)
+            .legend(dc.legend().x(wt-200).y(50).itemHeight(13).gap(5)//x(wt*0.2).y(5).itemHeight(13).gap(5)
+               .horizontal(1).legendWidth(140).itemWidth(70))
+            .rescale()
+            .render()
         }  
-
       dc.renderAll();
     }, 
     error: function(xhr, option, error){
-      alert(xhr.status); 
+      alert(xhr.status+"DataReload 에러"); 
       alert(error);
     },
     complete: function(){
       $('#mloader').hide();
-
     }
   });
 }
 
-
-
+</script>

@@ -545,11 +545,6 @@
 <script>  
 var D_dTable , CN_dTable;
 $(document).ready(function(){
-  var calendar_new = flatpickr("#myModal_device_new #replaced_date", {
-    onChange: function(selectedDates, dateStr, instance) {
-      $("#myModal_device_new #replaced_date").text(dateStr);
-    }
-  });
 
   D_dTable = $('#Device_dataTable').DataTable({
     "info"        : false,
@@ -753,6 +748,17 @@ interval = setInterval(update_device_data, 5000);
 
 
 
+var calendar_new = flatpickr("#myModal_device_new #replaced_date", {
+  onChange: function(selectedDates, dateStr, instance) {
+    $("#myModal_device_new #replaced_date").text(dateStr);
+  }
+});
+
+var calendar_edit = flatpickr("#myModal_device_info #replaced_date", {
+  onChange: function(selectedDates, dateStr, instance) {
+    $("#myModal_device_info #replaced_date").text(dateStr);
+  }
+});
 
 /**************************************************************************************************************************************************************************/
 
