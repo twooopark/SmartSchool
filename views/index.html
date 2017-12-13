@@ -1616,6 +1616,7 @@ var Device_State_Color = {
   dead : "rgb(255, 241, 0)",//"#fff100",
   undefn :"rgb(201, 201, 201)"//"#c9c9c9"
 }
+//POST에 사용되는 변수
 var formData = {"sel":"daily","loc":""}
 var dData = {"c_name":"", "c_name_new":"", "d_name":"", "d_mac":"", "flag":""};
 
@@ -1625,7 +1626,11 @@ $("#device_info").on('click', '.btn', function (){
 })
 
 
+
+
+update_device_data()
 var interval = setInterval(update_device_data, 5000); 
+
 function update_device_data() {
    if(document.getElementById("device_info") === null) {
      clearInterval(interval);
@@ -1634,24 +1639,25 @@ function update_device_data() {
 
   $.getJSON("/api/sensor_update-data" , function(data) {
     $.each(data, function() {
-      var temp_Cname;
+      var temp_Cname, temp_Cmac;
       $.each(this, function(k , v) {
 
       switch(k){
         case "class_name" :
           temp_Cname = v;
           break;
-        
+        case "mac" : 
+          temp_Cmac = v;
+          break;
         case "time" : 
-            if(moment().diff(v, 'minutes') >= 10){
-              //tbl_row += "<td style=\"color:Tomato;\">"+moment(v).fromNow()+"</td>";
-              $("a#"+temp_Cname).css('background-color',Device_State_Color.dead);
-            }
-            else if(v == null){ //회색
+            if(v == null && temp_Cmac == undefined){ //회색
               $("a#"+temp_Cname).css('background-color',Device_State_Color.undefn);
             }
-            else{
+            else if(moment().diff(v, 'minutes') < 10){
               $("a#"+temp_Cname).css('background-color',Device_State_Color.alive);
+            }
+            else{
+              $("a#"+temp_Cname).css('background-color',Device_State_Color.dead);
             }
           break;        
         default : ;
@@ -1660,7 +1666,6 @@ function update_device_data() {
     })
   })
 }
-update_device_data()
 
 
 
@@ -1689,6 +1694,16 @@ function POST_func(Jdata, Info) {
   xmlhttp.send(Jdata);
 }
 
+
+
+
+
+TimeReload()
+setInterval(function(){ 
+  if($(".page-header").text().slice(1,6)=="교실 환경")
+    TimeReload()
+}, 1000); 
+
 function TimeReload(){
   $("#nowTime").text(moment().format('YYYY-MM-DD'));
 
@@ -1704,11 +1719,8 @@ function TimeReload(){
     })
 }
 
-TimeReload()
-setInterval(function(){ 
-  if($(".page-header").text().slice(1,6)=="교실 환경")
-    TimeReload()
-}, 1000); 
+
+
 
 function transeData(tempType,v){
   switch(tempType){
@@ -1726,6 +1738,10 @@ function transeData(tempType,v){
   }
   return v;
 }
+
+
+
+
 
 //태그 생성기
 function make(tag, inner, attr) {

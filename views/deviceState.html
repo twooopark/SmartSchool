@@ -462,7 +462,7 @@
 
 <script>
 
-  
+
 /************************************************************************/
 //var totalProjects = dc.numberDisplay("#total-projects"),
 var sensor_bar_chart = dc.barChart("#sensor_bar_chart"),
@@ -543,7 +543,7 @@ interval = setInterval(update_device_data, 5000);
 
 
 /************************************************************************/
-
+//errorGraph
 $.ajax({
   type: "GET",
   url: "/api/error-data",
@@ -694,7 +694,7 @@ $.ajax({
     alert(error);
   },
   complete: function(){
-    $('#mloader').hide();
+  //  $('#mloader').hide();
 
   }
 });
@@ -796,7 +796,7 @@ function DataReload(formData){
     data: formData,
     dataType: 'json',
     beforeSend: function() { 
-      $('#mloader').show();
+      //$('#mloader').show();
     },
     success: function(result){
       var s_data = result;

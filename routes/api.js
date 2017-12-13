@@ -121,10 +121,10 @@ router.get("/sensor-data", (req, res) => {
 //교실별 디바이스 현황(작동/확인요)
 router.get("/sensor_update-data", (req, res) => {
   var query =
-    'SELECT z.LOCATION as class_name, MIN(su.TIME) as time '+
+    'SELECT z.LOCATION as class_name, z.MAC as mac, MIN(su.TIME) as time '+
     'FROM classroom_new as z '+
     'left outer join sensor_data_update as su on su.MAC = z.MAC '+
-    'GROUP BY z.LOCATION ';
+    'GROUP BY z.LOCATION, z.MAC ;';
 
   db.query(query, (err, result) => {
     if(err) {
@@ -213,9 +213,9 @@ router.get("/devicesensor-data", (req, res) => {
 //(GET)
 router.get("/device-data", (req, res) => {
   var query =
-  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description '+
+  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as class_name,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description '+
   'FROM  classroom_new as z right outer join module as m on z.MAC = m.MAC '+
-  'ORDER BY LOC';
+  'ORDER BY z.LOCATION ';
 
   db.query(query, (err, result) => {
     if(err) {
@@ -237,7 +237,7 @@ router.get("/device-data", (req, res) => {
 router.post("/device-data", (req, res) => {
   var jsondata = req.body;
   var query =
-  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as loc,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description '+
+  'SELECT m.no as no, m.SERIAL as device_name, z.LOCATION as class_name,  DATE_FORMAT(m.REPLACED_DATE, "%Y-%m-%d") as replaced_date, m.MAC as mac, m.DESCRIPTION as description '+
   'FROM  classroom_new as z right outer join module as m on z.MAC = m.MAC '+
   'WHERE m.SERIAL = "'+jsondata.d_name+'" ' +
   'ORDER BY z.LOCATION';
@@ -256,6 +256,7 @@ router.post("/device-data", (req, res) => {
   })
 })
 
+
 //device_insert
 router.post("/device_insert", (req, res) => {
   var jsondata = req.body;
@@ -265,13 +266,15 @@ router.post("/device_insert", (req, res) => {
     return
   }
   var query = "INSERT INTO module (SERIAL,MAC,REPLACED_DATE,DESCRIPTION) VALUES " +
-             "(\""+jsondata.이름+"\", "+HexToDec(jsondata.물리주소)+" ,\""+jsondata.최종교체일+"\",\""+jsondata.기타+"\") ";//+
+             "(\""+jsondata.이름+"\", "+HexToDec(jsondata.물리주소)+" ,\""+jsondata.최종교체일+"\",\""+jsondata.기타+"\"); ";//+
             //"ON DUPLICATE KEY UPDATE SERIAL=VALUES(SERIAL), REPLACED_DATE=VALUES(REPLACED_DATE), DESCRIPTION=VALUES(DESCRIPTION);"
+  query += "UPDATE classroom_new SET MAC = "+HexToDec(jsondata.물리주소)+" WHERE LOCATION = \""+jsondata.교실명+"\"; ";
+
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)
       if(err.code == 'ER_DUP_ENTRY'){
-        res.end("이미 등록 된 디바이스(물리주소)가 있습니다.")
+        res.end("이미 등록 된 디바이스가 있습니다.")
       }
       else if(err.code == 'ER_TRUNCATED_WRONG_VALUE' || err.code =='ER_BAD_FIELD_ERROR'){
         res.end("입력된 값이 올바르지 않습니다.")
@@ -283,6 +286,7 @@ router.post("/device_insert", (req, res) => {
     }else{res.status(200).send('등록 완료되었습니다.');}
   })
 })
+
 
 //device_update
 router.post("/device_update", (req, res) => {
@@ -310,7 +314,8 @@ router.post("/device_update", (req, res) => {
 //device_delete
 router.post("/device_delete", (req, res) => {
   var jsondata = req.body;
-  var query = "DELETE FROM module WHERE MAC = "+HexToDec(jsondata.d_mac)+" ";
+  var query = "DELETE FROM module WHERE MAC = "+HexToDec(jsondata.d_mac)+" ;";
+  query += "UPDATE classroom_new SET MAC = null WHERE LOCATION = \""+jsondata.c_name+"\"; ";
   db.query(query, (err, result) => {
     if(err) {
       console.error(query, err)
