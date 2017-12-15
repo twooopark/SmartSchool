@@ -514,4 +514,229 @@ router.post("/student-data", (req, res) => {
 */
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***********************************************************************************************************************************************************************/
+
+
+
+
+
+
+
+router.get("/sensor-classroom", (req, res) => {
+  var data = req.query || {}
+  var query =
+ // 'SELECT  DATE_FORMAT(TIME, "%Y-%m-%d %H:%i:%s") AS time, MAC AS mac, DATA AS data,  TYPE AS type ' +
+ // 'FROM  sensor_data_update '
+ // 'where MAC = ' + mac
+'SELECT classroom.NO as no, classroom.LOCATION as location, classroom.MAC_DEC as mac, sensor_data_update.TYPE as type, sensor_data_update.DATA as data , DATE_FORMAT(sensor_data_update.TIME, "%Y-%m-%d %H:%i:%s") AS time ' +
+'FROM classroom JOIN sensor_data_update ' + 
+'ON classroom.MAC_DEC = sensor_data_update.MAC and sensor_data_update.time>current_date() '+
+'order by sensor_data_update.time desc'
+
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    res.end(JSON.stringify(result))
+  })
+})
+
+router.get("/classroom", (req, res) => {
+  var data = req.query || {}
+  var query =
+ // 'SELECT  DATE_FORMAT(TIME, "%Y-%m-%d %H:%i:%s") AS time, MAC AS mac, DATA AS data,  TYPE AS type ' +
+ // 'FROM  sensor_data_update '
+ // 'where MAC = ' + mac
+
+'SELECT  distinct(classroom.location) as location, student.CLASSROOM_MAC , ifnull(ble_count,0) as ble_count, teacher.name as teacher '+
+'FROM( select  student.CLASSROOM_MAC, count(BLE_MAC) as ble_count '+
+ 'from smartschool.student GROUP BY CLASSROOM_MAC '+
+ ')x join student on x.classroom_mac = student.classroom_mac '+
+ 'right outer join classroom on classroom.MAC_DEC = student.CLASSROOM_MAC ' +
+ 'left outer join teacher on classroom.MAC_DEC = teacher.CLASSROOM_MAC '+
+ 'order by location; '
+
+
+/*'SELECT classroom.NO as no, classroom.LOCATION as location ' +
+'FROM classroom '*/ 
+
+
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    res.end(JSON.stringify(result))
+  })
+})
+
+
+
+router.get("/student_attend", (req, res) => {
+  var data = req.query || {}
+
+  var query =
+
+'SELECT attend_check.BLE_MAC as student, DATE_FORMAT(attend_check.IN_TIME, "%Y-%m-%d")  as inTime, DATE_FORMAT(attend_check.OUT_TIME, "%Y-%m-%d") as outTime, attend_check.state, student.CLASSROOM_MAC as classroom, classroom.location, teacher.name as name '+
+'FROM smartschool.attend_check join smartschool.student '+
+'on attend_check.BLE_MAC = student.BLE_MAC '+
+'join smartschool.classroom '+
+'on student.classroom_mac = classroom.MAC_DEC '+
+'join teacher on teacher.classroom_mac = classroom.mac_dec and attend_check.in_time > current_date()' +
+'order by inTime desc'
+
+/*'SELECT RAW_BLE.CLASSROOM_MAC as currents , student.classroom_mac as iden, RAW_BLE.ble_mac as student, DATE_FORMAT(RAW_BLE.time, "%Y-%m-%d %H:%i:%s") as time, classroom.no, classroom.location '+
+'FROM smartschool.RAW_BLE join smartschool.student '+
+//'on RAW_BLE.ble_mac = CLASS.ble_mac and RAW_BLE.time>current_date() '
+'on RAW_BLE.ble_mac = student.ble_mac and RAW_BLE.time>DATE_ADD(now(), INTERVAL -3 hour) '+
+'join classroom on student.CLASSROOM_MAC = classroom.mac_dec ' + 
+'order by student.BLE_MAC, RAW_BLE.time desc'*/
+
+
+  db.query(query, (err, result) => {
+    if(err) {
+      console.error(query, err)
+      res.end("error")
+      return
+    }
+    res.end(JSON.stringify(result))
+  })
+})
+
+router.get("/sensor_graph_daily", (req, res) => { // 날짜별 그래프 그리기
+
+    var query ="SELECT loc,type,date_format(time,'%Y-%m-%d %T') as sensor_time,avge FROM smartschool.sensor_data_daily where month(time)=month(now())"
+
+
+    db.query(query, (err, result) => {
+        if (err) {
+            console.error(query, err)
+            res.end("error")
+            return
+        }
+
+        res.end(JSON.stringify(result))
+
+    })
+})
+//계속 추가 가능 
+router.get("/sensor_graph_hourly", (req, res) => { // 시간별 그래프 그리기
+
+    var query ="SELECT loc,type,date_format(time,'%Y-%m-%d %T') as sensor_time,avge from sensor_data_hourly where time >current_date()"
+
+
+    db.query(query, (err, result) => {
+        if (err) {
+            console.error(query, err)
+            res.end("error")
+            return
+        }
+
+        res.end(JSON.stringify(result))
+
+    })
+})
+router.get("/sensor_current", (req, res) => { // 시간별 그래프 그리기
+
+    var query ="SELECT sensor_data_update.mac,sensor_data_update.type,date_format(sensor_data_update.time,'%Y-%m-%d %T') as sensor_time,sensor_data_update.data , classroom.location from sensor_data_update join classroom on classroom.MAC_DEC = sensor_data_update.MAC and time >current_date();"
+
+    db.query(query, (err, result) => {
+        if (err) {
+            console.error(query, err)
+            res.end("error")
+            return
+        }
+
+        res.end(JSON.stringify(result))
+
+    })
+})
+
+
+/*router.get("/weather", (req,res) => {
+  http.get('http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1111060000',
+    function (web){
+      //데이터를 읽을 때마다
+      web.on('data', function(buffer){
+        res.write(buffer);
+      });
+      //데이터를 모두 읽으면
+      web.on('end', function(){
+        res.end();
+      })
+    })
+})
+*/
+router.get("/student_list", (req, res) => { 
+
+    var query ="select student.name, student.ble_mac,student.classroom_mac from student,attend_check where student.ble_mac = attend_check.ble_mac group by student.ble_mac order by student.ble_mac;"
+
+
+    db.query(query, (err, result) => {
+        if (err) {
+            console.error(query, err)
+            res.end("error")
+            return
+        }
+
+        res.end(JSON.stringify(result))
+
+    })
+})
+
+router.get("/attendance_student", (req, res) => {  
+  
+    //var query =
+        //"select ble_mac as student, date_format(min(ble_time),'%Y-%m-%d %T') as attend ,date_format(max(ble_time),'%Y-%m-%d %T') as attend2 from RAW_BLE  where ble_time > current_date() group by ble_mac"
+    var query = "SELECT student.name,student.ble_mac,date_format(attend_check.IN_TIME,'%Y-%m-%d %T') as in_time,date_format(attend_check.OUT_TIME,'%Y-%m-%d %T') as out_time,student.classroom_mac,attend_check.state,date_format(attend_check.in_time,'%Y') as year,date_format(attend_check.in_time,'%m') as month,date_format(attend_check.in_time,'%e') as day  FROM student,attend_check where student.ble_mac = attend_check.ble_mac order by student.ble_mac, attend_check.in_time"
+    db.query(query, (err, result) => {
+        if (err) {
+            console.error(query, err)
+            res.end("error")
+            return
+        }
+        result.forEach(function(row) {
+            //row.student = convertMacFormatIntToHex(row.student)
+            //row.last=convertMacFormatIntToHex(row.last)
+        })
+        res.end(JSON.stringify(result))
+        //var obj, i;
+    })
+})
+
+router.get("/student_info", (req, res) => { 
+
+    var query ="select student.name ,student.ble_mac,student.classroom_mac, student.birth, student.PHONE_NUM, student.EMAIL, student.address, student.PARENT_NAME, student.PARENT_PHONE from student,attend_check where student.ble_mac = attend_check.ble_mac group by student.ble_mac order by student.ble_mac"
+
+
+    db.query(query, (err, result) => {
+        if (err) {
+            console.error(query, err)
+            res.end("error")
+            return
+        }
+
+        res.end(JSON.stringify(result))
+
+    })
+})
+
+
 module.exports = router

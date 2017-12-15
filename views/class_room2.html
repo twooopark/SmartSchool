@@ -1,0 +1,1803 @@
+<head>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Smart School</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+    queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://
+    -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="jquery/jquery.js"></script>
+
+    <script src="../vendor/raphael/raphael.min.js"></script>
+    <script src="../vendor/morrisjs/morris.min.js"></script>
+    <!-- <script src="../data/morris-data.js"></script> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+    queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://
+    -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+        <!--교실환경 평가 시작-->
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">교실별 환경 현황</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <!--교실환경 평가 끝-->
+        <!--교실별 환경 현황 시작-->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <!--타이틀 시작-->
+                <i class="fa fa-cubes"></i>&nbsp;교실별 환경 현황
+                <span class="pull-right">
+                  <span class="pull-right text-muted " style="font-size:15px; ">
+                    <font color="#eb6100" size="5">■</font>확인필요
+                    <font color="#fff100" size="5">■</font>양호
+                    <font color="8fc31f" size="5">■</font>최적
+                    <font color="00b7ee" size="5">■</font>미만</span>
+                </span>
+              </div>
+              <!--타이틀 끝-->
+              <!--내용 시작-->
+              <div class="panel-body">
+                <!--탭메뉴시작-->
+                <ul class="nav nav-tabs">
+                  <li class="active">
+                    <a href="#temperature" data-toggle="tab">온도</a>
+                  </li>
+                  <li>
+                    <a href="#humidity" data-toggle="tab">습도</a>
+                  </li>
+                  <li>
+                    <a href="#carbon_dioxide" data-toggle="tab">CO2</a>
+                  </li>
+                  <li>
+                    <a href="#fine_dust" data-toggle="tab">미세먼지</a>
+                  </li>
+                  <li>
+                    <a href="#ultrafine_dust" data-toggle="tab">초미세먼지</a>
+                  </li>
+                  <!--span class="pull-right text-muted " style="font-size:15px; ">
+                    <font color="#eb6100" size="5">■</font>확인필요
+                    <font color="#fff100" size="5">■</font>양호
+                    <font color="8fc31f" size="5">■</font>최적
+                    <font color="00b7ee" size="5">■</font>미만</span-->
+                </ul>
+                <!--탭메뉴 끝-->
+                <!-- Tab panes -->
+                <div class="tab-content" id = "sensor_info">
+                  <div class="tab-pane fade in active" id="temperature">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "temp_19" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">미래교실</a>
+                            </td>
+                            <td>
+                              <a id = "temp_11" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">6학년1반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "temp_12" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">6학년2반</a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <!--br> 
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a id = "temp_18"" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">도서실</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "temp_22" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">음악실</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "temp_9" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">5학년1반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "temp_10" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">5학년2반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "temp_20" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">열린교실</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "temp_15"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">과학실</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a id = "temp_14"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">세미나실</a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "temp_5"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">3학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "temp_6"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">3학년2반</a>
+                            </td>
+                            <td>
+                              <a id = "temp_7"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">4학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "temp_8"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">4학년2반</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a id = "temp_3"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">2학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "temp_4"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">2학년2반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "temp_21"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">영어전용교실</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "temp_1"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">1학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "temp_2"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">1학년2반</a>
+                            </td>
+                            <td>
+                              <a id = "temp_17"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">꿈나무교실2</a>
+                            </td>
+                            <td>
+                              <a id = "temp_16"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">꿈나무교실1</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--별관 끝-->
+                  </div>
+                  <!--습도 내용 시작-->
+                  <div class="tab-pane fade" id="humidity">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "reh_19"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">미래교실</a>
+                            </td>
+                            <td>
+                              <a id = "reh_11"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">6학년1반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "reh_12"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">6학년2반</a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <!--br> 
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a id = "reh_18"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">도서실</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "reh_22"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">음악실</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "reh_9"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">5학년1반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "reh_10"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">5학년2반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "reh_20" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">열린교실</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "reh_15"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">과학실</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a id = "reh_14"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">세미나실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "reh_5"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">3학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "reh_6"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">3학년2반</a>
+                            </td>
+                            <td>
+                              <a id = "reh_7"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">4학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "reh_8"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">4학년2반</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a id = "reh_3"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">2학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "reh_4"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">2학년2반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "reh_21"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">영어전용교실</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "reh_1"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">1학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "reh_2"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">1학년2반</a>
+                            </td>
+                            <td>
+                              <a id = "reh_17"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">꿈나무교실2</a>
+                            </td>
+                            <td>
+                              <a id = "reh_16"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">꿈나무교실1</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--별관 끝-->
+                  </div>
+                  <!--CO2내용시작-->
+                  <div class="tab-pane fade" id="carbon_dioxide">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "co2_19"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">미래교실</a>
+                            </td>
+                            <td>
+                              <a id = "co2_11"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">6학년1반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "co2_12"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">6학년2반</a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <!--br> 
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a id = "co2_18"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">도서실</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "co2_22"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">음악실</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "co2_9"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">5학년1반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "co2_10"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">5학년2반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "co2_20" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">열린교실</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "co2_15"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">과학실</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a id = "co2_14"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">세미나실</a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "co2_5"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">3학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "co2_6"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">3학년2반</a>
+                            </td>
+                            <td>
+                              <a id = "co2_7"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">4학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "co2_8"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">4학년2반</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a id = "co2_3"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">2학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "co2_4"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">2학년2반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "co2_21"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">영어전용교실</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "co2_1"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">1학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "co2_2"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">1학년2반</a>
+                            </td>
+                            <td>
+                              <a id = "co2_17"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">꿈나무교실2</a>
+                            </td>
+                            <td>
+                              <a id = "co2_16"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">꿈나무교실1</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--별관 끝-->
+                  </div>
+                  <!--미세먼지-->
+                  <div class="tab-pane fade" id="fine_dust">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_19"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">미래교실</a>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_11"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">6학년1반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "fine_dust_12"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">6학년2반</a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <!--br> 
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a id = "fine_dust_18"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">도서실</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "fine_dust_22"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">음악실</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "fine_dust_9"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">5학년1반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "fine_dust_10"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">5학년2반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "fine_dust_20" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">열린교실</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_15"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">과학실</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_14"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">세미나실</a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_5"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">3학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_6"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">3학년2반</a>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_7"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">4학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_8"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">4학년2반</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_3"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">2학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_4"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">2학년2반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "fine_dust_21"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">영어전용교실</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_1"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">1학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_2"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">1학년2반</a>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_17"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">꿈나무교실2</a>
+                            </td>
+                            <td>
+                              <a id = "fine_dust_16"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">꿈나무교실1</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--별관 끝-->
+                  </div>
+                  <!--초미세먼지-->
+                  <div class="tab-pane fade" id="ultrafine_dust">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_19"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">미래교실</a>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_11"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">6학년1반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "ultrafine_dust_12"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">6학년2반</a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <!--br> 
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a id = "ultrafine_dust_18"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">도서실</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "ultrafine_dust_22"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">음악실</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "ultrafine_dust_9"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">5학년1반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "ultrafine_dust_10"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">5학년2반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "ultrafine_dust_20" class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">열린교실</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_15"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">과학실</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_14"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">세미나실</a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_5"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">3학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_6"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">3학년2반a>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_7"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">4학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_8"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">4학년2반</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_3"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">2학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_4"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">2학년2반</a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "ultrafine_dust_21"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">영어전용교실</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_1"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">1학년1반</a>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_2"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">1학년2반</a>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_17"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">꿈나무교실2</a>
+                            </td>
+                            <td>
+                              <a id = "ultrafine_dust_16"  class="btn btn-default btn-block btn-xs" style="background-color:#eb6100;">꿈나무교실1</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <!--br>
+                                <small>&nbsp;</small--></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--별관 끝-->
+                  </div>
+                  <!--내용 끝-->
+                </div>
+                <!-- /#page-wrapper -->
+<script type="text/javascript">
+          
+window.onload = function(){    
+
+
+
+$.getJSON("/api/sensor-classroom", function(data) {
+
+var data_store = (_) => {
+    // 매개가 배열일경우
+    if (Array.isArray(_)) {
+        this._data = _
+        return this
+    } else if (typeof _ == "string") {
+        return this._data.filter(function(row) {
+            return row.type == _
+        })
+    }
+} 
+
+data_store(data);
+var fine_dust = data_store('1');
+var ultrafine_dust = data_store('2');
+var temp = data_store('4');
+var reh = data_store('8');
+var carbon_dioxide = data_store('16');
+
+
+for(i=0;i<temp.length;i++){
+  var no = temp[i].no;
+  var cr = "temp_" + temp[i].no;
+
+if( temp[i].data > 150 && temp[i].data < 250)
+  document.getElementById(cr).style.backgroundColor = "8fc31f";
+else if(temp[i].data < 150 && temp[i].data > 0)
+  document.getElementById(cr).style.backgroundColor = "#fff100";
+else if(temp[i].data < 310)
+  document.getElementById(cr).style.backgroundColor = "00b7ee";
+else
+  document.getElementById(cr).style.backgroundColor = "#eb6100";
+}
+
+for(i=0;i<reh.length;i++){
+  var no = reh[i].no;
+  var cr = "reh_" + reh[i].no;
+
+if( reh[i].data > 400 && reh[i].data < 600)
+  document.getElementById(cr).style.backgroundColor = "8fc31f";
+else if(reh[i].data < 800 || reh[i].data > 200)
+  document.getElementById(cr).style.backgroundColor = "#fff100";
+else if(reh[i].data > 100)
+  document.getElementById(cr).style.backgroundColor = "00b7ee";
+else
+  document.getElementById(cr).style.backgroundColor = "#eb6100";
+}
+for(i=0;i<carbon_dioxide.length;i++){
+  var no = carbon_dioxide[i].no;
+  var cr = "co2_" + carbon_dioxide[i].no;
+
+if( carbon_dioxide[i].data < 400 )
+  document.getElementById(cr).style.backgroundColor = "8fc31f";
+else if(carbon_dioxide[i].data < 1000 )
+  document.getElementById(cr).style.backgroundColor = "#fff100";
+else if(carbon_dioxide[i].data > 1000)
+  document.getElementById(cr).style.backgroundColor = "00b7ee";
+else
+  document.getElementById(cr).style.backgroundColor = "#eb6100";
+}
+
+for(i=0;i<fine_dust.length;i++){
+  var no = fine_dust[i].no;
+  var cr = "fine_dust_" + fine_dust[i].no;
+
+if( fine_dust[i].data < 30)
+  document.getElementById(cr).style.backgroundColor = "8fc31f";
+else if(fine_dust[i].data < 80)
+  document.getElementById(cr).style.backgroundColor = "#fff100";
+else if(fine_dust[i].data > 80)
+  document.getElementById(cr).style.backgroundColor = "00b7ee";
+else
+  document.getElementById(cr).style.backgroundColor = "#eb6100";
+}
+
+for(i=0;i<ultrafine_dust.length;i++){
+  var no = ultrafine_dust[i].no;
+  var cr = "ultrafine_dust_" + ultrafine_dust[i].no;
+if( ultrafine_dust[i].data < 15)
+  document.getElementById(cr).style.backgroundColor = "8fc31f";
+else if(ultrafine_dust[i].data < 50)
+  document.getElementById(cr).style.backgroundColor = "#fff100";
+else if(ultrafine_dust[i].data > 50)
+  document.getElementById(cr).style.backgroundColor = "#00b7ee";
+else
+  document.getElementById(cr).style.backgroundColor = "#eb6100";
+}
+
+});
+
+//----------------------------------------소연----------------------------------------------//
+
+var test1;
+var test2;
+
+$("#sensor_info").on('click', '.btn', function (){
+    var c_name = $(this).text();
+    console.log(c_name);
+     document.getElementById("classroom_name").innerHTML = c_name;
+
+$.getJSON("/api/sensor_graph_hourly", function(data) {
+  
+
+
+    var hourly_humidity = data.filter(function(row) { return row.loc == c_name && row.type == '습도' });
+    var hourly_dust1 = data.filter(function(row) { return row.loc == c_name && row.type == '초미세먼지' });
+    var hourly_dust2 = data.filter(function(row) { return row.loc == c_name && row.type == '미세먼지' });
+    var hourly_temp = data.filter(function(row) { return row.loc == c_name && row.type == '온도' });
+    var hourly_CO2 = data.filter(function(row) { return row.loc == c_name && row.type == '이산화탄소' });
+
+console.log(hourly_dust1);
+
+    google.charts.load('upcoming', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart1);
+    google.charts.setOnLoadCallback(drawChart2);
+    google.charts.setOnLoadCallback(drawChart3);
+    google.charts.setOnLoadCallback(drawChart4);
+    google.charts.setOnLoadCallback(drawChart5);
+    var chartwidth = $('#classroom_name').width();
+    console.log("width : " + chartwidth);
+    function drawChart1() {
+        var g_data = new google.visualization.DataTable(hourly_dust1);
+        g_data.addColumn('string', '시간')
+        g_data.addColumn('number', '초미세먼지')
+
+        hourly_dust1.forEach(function(row) {
+            g_data.addRow([
+                row.sensor_time,
+                row.avge
+            ]);
+        });
+        var options = {
+            title: c_name,
+            curveType: 'function',
+            pointSize: 10,
+            legend: { position: 'bottom' },
+            colors: ['#CCA63D'],
+            width : chartwidth,
+            hAxis: { title: '시간' },
+            vAxis: { title: '초미세먼지' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('hourly_dust1_graph'));
+        chart.draw(g_data, options);
+    }
+
+
+    function drawChart2() {
+        var g_data = new google.visualization.DataTable(hourly_dust2);
+        g_data.addColumn('string', '시간')
+        g_data.addColumn('number', '미세먼지')
+
+        hourly_dust2.forEach(function(row) {
+            g_data.addRow([
+                row.sensor_time,
+                row.avge
+            ]);
+        });
+        var options = {
+            title: c_name,
+            curveType: 'function',
+            pointSize: 10,
+            legend: { position: 'bottom' },
+            colors: ['#F2CB61'],
+            width : chartwidth,
+            hAxis: { title: '시간' },
+            vAxis: { title: '미세먼지' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('hourly_dust2_graph'));
+        chart.draw(g_data, options);
+    }
+
+    function drawChart3() {
+        var g_data = new google.visualization.DataTable(hourly_temp);
+        g_data.addColumn('string', '시간')
+        g_data.addColumn('number', '온도')
+
+        hourly_temp.forEach(function(row) {
+            row.avge = row.avge / 10
+            g_data.addRow([
+                row.sensor_time,
+                row.avge
+            ]);
+        });
+        var options = {
+            title: c_name,
+            curveType: 'function',
+            pointSize: 10,
+            legend: { position: 'bottom' },
+            colors: ['#5CD1E5'],
+            width : chartwidth,
+            hAxis: { title: '시간' },
+            vAxis: { title: '온도' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('hourly_temp_graph'));
+        chart.draw(g_data, options);
+    }
+
+    function drawChart4() {
+        var g_data = new google.visualization.DataTable(hourly_humidity);
+        g_data.addColumn('string', '시간')
+        g_data.addColumn('number', '습도')
+
+        hourly_humidity.forEach(function(row) {
+            row.avge = row.avge / 10
+            g_data.addRow([
+                row.sensor_time,
+                row.avge
+            ]);
+        });
+        var options = {
+            title: c_name,
+            curveType: 'function',
+            pointSize: 10,
+            legend: { position: 'bottom' },
+            colors: ['#47C83E'],
+            width : chartwidth,
+            hAxis: { title: '시간' },
+            vAxis: { title: '습도' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('hourly_humidity_graph'));
+        chart.draw(g_data, options);
+    }
+
+    function drawChart5() {
+        var g_data = new google.visualization.DataTable(hourly_CO2);
+        g_data.addColumn('string', '시간')
+        g_data.addColumn('number', '이산화탄소')
+
+        hourly_CO2.forEach(function(row) {
+            g_data.addRow([
+                row.sensor_time,
+                row.avge
+            ]);
+        });
+        var options = {
+            title: c_name,
+            curveType: 'function',
+            pointSize: 10,
+            legend: { position: 'bottom' },
+            width : chartwidth,
+            hAxis: { title: '시간' },
+            vAxis: { title: '이산화탄소' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('hourly_CO2_graph'));
+        chart.draw(g_data, options);
+    }
+  });
+
+$.getJSON("/api/sensor_graph_daily", function(data) {
+
+
+    var daily_humidity = data.filter(function(row) { return row.loc == c_name && row.type == '습도' });
+    var daily_dust1 = data.filter(function(row) { return row.loc == c_name && row.type == '초미세먼지' });
+    var daily_dust2 = data.filter(function(row) { return row.loc == c_name && row.type == '미세먼지' });
+    var daily_temp = data.filter(function(row) { return row.loc == c_name && row.type == '온도' });
+    //var all = data.filter(function(row) { return row.loc = '과학실' && row.type == '습도' });
+    var daily_CO2 = data.filter(function(row) { return row.loc == c_name && row.type == '이산화탄소' });
+
+    // console.log(all);
+    console.log(daily_dust1);
+    console.log(daily_dust2);
+    console.log(daily_temp);
+    console.log(daily_humidity);
+    console.log(daily_CO2);
+
+    daily_temp.forEach(function(row) {
+            row.avge = row.avge / 10
+    });
+    daily_humidity.forEach(function(row) {
+            row.avge = row.avge / 10
+    });
+
+    google.charts.load('upcoming', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart1);
+    google.charts.setOnLoadCallback(drawChart2);
+    google.charts.setOnLoadCallback(drawChart3);
+    google.charts.setOnLoadCallback(drawChart4);
+    google.charts.setOnLoadCallback(drawChart5);
+
+    var chartwidth = $('#classroom_name').width();
+    console.log("width : " + chartwidth);
+
+    function drawChart1() {
+        var g_data = new google.visualization.DataTable(daily_dust1);
+        g_data.addColumn('string', '시간')
+        g_data.addColumn('number', '초미세먼지')
+
+        daily_dust1.forEach(function(row) {
+            g_data.addRow([
+                row.sensor_time,
+                row.avge
+            ]);
+        });
+        var options = {
+            title: c_name,
+            curveType: 'function',
+            pointSize: 10,
+            legend: { position: 'bottom' },
+            colors: ['#CCA63D'],
+            width : chartwidth,
+            hAxis: { title: '시간' },
+            vAxis: { title: '초미세먼지' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('daily_dust1_graph'));
+        chart.draw(g_data, options);
+    }
+
+
+    function drawChart2() {
+        var g_data = new google.visualization.DataTable(daily_dust2);
+        g_data.addColumn('string', '시간')
+        g_data.addColumn('number', '미세먼지')
+
+        daily_dust2.forEach(function(row) {
+            g_data.addRow([
+                row.sensor_time,
+                row.avge
+            ]);
+        });
+        var options = {
+            title: c_name,
+            curveType: 'function',
+            pointSize: 10,
+            legend: { position: 'bottom' },
+            colors: ['#F2CB61'],
+            width : chartwidth,
+            hAxis: { title: '시간' },
+            vAxis: { title: '미세먼지' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('daily_dust2_graph'));
+        chart.draw(g_data, options);
+    }
+
+    function drawChart3() {
+        var g_data = new google.visualization.DataTable(daily_temp);
+        g_data.addColumn('string', '시간')
+        g_data.addColumn('number', '온도')
+
+        daily_temp.forEach(function(row) {
+            row.avge = row.avge / 10
+            g_data.addRow([
+                row.sensor_time,
+                row.avge
+            ]);
+        });
+        var options = {
+            title: c_name,
+            curveType: 'function',
+            pointSize: 10,
+            legend: { position: 'bottom' },
+            colors: ['#5CD1E5'],
+            width : chartwidth,
+            hAxis: { title: '시간' },
+            vAxis: { title: '온도' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('daily_temp_graph'));
+        chart.draw(g_data, options);
+    }
+
+    function drawChart4() {
+        var g_data = new google.visualization.DataTable(daily_humidity);
+        g_data.addColumn('string', '시간')
+        g_data.addColumn('number', '습도')
+
+        daily_humidity.forEach(function(row) {
+            row.avge = row.avge / 10
+            g_data.addRow([
+                row.sensor_time,
+                row.avge
+            ]);
+        });
+        var options = {
+            title: c_name,
+            curveType: 'function',
+            pointSize: 10,
+            legend: { position: 'bottom' },
+            colors: ['#47C83E'],
+            width : chartwidth,
+            hAxis: { title: '시간' },
+            vAxis: { title: '습도' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('daily_humidity_graph'));
+        chart.draw(g_data, options);
+    }
+
+    function drawChart5() {
+        var g_data = new google.visualization.DataTable(daily_CO2);
+        g_data.addColumn('string', '시간')
+        g_data.addColumn('number', '이산화탄소')
+
+        daily_CO2.forEach(function(row) {
+            g_data.addRow([
+                row.sensor_time,
+                row.avge
+            ]);
+        });
+        var options = {
+            title: c_name,
+            curveType: 'function',
+            pointSize: 10,
+            legend: { position: 'bottom' },
+            width : chartwidth,
+            hAxis: { title: '시간' },
+            vAxis: { title: '이산화탄소' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('daily_CO2_graph'));
+        chart.draw(g_data, options);
+    }
+
+    
+})
+$(document).ready(function() {
+    $.getJSON("/api/sensor_current", function(result) {
+        var current_humidity = result.filter(function(row) { return row.location == c_name && row.type == 8 });
+        var current_dust1 = result.filter(function(row) { return row.location == c_name && row.type == 1 });
+        var current_dust2 = result.filter(function(row) { return row.location == c_name && row.type == 2 });
+        var current_temp = result.filter(function(row) { return row.location == c_name && row.type == 4 });
+        var current_CO2 = result.filter(function(row) { return row.location == c_name && row.type == 16 });
+
+        current_temp[0].data = current_temp[0].data / 10;
+        current_humidity[0].data = current_humidity[0].data / 10;
+
+        console.log(current_dust1[0].data);
+        console.log(current_dust2[0].data);
+        console.log(current_temp[0].data);
+        console.log(current_humidity[0].data);
+        console.log(current_CO2[0].data);
+
+        
+
+
+        $("#dust1_value").text(current_dust1[0].data + "μg/㎥");
+        $("#dust2_value").text(current_dust2[0].data + "μg/㎥");
+        $("#temp_value").text(current_temp[0].data + "℃");
+        $("#humid_value").text(current_humidity[0].data + "%");
+        $("#co2_value").text(current_CO2[0].data + "ppm");
+
+        // 온도에 대한 메시지
+        if (current_temp[0].data > 15 && current_temp[0].data < 25) {
+            $("#temp_message1").text("좋음");
+            $("#temp_message2").text("학습하기 쾌적합니다.");
+        } else if (current_temp[0].data < 15) {
+            $("#temp_message1").text("보통");
+            $("#temp_message2").text("적당한 온도에요.");
+        } else if (current_temp[0].data > 25) {
+            $("#temp_message1").text("주의");
+            $("#temp_message2").text("온도가 너무 높진 않은지 확인해주세요.");
+        }
+
+        //습도에 대한 메시지
+        if (current_humidity[0].data > 40 && current_humidity[0].data < 60) {
+            $("#humidity_message1").text("좋음");
+            $("#humidity_message2").text("학습하기 쾌적합니다.");
+        } else if (current_humidity[0].data > 20 && current_humidity[0].data < 80) {
+            $("#humidity_message1").text("보통");
+            $("#humidity_message2").text("적당한 습도에요.");
+        } else if (current_humidity[0].data < 20) {
+            $("#humidity_message1").text("주의");
+            $("#humidity_message2").text("실내가 건조한건 아닌지 확인해주세요.");
+        } else if (current_humidity[0].data > 80) {
+            $("#humidity_message1").text("주의");
+            $("#humidity_message2").text("실내가 습한건 아닌지 확인해주세요.");
+        }
+
+        //미세먼지에 대한 메시지
+        if (current_dust2[0].data < 30) {
+            $("#dust_message1").text("좋음");
+            $("#dust_message2").text("학습하기 쾌적합니다.");
+        } else if (current_dust2[0].data > 30 && current_dust2[0].data < 80) {
+            $("#dust_message1").text("보통");
+            $("#dust_message2").text("학습하기 적당한 환경이에요.");
+        } else if (current_dust2[0].data > 80) {
+            $("#dust_message1").text("주의");
+            $("#dust_message2").text("미세먼지를 주의하세요.");
+        }
+
+        //co2에 대한 메시지
+        if (current_CO2[0].data < 400) {
+            $("#co2_message1").text("좋음");
+            $("#co2_message2").text("학습하기 쾌적합니다.");
+        } else if (current_CO2[0].data > 400 && current_dust2[0].data < 1000) {
+            $("#co2_message1").text("보통");
+            $("#co2_message2").text("학습하기 적당한 환경이에요.");
+        } else if (current_CO2[0].data > 1000) {
+            $("#co2_message1").text("주의");
+            $("#co2_message2").text("환기가 필요해요.");
+        }
+
+    }) //getjson 끝
+    $("#hourly_graph").show();
+    $("#daily_graph").hide();
+
+    $("#hour_btn").click(function() {
+        $("#hourly_graph").show();
+        $("#daily_graph").hide();
+
+
+    })
+    $("#day_btn").click(function() {
+        $("#hourly_graph").hide();
+        $("#daily_graph").show();
+
+    })
+})
+});
+}
+
+
+          </script>
+          <!--교실별 출결 현황 시작-->
+                <div class="col-lg-12">
+                    <h1 id = "classroom_name" class="page-header">과학실</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+                <!--교실별 환경 현황 시작-->
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <!--타이틀 시작-->
+                            <i class="fa fa-cube"></i>&nbsp;선택 교실 환경 현황</div>
+                        <!--타이틀 끝-->
+                        <!--내용 시작-->
+                        <div class="panel-body">
+                            <!--교실상태 요약-->
+                            <!--모두 4단계로 구분하였습니다. 문구는 임의로 수정하셔도 좋습니다.-->
+                            <!--미만-->
+                            <div class="col-lg-6">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <div class="huge">온도</div>
+                                            </div>
+                                            <div class="col-xs-5 text-right">
+                                                <div id="temp_message1" class="huge"></div>
+                                            </div>
+                                            <div class="col-xs-12 text-right">
+                                                <div id="temp_message2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--정상-->
+                            <div class="col-lg-6">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <div class="huge">습도</div>
+                                            </div>
+                                            <div class="col-xs-5 text-right">
+                                                <div id="humidity_message1" class="huge"></div>
+                                            </div>
+                                            <div class="col-xs-12 text-right">
+                                                <div id="humidity_message2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--양호-->
+                            <div class="col-lg-6">
+                                <div class="panel panel-warning">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <div class="huge">미세먼지</div>
+                                            </div>
+                                            <div class="col-xs-5 text-right">
+                                                <div id="dust_message1" class="huge"></div>
+                                            </div>
+                                            <div class="col-xs-12 text-right">
+                                                <div id="dust_message2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--확인필요-->
+                            <div class="col-lg-6">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <div class="huge">CO2</div>
+                                            </div>
+                                            <div class="col-xs-5 text-right">
+                                                <div id="co2_message1" class="huge"></div>
+                                            </div>
+                                            <div class="col-xs-12 text-right">
+                                                <div id="co2_message2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--표시작-->
+                            <div class="table-responsive col-lg-12">
+                                <table class="table table-hover " style="text-align:center;">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th style="text-align:center;">온도</th>
+                                            <th style="text-align:center;">습도</th>
+                                            <th style="text-align:center;">CO2</th>
+                                            <th style="text-align:center;">미세먼지</th>
+                                            <th style="text-align:center;">초미세먼지</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>현재</td>
+                                            <td id="temp_value">
+                                            </td>
+                                            <td id="humid_value"></td>
+                                            <td id="co2_value">
+                                            </td>
+                                            <td id="dust1_value">
+                                            </td>
+                                            <td id="dust2_value"></td>
+                                        </tr>
+                                        <!--tr>
+                                            <td>월평균</td>
+                                            <td>00℃</td>
+                                            <td>00%</td>
+                                            <td>0000ppm</td>
+                                            <td>0000μg/㎥</td>
+                                            <td>0000μg/㎥</td>
+                                        </tr>
+                                        <tr>
+                                            <td>연평균</td>
+                                            <td>00℃</td>
+                                            <td>00%</td>
+                                            <td>0000ppm</td>
+                                            <td>0000μg/㎥</td>
+                                            <td>0000μg/㎥</td>
+                                        </tr-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--내용 끝-->
+                    </div>
+                </div>
+                <!--교실별 환경 그래프 시작-->
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <!--타이틀 시작-->
+                            <i class="fa fa-bar-chart-o"></i>&nbsp;교실 환경 그래프
+                            <!--시간별 그래프 보기-->
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <a id="hour_btn" class="btn btn-default btn-xs">시간</a>
+                                    <a id="day_btn" class="btn btn-default btn-xs">일간</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--타이틀 끝-->
+                        <div class="panel-body">
+                            <div id="hourly_graph">
+                                <div id="hourly_dust1_graph"></div>
+                                <div id="hourly_dust2_graph"></div>
+                                <div id="hourly_temp_graph"></div>
+                                <div id="hourly_humidity_graph"></div>
+                                <div id="hourly_CO2_graph"></div>
+                            </div>
+                            <div id="daily_graph">
+                                <div id='daily_dust1_graph'></div>
+                                <div id='daily_dust2_graph'></div>
+                                <div id='daily_temp_graph'></div>
+                                <div id='daily_humidity_graph'></div>
+                                <div id='daily_CO2_graph'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+        <!-- /#wrapper -->
+        <!-- jQuery -->
+        <script src="../vendor/jquery/jquery.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="../dist/js/sb-admin-2.js"></script>
+        <!--하단의 자바 스크립트는 예시로 보여줄 그래프용 소스이므로 지우셔도 됩니다.-->
+        <!-- Flot Charts JavaScript -->
+        <script src="../vendor/flot/excanvas.min.js"></script>
+        <script src="../vendor/flot/jquery.flot.js"></script>
+        <script src="../vendor/flot/jquery.flot.pie.js"></script>
+        <script src="../vendor/flot/jquery.flot.resize.js"></script>
+        <script src="../vendor/flot/jquery.flot.time.js"></script>
+        <script src="../vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+        <!-- <script src="../data/flot-data.js"></script> -->
+        <!-- Morris Charts JavaScript -->
+    </div>

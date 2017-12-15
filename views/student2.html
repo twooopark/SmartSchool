@@ -1,0 +1,2056 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Smart School</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+    queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://
+    -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+
+
+
+
+
+
+        <!--교실환경 평가 시작-->
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">학생 출결 현황</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+
+
+        <!--교실별 환경 현황 시작-->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <!--타이틀 시작-->
+                <i class="fa fa-cubes"></i>&nbsp;교실별 출결 현황
+                <span class="pull-right">
+                  <span class="pull-right text-muted " style="font-size:13px;">
+                    <font color="#8fc31f" size="5">■</font>등교
+                    <font color="#eb6100" size="5">■</font>결석
+                    <font color="#fff100" size="5">■</font>조퇴
+                    <font color="#00b7ee" size="5">■</font>지각
+                    <!--font color="#ea68a2" size="5">■</font>밴드착용-->
+                    <font color="#ea68a2" size="5">■</font>밴드미착용</span>
+                </span>
+              </div>
+              <!--타이틀 끝-->
+              <!--내용 시작-->
+              <div class="panel-body">
+                <!--탭메뉴시작-->
+                <ul class="nav nav-tabs">
+                  <li class="active">
+                    <a href="#go_school" data-toggle="tab">등교</a>
+                  </li>
+                  <li>
+                    <a href="#absent" data-toggle="tab">결석</a>
+                  </li>
+                  <li>
+                    <a href="#early_leave" data-toggle="tab">조퇴</a>
+                  </li>
+                  <li>
+                    <a href="#ect" data-toggle="tab">기타</a>
+                  </li>
+                  <!--li-->
+                  <!--a href="#band_Wear" data-toggle="tab">밴드착용</a>
+                  </li-->
+                  <li>
+                    <a href="#no_band_Wear" data-toggle="tab">밴드미착용</a>
+                  </li>
+                  <!--span class="pull-right text-muted " style="font-size:15px; ">
+                    <font color="#8fc31f" size="5">■</font>등교
+                    <font color="#eb6100" size="5">■</font>결석
+                    <font color="#fff100" size="5">■</font>조퇴
+                    <font color="#00b7ee" size="5">■</font>기타
+                   <font color="#ea68a2" size="5">■</font>밴드착용
+                    <font color="#ea68a2" size="5">■</font>밴드미착용</span-->
+                </ul>
+                <!--탭메뉴 끝-->
+                <!-- Tab panes -->
+                <div class="tab-content" id = "attend_info">
+                  <div class="tab-pane fade in active" id="go_school">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">미래교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a  id = "attend_11" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a  id = "attend_12" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">도서실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">음악실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "attend_9"  class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-1
+                                <br>
+                                <small >00/00</small></a>
+                            </td>
+                            <td olspan="2">
+                              <a id = "attend_10" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">열린교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">과학실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">세미나실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "attend_5" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "attend_6" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "attend_7" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "attend_8" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a id = "attend_3" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "attend_4" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">영어전용교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "attend_1" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "attend_2" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실2
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실1
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--별관 끝-->
+                  </div>
+                  <!--결석 내용 시작-->
+                  <div class="tab-pane fade" id="absent">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">미래교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a  id = "absence_11" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a  id = "absence_12" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">도서실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">음악실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "absence_9" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-1
+                                <br>
+                                <small >00/00</small></a>
+                            </td>
+                            <td olspan="2">
+                              <a id = "absence_10" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">열린교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">과학실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">세미나실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "absence_5" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "absence_6" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "absence_7" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "absence_8" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a id = "absence_3" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "absence_4" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">영어전용교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "absence_1" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "absence_2" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실2
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실1
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <!--별관 끝-->
+                  </div>
+                  <!--조퇴 내용시작-->
+                  <div class="tab-pane fade" id="early_leave">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">미래교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a  id = "leave_11" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a  id = "leave_12" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">도서실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">음악실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "leave_9" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-1
+                                <br>
+                                <small >00/00</small></a>
+                            </td>
+                            <td olspan="2">
+                              <a id = "leave_10" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">열린교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">과학실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">세미나실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "leave_5" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "leave_6" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "leave_7" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "leave_8" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a id = "leave_3" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "leave_4" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">영어전용교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "leave_1" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "leave_2" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실2
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실1
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!--기타 내용시작-->
+                  <div class="tab-pane fade" id="ect">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">미래교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a  id = "late_11" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a  id = "late_12" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">도서실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">음악실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a id = "late_9" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-1
+                                <br>
+                                <small >00/00</small></a>
+                            </td>
+                            <td olspan="2">
+                              <a id = "late_10" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">열린교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">과학실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">세미나실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a id = "late_5" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "late_6" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "late_7" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "late_8" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a id = "late_3" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "late_4" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">영어전용교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a id = "late_1" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a id = "late_2" class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실2
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실1
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--별관 끝-->
+                  </div>
+                  <!--밴드착용 내용시작-->
+                  <div class="tab-pane fade" id="band_Wear">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">미래교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">도서실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">음악실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">열린교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">과학실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">세미나실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">영어전용교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실2
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실1
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--별관 끝-->
+                  </div>
+                  <!--밴드미착용 내용 시작-->
+                  <div class="tab-pane fade" id="no_band_Wear">
+                    <!--본관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>본관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">미래교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#ea68a2;">6-1
+                                <br>
+                                <small>05/10</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">6-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="6">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">강당
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">도서실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">음악실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">5-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">열린교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">과학실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">현관
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">보건실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">방송실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">회의실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">인쇄실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">&nbsp;
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">당직실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">행정실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">교장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>지하</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">세미나실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td colspan="9">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--본관 끝-->
+                    <!--별관 시작-->
+                    <div class="col-lg-12 table-responsive">
+                      <table style="text-align:center;" class="table">
+                        <thead>
+                          <tr>
+                            <th colspan="11">
+                              <center>별관</center>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <small>3층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">3-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">4-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>2층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">2-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td colspan="2">
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">영어전용교실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <small>1층</small>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-1
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#8fc31f;">1-2
+                                <br>
+                                <small>00/00</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실2
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#aeaeae;">꿈나무 교실1
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                            <td>
+                              <a class="btn btn-default btn-block btn-xs" style="background-color:#c9c9c9;">화장실
+                                <br>
+                                <small>&nbsp;</small></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--별관 끝-->
+                  </div>
+                  <!--내용 끝-->
+                </div>
+                <!-- /#page-wrapper -->
+              </div>
+            </div>
+          </div>
+          <script type="text/javascript">
+window.onload = function(){             
+
+$.getJSON("/api/classroom", function(data_1) {
+
+$.getJSON("/api/student_attend", function(data) {
+
+var i=0, j=1;
+
+var count = [];
+var attend = [];
+var late = [];
+var leave = [];
+//var Data_a = [];
+var num = [];
+
+    for (i = 0; i < data_1.length; i++) {
+        count[i] = 0;
+        late[i] = 0;
+        leave[i] = 0;
+    }
+
+i=0;
+var location = [];
+while(i<data.length){
+
+    for(j=0;j<data_1.length;j++){
+    if(data[i].location == data_1[j].location) {
+      if(data[i].state==0)
+        late[j]++;
+      else if(data[i].state==1)
+        leave[j]++;
+      else
+        count[j]++;
+}
+}
+
+i++;
+}
+
+
+
+
+var kkk = [];
+
+
+for(i = 0; i<data_1.length; i++){
+ kkk.push({"no" : i+1, "attend" : count[i], "absence" : data_1[i].ble_count-(count[i]+late[i]+leave[i]), "late" : late[i], "leave" : leave[i], "num" :data_1[i].ble_count, "location" : data_1[i].location});
+
+}
+console.log(kkk);
+console.log(data_1);
+//console.log();
+
+for(i=0;i<12;i++){
+  var no = kkk[i].no;
+  var cr = "attend_" + kkk[i].no;
+  document.getElementById(cr).innerHTML = kkk[i].location +"<br><small> " + (kkk[i].num-kkk[i].absence) +"/" + kkk[i].num+"</small>"
+if( kkk[i].absence > 0 )
+  document.getElementById(cr).style.backgroundColor = "#eb6100";
+else if(kkk[i].late > 0)
+  document.getElementById(cr).style.backgroundColor = "00b7ee";
+else if(kkk[i].leave > 0)
+  document.getElementById(cr).style.backgroundColor = "#fff100";
+else
+  document.getElementById(cr).style.backgroundColor = "8fc31f";
+}
+for(i=0;i<12;i++){
+  var no = kkk[i].no;
+  var cr = "absence_" + kkk[i].no;
+  document.getElementById(cr).innerHTML = kkk[i].location +"<br><small> " + kkk[i].absence +"/" + kkk[i].num+"</small>"
+if( kkk[i].absence > 0 )
+  document.getElementById(cr).style.backgroundColor = "#eb6100";
+else if(kkk[i].late > 0)
+  document.getElementById(cr).style.backgroundColor = "00b7ee";
+else if(kkk[i].leave > 0)
+  document.getElementById(cr).style.backgroundColor = "#fff100";
+else
+  document.getElementById(cr).style.backgroundColor = "8fc31f";
+}
+for(i=0;i<12;i++){
+  var no = kkk[i].no;
+  var cr = "leave_" + kkk[i].no;
+  document.getElementById(cr).innerHTML = kkk[i].location +"<br><small> " + kkk[i].leave +"/" + kkk[i].num+"</small>"
+if(kkk[i].leave > 0)
+  document.getElementById(cr).style.backgroundColor = "#fff100";
+else if(kkk[i].late > 0)
+  document.getElementById(cr).style.backgroundColor = "00b7ee";
+else if( kkk[i].absence > 0 )
+  document.getElementById(cr).style.backgroundColor = "#eb6100";
+else
+  document.getElementById(cr).style.backgroundColor = "8fc31f";
+}
+for(i=0;i<12;i++){
+  var no = kkk[i].no;
+  var cr = "late_" + kkk[i].no;
+  document.getElementById(cr).innerHTML = kkk[i].location +"<br><small> " + kkk[i].late +"/" + kkk[i].num+"</small>"
+if(kkk[i].late > 0)
+  document.getElementById(cr).style.backgroundColor = "00b7ee";
+else if( kkk[i].absence > 0 )
+  document.getElementById(cr).style.backgroundColor = "#eb6100";
+else if(kkk[i].leave > 0)
+  document.getElementById(cr).style.backgroundColor = "#fff100";
+else
+  document.getElementById(cr).style.backgroundColor = "8fc31f";
+}
+
+$("#attend_info").on('click', '.btn', function (){
+    var c_name = $(this).text();
+    c_name = c_name.split(" ")[0];
+    console.log(c_name);
+    var c_id = this.id;
+    var slice =  c_id.split('_');
+    var th = slice[1]-1;
+    console.log(th);
+
+     document.getElementById("classroom_name").innerHTML = c_name;
+     document.getElementById("attend_rate").innerHTML = ((kkk[th].num-kkk[th].absence)/kkk[th].num*100).toFixed(1)+"%";
+     document.getElementById("attend").innerHTML = kkk[th].attend;
+     document.getElementById("absence").innerHTML = kkk[th].absence;
+     document.getElementById("leave").innerHTML = kkk[th].leave;
+     document.getElementById("late").innerHTML = kkk[th].late;
+
+
+});
+
+});
+});
+}
+
+//-----------------------------------------소연----------------------------------------------
+
+var monthdays = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+var month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+var todayDate = new Date();
+monthdays[1] = (((todayDate.getFullYear() % 4 == 0) && (todayDate.getFullYear() % 100 != 0)) || (todayDate.getFullYear() % 400 == 0)) ? 29 : 28;
+var selectedMonth = 12;
+var fullDayofMonth = monthdays[selectedMonth - 1];
+
+
+function myFunction() {
+    $(document).ready(function() {
+        if (document.getElementById("optionmonth").value == '12월') {
+            $("#monthname").text("12월");
+            $.getJSON("/api/student_list", function(data) {
+                var student_list = data.filter(function(row) { return row.classroom_mac == 241961354487256 });
+                //console.log(student);
+
+                $.getJSON("/api/attendance_student", function(data2) {
+
+                    var attendance_student = data2.filter(function(row) { return row.month == selectedMonth && row.classroom_mac == 241961354487256 })
+                    console.log(student_list);
+                    console.log(attendance_student);
+
+                    //console.log(attendance_student.day);
+                    //$("#_attendance_student_info").attr('day');
+
+                    var dataCount = 0;
+                    var cnt = 0;
+                    var j = 0;
+                    $('#_attendance_check_head').children().remove();
+
+                    $.each(student_list, function(index, result) {
+
+
+
+                        dataCount++;
+
+                        var element = '<tr><td>' + dataCount + '</td><td><a id="_attendance_student_info' + index + '" data-toggle="modal" data-target="#modal_on2" id="#modal_on2" href="#modal_on2">' +
+                            student_list[dataCount - 1].name + '</a></td>';
+
+                        for (var i = cnt; attendance_student[i].ble_mac == student_list[index].ble_mac; i++) {
+                            j++;
+
+                           
+                           // console.log("i= " + i);
+                           // console.log("cnt==" + cnt);
+                           // console.log(attendance_student[i].ble_mac)
+                           // console.log($("#" + j).text());
+
+                            if ($("#" + j).text() == attendance_student[i].day) {
+                                switch (attendance_student[i].state) {
+                                    case 0: //지각 기타
+                                        element += '<td bgcolor="#00b7ee"><a id="_attendance' + cnt + '" attendance="' + attendance_student[i].state + '" day="' + attendance_student[i].day + '" data-toggle="modal" class="_attendance_viewer" data-target="#modal_on" id="#modal_on" href="#modal_on">◎</a>';
+
+                                        break;
+
+                                    case 1: //조퇴
+                                        element += '<td bgcolor="#fff100"><a id="_attendance' + cnt + '" attendance="' + attendance_student[i].state + '" day="' + attendance_student[i].day + '" data-toggle="modal" class="_attendance_viewer" data-target="#modal_on" id="#modal_on" href="#modal_on">△</a>';
+
+                                        break;
+
+                                    case 2: // 정상등교 출석
+                                        element += '<td bgcolor="#8fc31f"><a id="_attendance' + cnt + '" attendance="' + attendance_student[i].state + '" day="' + attendance_student[i].day + '" data-toggle="modal" class="_attendance_viewer" data-target="#modal_on" id="#modal_on" href="#modal_on"><i class="fa fa-check text-danger text-nowrap"></i></a>';
+
+                                        break;
+                                    case 3: // 결석
+                                        element += '<td bgcolor="#eb6100"><a id="_attendance' + cnt + '" attendance="' + attendance_student[i].state + '" day="' + attendance_student[i].day + '" data-toggle="modal" class="_attendance_viewer" data-target="#modal_on" id="#modal_on" href="#modal_on">X</a>';
+
+                                        break;
+                                }
+                                element += '</td>';
+                                cnt++;
+                                console.log("plus cnt: " + cnt);
+                                if (cnt == attendance_student.length) {
+                                    break;
+                                }
+                            } else if ($("#" + j).text() != attendance_student[i].day) {
+                                element += '<td></td>';
+                                i = (cnt - 1);
+                                // console.log("minus cnt: "+cnt);
+                            }
+                            console.log("length " + attendance_student.length);
+
+                        }
+                        j = 0;
+
+
+                        element += '</tr>';
+
+                        $('#_attendance_check_head').append(element);
+
+                        $(document).ready(function() {
+                            $("#_attendance_student_info" + index).click(function() {
+                                console.log("send");
+                                //$('#_attendance_student_name4').text(attendance_student[cnt].name);
+
+                                $.getJSON("/api/student_info", function(result) {
+                                    var studentInfo = result.filter(function(row) { return row.classroom_mac == 241961354487256 });
+                                    console.log(studentInfo[index].ble_mac);
+
+                                    $('._attendance_student_name').text(studentInfo[index].name)
+                                    //$('#_attendance_student_name2').text(studentInfo[index].name)
+                                    $('#_attendance_student_mac').text(studentInfo[index].ble_mac);
+                                    $('#_attendance_student_phone').text(studentInfo[index].PHONE_NUM);
+                                    $('#_attendance_student_address').text(studentInfo[index].address);
+
+                                })
+                            });
+
+                        });
+                    }) //each
+                    $.each(attendance_student, function(i, r) {
+                        $(document).ready(function() {
+                            $("#_attendance" + i).click(function() {
+                                $("._attendance_student_name").text(attendance_student[i].name);
+                                $("#_attendance_student_in_time").text(attendance_student[i].in_time);
+                                $("#_attendance_student_out_time").text(attendance_student[i].out_time);
+                                //<td id="_attendance_student_out_time"></td>
+                                //<td id="_attendance_student_stay_time"></td>
+
+                            })
+                        })
+                    })
+                })
+            })
+        } else if (document.getElementById("optionmonth").value != '12월' && document.getElementById("optionmonth").value != '월선택') {
+            alert("데이터가 없습니다.");
+            //$('#_attendance_check_head').remove(element);
+
+        }
+    })
+}
+
+
+
+          </script>
+          <!--교실별 출결 현황 시작-->
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <!--타이틀 시작-->
+                <i class="fa fa-cube"></i>&nbsp;선택 교실 출결 현황</div>
+              <!--타이틀 끝-->
+              <!--내용 시작-->
+              <div class="panel-body">
+                <!--교실상태 요약-->
+                <!--정상-->
+                <div class="col-lg-6">
+                  <div class="panel panel-success">
+                    <div class="panel-heading">
+                      <div class="row">
+                        <div class="col-xs-7">
+                          <div class="huge" id = "classroom_name"></div>
+                        </div>
+                        <div class="col-xs-5 text-right">
+                          <div>평균 등교율</div>
+                          <div class="huge" id = "attend_rate"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--표시작-->
+                <div class="table-responsive col-lg-12">
+                  <table class="table table-striped table-bordered table-hover " style="text-align:center;">
+                    <thead>
+                      <tr>
+                        <th style="text-align:center;" bgcolor="#8fc31f">등교</th>
+                        <th style="text-align:center;" bgcolor="#eb6100">결석</th>
+                        <th style="text-align:center;" bgcolor="#fff100">조퇴</th>
+                        <th style="text-align:center;" bgcolor="#00b7ee">기타</th>
+                        <th style="text-align:center;" bgcolor="#ffffff">밴드착용</th>
+                        <th style="text-align:center;" bgcolor="#ea68a2">밴드미착용</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td id = "attend"></td>
+                        <td id = "absence"></td>
+                        <td id = "leave"></td>
+                        <td id = "late"></td>
+                        <td>00</td>
+                        <td>00</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!--내용 끝-->
+            </div>
+          </div>
+          <!--교실별 환경 그래프 시작-->
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <!--타이틀 시작-->
+                            <i class="fa fa-th-list"></i>&nbsp;출석부
+                            <span class="pull-right">
+                  <span class="pull-right text-muted " style="font-size:13px;">
+                    <font color="#8fc31f" size="5">■</font>등교
+                    <font color="#eb6100" size="5">■</font>결석
+                    <font color="#fff100" size="5">■</font>조퇴
+                    <font color="#00b7ee" size="5">■</font>기타
+                    <!--font color="#ea68a2" size="5">■</font>밴드착용-->
+                    <font color="#ea68a2" size="5">■</font>밴드미착용</span>
+                            </span>
+                        </div>
+                        <!--타이틀 끝-->
+                        <div class="panel-body">
+                            <!--월선택-->
+                            <div class="form-group col-lg-2">
+                                <label>월선택</label>
+                                <select id="optionmonth" class="form-control" onchange="myFunction()">
+                                    <option>월선택</option>
+                                    <option>1월</option>
+                                    <option>2월</option>
+                                    <option>3월</option>
+                                    <option>4월</option>
+                                    <option>5월</option>
+                                    <option>6월</option>
+                                    <option>7월</option>
+                                    <option>8월</option>
+                                    <option>9월</option>
+                                    <option>10월</option>
+                                    <option>11월</option>
+                                    <option>12월</option>
+                                </select>
+                            </div>
+                            <!--출석부시작-->
+                            <div class="table-responsive col-lg-12">
+                                <table id="table1" class="table table-striped table-bordered table-hover" style="font-size:12px; text-align:center;">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" style="text-align:center;">번호</th>
+                                            <th rowspan="2" style="text-align:center;">이름</th>
+                                            <th id="monthname" colspan="31" style="text-align:center;">월</th>
+                                        </tr>
+                                        <tr id="dayvalue">
+                                            <th id="1">1</th>
+                                            <th id="2" bgcolor="#fdc689">2</th>
+                                            <th id="3" bgcolor="#fdc689">3</th>
+                                            <th id="4">4</th>
+                                            <th id="5">5</th>
+                                            <th id="6">6</th>
+                                            <th id="7">7</th>
+                                            <th id="8">8</th>
+                                            <th id="9" bgcolor="#fdc689">9</th>
+                                            <th id="10" bgcolor="#fdc689">10</th>
+                                            <th id="11">11</th>
+                                            <th id="12">12</th>
+                                            <th id="13">13</th>
+                                            <th id="14">14</th>
+                                            <th id="15">15</th>
+                                            <th id="16" bgcolor="#fdc689">16</th>
+                                            <th id="17" bgcolor="#fdc689">17</th>
+                                            <th id="18">18</th>
+                                            <th id="19">19</th>
+                                            <th id="20">20</th>
+                                            <th id="21">21</th>
+                                            <th id="22">22</th>
+                                            <th id="23" bgcolor="#fdc689">23</th>
+                                            <th id="24" bgcolor="#fdc689">24</th>
+                                            <th id="25">25</th>
+                                            <th id="26">26</th>
+                                            <th id="27">27</th>
+                                            <th id="28">28</th>
+                                            <th id="29">29</th>
+                                            <th id="30" bgcolor="#fdc689">30</th>
+                                            <th id="31" bgcolor="#fdc689">31</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="_attendance_check_head">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                            <!--출석부끝-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#wrapper -->
+            <!-- jQuery -->
+            <script src="../vendor/jquery/jquery.min.js"></script>
+            <!-- Bootstrap Core JavaScript -->
+            <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+            <!-- Metis Menu Plugin JavaScript -->
+            <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+            <!-- Custom Theme JavaScript -->
+            <script src="../dist/js/sb-admin-2.js"></script>
+            <!--하단의 자바 스크립트는 예시로 보여줄 그래프용 소스이므로 지우셔도 됩니다.-->
+            <!-- Flot Charts JavaScript -->
+            <script src="../vendor/flot/excanvas.min.js"></script>
+            <script src="../vendor/flot/jquery.flot.js"></script>
+            <script src="../vendor/flot/jquery.flot.pie.js"></script>
+            <script src="../vendor/flot/jquery.flot.resize.js"></script>
+            <script src="../vendor/flot/jquery.flot.time.js"></script>
+            <script src="../vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+            <script src="../data/flot-data.js"></script>
+            <!-- Morris Charts JavaScript -->
+            <script src="../vendor/raphael/raphael.min.js"></script>
+            <script src="../vendor/morrisjs/morris.min.js"></script>
+            <script src="../data/morris-data.js"></script>
+        </div>
+    </div>
+    <div class="modal fade" id="modal_on">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title text-center">
+                        <b><span class="_attendance_student_name"></span>학생 출결현황</b>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#"><img class="_attendance_student_image media-object" src="..\images\head_chr_boy_1.png" height="64" width="64"></a>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <b class="_attendance_student_name"></b>
+                                </h4>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>등교시간</th>
+                                            <th>하교시간(4시이후)</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="_attendance_student_in_time"></td>
+                                            <td id="_attendance_student_out_time"></td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal_on2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title text-center">
+                        <b><span class="_attendance_student_name"></span>학생 정보</b>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#"><img class="_attendance_student_image media-object" src="..\images\head_chr_boy_1.png" height="64" width="64"></a>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <b class="_attendance_student_name"></b>
+                                </h4>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>학생 MAC 정보</th>
+                                            <th>연락처</th>
+                                            <th>주소</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="_attendance_student_mac"></td>
+                                            <td id="_attendance_student_phone"></td>
+                                            <td id="_attendance_student_address"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p id="_attendance_student_infoexplain"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  

@@ -64,7 +64,7 @@
 <!--설치 디바이스 현황 시작-->
 <div class="row">
   <div class="col-lg-12">
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="device_info">
       <div class="panel-heading">
         <!--타이틀 시작-->
         <i class="fa fa-cubes"></i>&nbsp;교실별 디바이스 현황
@@ -76,7 +76,7 @@
         <!--탭메뉴 끝-->
         <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane fade in active" id="device_info">
+          <div class="tab-pane fade in active">
             <!--본관 시작-->
             <div class="col-lg-12 table-responsive">
               <table style="text-align:center;" class="table">
@@ -333,7 +333,7 @@
         <!--Graph-->
         <div class="row">
           <div class="col-lg-12">        
-            <div class="chart-wrapper" id="sensor_state">
+            <div class="chart-wrapper" id="sensor_state" style="display: none;">
               <div class="chart-title">
                 <strong> 환경 그래프 </strong>
               </div>
@@ -421,7 +421,7 @@
             <div class="col-lg-12">
               <div class="chart-wrapper" id="sensor_bar_chart">
                 <div class="chart-title">
-                  <strong> 교실별 오류 확인 </strong>
+                  <strong> 교실별 오류 개수 </strong>
                 </div>  
               </div>
             </div>
@@ -431,7 +431,7 @@
             <div class="col-lg-12">
               <div class="chart-wrapper" id="daily_line_chart" style="margin-bottom:-2px";>
                 <div class="chart-title">
-                  <strong> 시간별 오류 확인 </strong><a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a>   
+                  <strong> 시간별 오류 개수 </strong><a href='javascript:dc.filterAll();dc.redrawAll();'><font size="2px">- 초기화</font></a>   
                 </div>
               </div> 
               <div class="chart-wrapper" id="range_chart"> </div>
@@ -442,14 +442,14 @@
             <div class="col-lg-6">
               <div class="chart-wrapper" id="type_row_chart">
                 <div class="chart-title">
-                  <strong> 센서별 오류 확인 </strong>
+                  <strong> 센서별 오류 개수 </strong>
                 </div> 
               </div> 
             </div>
             <div class="col-lg-6">
               <div class="chart-wrapper" id="type_pie_chart">
                 <div class="chart-title">
-                  <strong> 센서별 오류 확인 </strong>
+                  <strong> 센서별 오류 비율 </strong>
                 </div> 
               </div> 
             </div>
@@ -478,6 +478,7 @@ var s_filter;
 var runDimension;
 var runGroup;
 
+//일별/시간별 선택
 $(".btn-group").on('click','.btn-success',function () {
   formData.sel = this.id.slice(4);
   DataReload(formData);
@@ -489,7 +490,6 @@ $(".btn-group").on('click','.btn-success',function () {
 
 $("#device_info").on('click', '.btn', function (){
   dData.c_name = $(this).text();
-
   $(".device_state_val").text(dData.c_name);
 
   if($(this).css("background-color") == Device_State_Color.undefn){ //회색
@@ -508,13 +508,11 @@ $("#device_info").on('click', '.btn', function (){
   }
   else{
     if($(this).css("background-color") == Device_State_Color.alive){//초록색
-
       $("#device_state_true").show();
       $("#device_state_false").hide();
       $("#device_state_undefined").hide();
     }
     else if($(this).css("background-color") == Device_State_Color.dead){//노랑색
-
       $("#device_state_true").hide();
       $("#device_state_false").show();
       $("#device_state_undefined").hide();
@@ -526,9 +524,12 @@ $("#device_info").on('click', '.btn', function (){
       'slow'
     );
   }
+
+  //테이블
   selected_class_data()
   interval_2 = setInterval(selected_class_data, 1000);
 
+  //그래프
   formData.loc = dData.c_name;
   DataReload(formData);
 })
@@ -543,12 +544,15 @@ interval = setInterval(update_device_data, 5000);
 
 
 /************************************************************************/
+
+//기본 실행...(오류 그래프 & 일별,시간별 그래프)
 //errorGraph
 $.ajax({
   type: "GET",
   url: "/api/error-data",
   dataType: 'json',
   beforeSend: function() { 
+    formData = {"sel":"daily","loc":""}
     $('#mloader').show();
   },
   success: function(result){
@@ -690,8 +694,7 @@ $.ajax({
       DataReload(formData);
   }, 
   error: function(xhr, option, error){
-    alert(xhr.status+"오류분석차트 에러"); 
-    alert(error);
+    alert(err+"("+xhr.status+") : 오류분석차트 에러"); 
   },
   complete: function(){
   //  $('#mloader').hide();
@@ -748,8 +751,7 @@ function selected_class_data(){
       $("#tb_sensor_type_rt #sensor_type_time").html(tbl_row_time);
     }, 
     error: function(xhr, option, error){
-      alert(xhr.status+"selected_class_data 에러"); 
-      alert(error);
+      //alert(err+"("+xhr.status+") : selected_class_data 에러"); 
     }
   });
 
@@ -782,8 +784,8 @@ function selected_class_data(){
         $("#tb_sensor_type_error #sensor_type_error").html(tbl_row_data);
       }, 
     error: function(xhr, option, error){
-      alert(xhr.status+"selected_class_data 에러"); 
-      alert(error);
+      //alert(xhr.status+"selected_class_data 에러"); 
+      //alert(error);
     }
   });
 }
@@ -801,8 +803,14 @@ function DataReload(formData){
     success: function(result){
       var s_data = result;
         if(s_data.length == 0){
+          dc.renderAll();
+          $('#mloader').hide();
+          $("#sensor_state").hide();
           alert("데이터가 없습니다.")
-          return;
+          return ;
+        }
+        else{
+          $("#sensor_state").show();
         }
          //filter.remove();
          //filter.add(result);
