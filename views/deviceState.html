@@ -536,6 +536,50 @@ $("#device_info").on('click', '.btn', function (){
 var interval_2
 
 
+function device_info_select(){
+    $(".device_state_val").text(dData.c_name);
+
+  if($(this).css("background-color") == Device_State_Color.undefn){ //회색
+    $('#class_name').text(dData.c_name);
+    $('#myModal_device_new').modal('show');
+
+    $("#device_state_true").hide();
+    $("#device_state_false").hide();
+    $("#device_state_undefined").show();
+
+    $('html,body').animate({
+      scrollTop: $("#device_info").offset().top
+      },
+      'slow'
+    );
+  }
+  else{
+    if($(this).css("background-color") == Device_State_Color.alive){//초록색
+      $("#device_state_true").show();
+      $("#device_state_false").hide();
+      $("#device_state_undefined").hide();
+    }
+    else if($(this).css("background-color") == Device_State_Color.dead){//노랑색
+      $("#device_state_true").hide();
+      $("#device_state_false").show();
+      $("#device_state_undefined").hide();
+    }
+
+    $('html,body').animate({
+      scrollTop: $("#device_error_info").offset().top
+      },
+      'slow'
+    );
+  }
+
+  //테이블
+  selected_class_data()
+  interval_2 = setInterval(selected_class_data, 1000);
+
+  //그래프
+  formData.loc = dData.c_name;
+  DataReload(formData);
+}
 /************************************************************************/
 
 //device_info update
